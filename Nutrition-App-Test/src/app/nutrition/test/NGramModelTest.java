@@ -33,6 +33,9 @@ public class NGramModelTest {
 		assertEquals("name", ngm.name);
 	}
 
+	/**
+	 * Test that NGramModels are created with the right TransitionMatrix
+	 */
 	@Test
 	public void testGetTransitionMatrix() {
 		TransitionMatrix t = new TransitionMatrix(3, 3);
@@ -47,7 +50,7 @@ public class NGramModelTest {
 	 */
 	@Test
 	public void testLogLikelihood() {
-		TransitionMatrix t = null;
+		TransitionMatrix t = new TransitionMatrix(2);
 		NGramModel ngm = new NGramModel("name", t);
 		double expected = 0.0;
 		List<Integer> seq = new ArrayList<Integer>();

@@ -9,7 +9,13 @@ import java.util.List;
  *         Created Apr 13, 2012.
  */
 public class NGramModel {
+	/**
+	 * Name of this NGramModel
+	 */
 	public String name;
+	/**
+	 * TransitionMatrix this NGramModel encases
+	 */
 	public TransitionMatrix tmat;
 
 	/**
@@ -27,7 +33,7 @@ public class NGramModel {
 	 * TODO Put here a description of what this method does.
 	 * 
 	 * @param seq
-	 * @return
+	 * @return loglikelihood of the sequence matching this NGramModel
 	 */
 	public double logLikelihood(List<Integer> seq) {
 		

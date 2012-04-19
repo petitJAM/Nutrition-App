@@ -30,10 +30,18 @@ public class NutritionAppTest extends
 		appName = naa.getString(app.nutrition.R.string.app_name);
 	}
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 */
 	public void testSuccessfulNutritionAppActivityCreation() {
 		assertNotNull(naa);
 	}
 	
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 */
 	public void testAppName() {
 		assertEquals("Nutrition-App", appName);
 	}
