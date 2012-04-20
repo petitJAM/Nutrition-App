@@ -84,10 +84,10 @@ public class ProcessImage {
 	public static final int NUM_COLORS = 15;
 
 	/**
-	 * Return something
+	 * Return a sequence of colors found from the given Bitmap image.
 	 * 
-	 * @param img
-	 * @return the sequence of colors
+	 * @param img - image to sequence
+	 * @return sequence of colors
 	 */
 	public static List<Integer> generateSequence(Bitmap img) {
 		ArrayList<Integer> ret = new ArrayList<Integer>();
