@@ -21,8 +21,10 @@ public class ProcessImageTest extends TestCase {
 	 *
 	 */
 	public void testThatProcessImageGeneratesACorrectSequence() {
-		Bitmap b;
-		b = BitmapFactory.decodeFile("test_images/white.bmp");
+		Bitmap b = null;
+		
+		int[] pixels = {0xFFFFFF, 0xFFFFFF, 0xFFFFFF, 0xFFFFFF};
+		b = Bitmap.createBitmap(pixels, 2, 2, Bitmap.Config.RGB_565);
 		
 		ArrayList<Integer> expected = new ArrayList<Integer>();
 		expected.add(2);expected.add(2);expected.add(2);expected.add(2);
@@ -36,7 +38,8 @@ public class ProcessImageTest extends TestCase {
 	 */
 	public void testThatProcessImageGeneratesACorrectSequence2() {
 		Bitmap b;
-		b = BitmapFactory.decodeFile("test_images/black.bmp");
+		int[] pixels = {0xFFFFFF, 0xFFFFFF, 0xFFFFFF, 0xFFFFFF};
+		b = Bitmap.createBitmap(pixels, 2, 2, Bitmap.Config.RGB_565);
 		
 		ArrayList<Integer> expected = new ArrayList<Integer>();
 		expected.add(0);expected.add(0);expected.add(0);expected.add(0);
