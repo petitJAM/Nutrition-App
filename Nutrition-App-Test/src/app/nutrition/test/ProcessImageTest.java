@@ -38,7 +38,7 @@ public class ProcessImageTest extends TestCase {
 	 */
 	public void testThatProcessImageGeneratesACorrectSequence2() {
 		Bitmap b;
-		int[] pixels = {0xFFFFFF, 0xFFFFFF, 0xFFFFFF, 0xFFFFFF};
+		int[] pixels = {0x000000, 0x000000, 0x000000, 0x000000};
 		b = Bitmap.createBitmap(pixels, 2, 2, Bitmap.Config.RGB_565);
 		
 		ArrayList<Integer> expected = new ArrayList<Integer>();

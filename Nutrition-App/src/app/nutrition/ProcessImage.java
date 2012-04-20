@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.widget.Toast;
 
 /**
  * Process an image
@@ -53,8 +54,6 @@ public class ProcessImage {
     	
     	return ret;
     }
-    
-    
     
     private static int[] getPixelRGB(int pixel) {
         int red = (pixel >> 16) & 0xff;
