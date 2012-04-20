@@ -1,11 +1,14 @@
 package app.nutrition.test;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+
+import app.nutrition.NGramModel;
+import app.nutrition.TransitionMatrix;
 
 /**
  * TODO Put here a description of what this class does.
@@ -26,27 +29,35 @@ public class NGramModelTest {
 	public void testGetName() {
 		TransitionMatrix t = null;
 		NGramModel ngm = new NGramModel("name", t);
-		assertEqual("name", ngm.getName());
+
+		assertEquals("name", ngm.name);
 	}
 
+	/**
+	 * Test that NGramModels are created with the right TransitionMatrix
+	 */
 	@Test
 	public void testGetTransitionMatrix() {
 		TransitionMatrix t = new TransitionMatrix(3, 3);
 		NGramModel ngm = new NGramModel("name", t);
 
-		assertEqual(t, ngm.getTransitionMatrix());
+		assertEquals(t, ngm.tmat);
 	}
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 */
 	@Test
 	public void testLogLikelihood() {
-		TransitionMatrix t = null;
+		TransitionMatrix t = new TransitionMatrix(2);
 		NGramModel ngm = new NGramModel("name", t);
 		double expected = 0.0;
 		List<Integer> seq = new ArrayList<Integer>();
 		seq.add(0);
 		seq.add(0);
-
-		assertEqual(expected, ngm.logLikelihood());
+		
+		assertEquals(expected, ngm.logLikelihood(seq));
 	}
 
 }

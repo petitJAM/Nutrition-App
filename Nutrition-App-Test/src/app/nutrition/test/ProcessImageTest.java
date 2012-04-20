@@ -1,11 +1,14 @@
 package app.nutrition.test;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 
 import org.junit.Test;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import app.nutrition.ProcessImage;
 
 /**
  * Test the ProcessImage class
@@ -43,5 +46,4 @@ public class ProcessImageTest {
 		
 		assertEquals(expected, ProcessImage.generateSequence(b));
 	}
-
 }
