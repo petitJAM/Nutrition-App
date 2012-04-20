@@ -1,12 +1,9 @@
 package app.nutrition.test;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
-
+import junit.framework.TestCase;
 import app.nutrition.NGramModel;
 import app.nutrition.TransitionMatrix;
 
@@ -16,16 +13,14 @@ import app.nutrition.TransitionMatrix;
  * @author Alex Petitjean.
  *         Created Apr 13, 2012.
  */
-public class NGramModelTest {
+public class NGramModelTest extends TestCase {
 
-	@Test
 	public void testThatNGramModelsAreCreated() {
 		TransitionMatrix t = null;
 		NGramModel ngm = new NGramModel("name", t);
 		assertNotNull(ngm);
 	}
 
-	@Test
 	public void testGetName() {
 		TransitionMatrix t = null;
 		NGramModel ngm = new NGramModel("name", t);
@@ -36,7 +31,6 @@ public class NGramModelTest {
 	/**
 	 * Test that NGramModels are created with the right TransitionMatrix
 	 */
-	@Test
 	public void testGetTransitionMatrix() {
 		TransitionMatrix t = new TransitionMatrix(3, 3);
 		NGramModel ngm = new NGramModel("name", t);
@@ -48,7 +42,6 @@ public class NGramModelTest {
 	 * TODO Put here a description of what this method does.
 	 *
 	 */
-	@Test
 	public void testLogLikelihood() {
 		TransitionMatrix t = new TransitionMatrix(2);
 		NGramModel ngm = new NGramModel("name", t);

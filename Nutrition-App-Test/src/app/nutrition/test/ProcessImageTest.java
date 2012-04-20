@@ -1,10 +1,8 @@
 package app.nutrition.test;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.ArrayList;
 
-import org.junit.Test;
+import junit.framework.TestCase;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,13 +14,12 @@ import app.nutrition.ProcessImage;
  * @author Alex Petitjean.
  *         Created Apr 13, 2012.
  */
-public class ProcessImageTest {
+public class ProcessImageTest extends TestCase {
 
 	/**
 	 * Test on a 2x2 bitmap of white pixels.
 	 *
 	 */
-	@Test
 	public void testThatProcessImageGeneratesACorrectSequence() {
 		Bitmap b;
 		b = BitmapFactory.decodeFile("test_images/white.bmp");
