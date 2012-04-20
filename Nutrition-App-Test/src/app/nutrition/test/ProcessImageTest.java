@@ -3,9 +3,7 @@ package app.nutrition.test;
 import java.util.ArrayList;
 
 import junit.framework.TestCase;
-
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import app.nutrition.ProcessImage;
 
 /**

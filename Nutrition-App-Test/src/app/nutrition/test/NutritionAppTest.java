@@ -4,7 +4,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import app.nutrition.NutritionAppActivity;
 
 /**
- * TODO Put here a description of what this class does.
+ * Test the NutritionAppActivity class
  *
  * @author Alex Petitjean.
  *         Created Apr 13, 2012.
@@ -16,7 +16,7 @@ public class NutritionAppTest extends
 	private String appName;
 
 	/**
-	 * TODO Put here a description of what this constructor does.
+	 * Constructor
 	 *
 	 * @param activityClass
 	 */
@@ -32,27 +32,16 @@ public class NutritionAppTest extends
 		naa = getActivity();
 		appName = naa.getString(app.nutrition.R.string.app_name);
 	}
-	
-//	@Override
-//	protected void runTest() {
-//		try {
-//			super.runTest();
-//		} catch (Throwable exception) {
-//			exception.printStackTrace();
-//		}
-//	}
 
 	/**
-	 * TODO Put here a description of what this method does.
-	 *
+	 * Test creation
 	 */
 	public void testSuccessfulNutritionAppActivityCreation() {
 		assertNotNull(naa);
 	}
 	
 	/**
-	 * TODO Put here a description of what this method does.
-	 *
+	 * Test app has a name
 	 */
 	public void testAppName() {
 		assertEquals("Nutrition-App", appName);

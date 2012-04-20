@@ -8,19 +8,25 @@ import app.nutrition.NGramModel;
 import app.nutrition.TransitionMatrix;
 
 /**
- * TODO Put here a description of what this class does.
+ * Test NGramModel
  * 
  * @author Alex Petitjean.
  *         Created Apr 13, 2012.
  */
 public class NGramModelTest extends TestCase {
 
+	/**
+	 * Test creation
+	 */
 	public void testThatNGramModelsAreCreated() {
 		TransitionMatrix t = null;
 		NGramModel ngm = new NGramModel("name", t);
 		assertNotNull(ngm);
 	}
 
+	/**
+	 * Test the ability to get an NGramModel's name
+	 */
 	public void testGetName() {
 		TransitionMatrix t = null;
 		NGramModel ngm = new NGramModel("name", t);
@@ -39,8 +45,8 @@ public class NGramModelTest extends TestCase {
 	}
 
 	/**
-	 * TODO Put here a description of what this method does.
-	 *
+	 * Test the loglikelihood method
+	 * Currently does not test correct value.
 	 */
 	public void testLogLikelihood() {
 		TransitionMatrix t = new TransitionMatrix(2);
