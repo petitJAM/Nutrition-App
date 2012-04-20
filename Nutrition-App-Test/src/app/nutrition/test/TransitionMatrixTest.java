@@ -29,7 +29,7 @@ public class TransitionMatrixTest extends TestCase {
 		assertEquals(N, t.size);
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
-				assertEquals(1, t.t[i][j]);
+				assertEquals(1, t.mat[i][j]);
 			}
 		}
 	}
@@ -43,7 +43,7 @@ public class TransitionMatrixTest extends TestCase {
 		
 		for (int i = 0; i < N; i++)
 			for (int j = 0; j < N; j++)
-				assertEquals(2.0, t.t[i][j]);
+				assertEquals(2.0, t.mat[i][j]);
 	}
 	
 	/**
@@ -55,7 +55,23 @@ public class TransitionMatrixTest extends TestCase {
 		
 		for (int i = 0; i < N; i++)
 			for (int j = 0; j < N; j++)
-				assertEquals(0.5, t.t[i][j]);
+				assertEquals(0.5, t.mat[i][j]);
+	}
+	
+	/**
+	 * Test exception on different size matrices for averaging
+	 */
+	public void testAverage2MatricesExceptionThrown() {
+		TransitionMatrix t1 = new TransitionMatrix(N);
+		TransitionMatrix t2 = new TransitionMatrix(N+1);
+		
+		try {
+			TransitionMatrix.average2Matrices(t1, t2);
+			fail("Exception not thrown");
+		} catch (Exception e) {
+			assertTrue(e instanceof IllegalArgumentException);
+			assertEquals("Matrix size mismatch", e.getMessage());
+		}
 	}
 	
 	/**
@@ -74,6 +90,6 @@ public class TransitionMatrixTest extends TestCase {
 		
 		for (int i = 0; i < N; i++)
 			for (int j = 0; j < N; j++)
-				assertEquals(expected_avg, t3.t[i][j]);
+				assertEquals(expected_avg, t3.mat[i][j]);
 	}
 }
