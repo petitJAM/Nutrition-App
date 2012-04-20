@@ -38,7 +38,7 @@ public class NGramModelTest extends TestCase {
 	 * Test that NGramModels are created with the right TransitionMatrix
 	 */
 	public void testGetTransitionMatrix() {
-		TransitionMatrix t = new TransitionMatrix(3, 3);
+		TransitionMatrix t = new TransitionMatrix(3);
 		NGramModel ngm = new NGramModel("name", t);
 
 		assertEquals(t, ngm.tmat);

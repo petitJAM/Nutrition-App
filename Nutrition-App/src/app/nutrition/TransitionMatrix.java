@@ -17,6 +17,11 @@ public class TransitionMatrix {
 	public int size;
 	
 	/**
+	 * The actual matrix of transitions
+	 */
+	public double[][] t;
+	
+	/**
 	 * Create a new TransitionMatrix with size N x N filled with 1.
 	 *
 	 * @param N
@@ -25,11 +30,31 @@ public class TransitionMatrix {
 	}
 	
 	/**
-	 * Create a new TransitionMatrix with size N x N filled with fill
+	 * Add i to all elements of the matrix
 	 *
-	 * @param N
-	 * @param fill
+	 * @param i - add to all elements
 	 */
-	public TransitionMatrix(int N, int fill) {
+	public void addToAll(int i) {
+		
+	}
+	
+	/**
+	 * Divide all elements by i.
+	 *
+	 * @param i - divide all elements by
+	 */
+	public void divideAllBy(int i) {
+		
+	}
+	
+	/**
+	 * Average two given TransitionMatrices elementwise
+	 *
+	 * @param t1 - first matrix
+	 * @param t2 - second matrix
+	 * @return elementwise average of the two matrices
+	 */
+	public static TransitionMatrix average2Matrices(TransitionMatrix t1, TransitionMatrix t2) {
+		return null;
 	}
 }
