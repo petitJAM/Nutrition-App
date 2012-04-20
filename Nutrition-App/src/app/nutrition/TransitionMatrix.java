@@ -62,6 +62,11 @@ public class TransitionMatrix {
 	 * @throws IllegalArgumentException if t1 and t2 have different sizes
 	 */
 	public static TransitionMatrix average2Matrices(TransitionMatrix t1, TransitionMatrix t2) throws IllegalArgumentException {
-		return null;
+		if (t1.size != t2.size)
+			throw new IllegalArgumentException("Matrix size mismatch");
+		
+		TransitionMatrix tnew = new TransitionMatrix(t1.size);
+		
+		return tnew;
 	}
 }

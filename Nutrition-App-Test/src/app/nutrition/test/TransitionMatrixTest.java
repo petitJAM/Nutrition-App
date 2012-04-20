@@ -27,11 +27,9 @@ public class TransitionMatrixTest extends TestCase {
 	public void testThatTransMatIsCreatedWithCorrectValues() {
 		TransitionMatrix t = new TransitionMatrix(N);
 		assertEquals(N, t.size);
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
+		for (int i = 0; i < N; i++)
+			for (int j = 0; j < N; j++)
 				assertEquals(1, t.mat[i][j]);
-			}
-		}
 	}
 	
 	/**
