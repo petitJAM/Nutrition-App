@@ -11,6 +11,10 @@ package app.nutrition;
  *         Created Apr 18, 2012.
  */
 public class TransitionMatrix {
+	/**
+	 * Size of the TransitionMatrix
+	 */
+	public int size;
 	
 	/**
 	 * Create a new TransitionMatrix with size N x N filled with 1.
