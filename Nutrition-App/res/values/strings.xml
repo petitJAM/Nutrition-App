@@ -3,5 +3,7 @@
 
     <string name="hello">Hello World, NutritionAppActivity!</string>
     <string name="app_name">Nutrition-App</string>
+    <string name="logo_content_description">Logo</string>
+    <string name="camera_button_text">Capture Image</string>
 
 </resources>
