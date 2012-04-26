@@ -1,6 +1,7 @@
 Nutrition-App/.classpath
 Nutrition-App/.project
 Nutrition-App/bin/
+Nutrition-App/.settings
 
 Nutrition-App-Test/.classpath
 Nutrition-App-Test/.project
@@ -11,3 +12,4 @@ Nutrition-App-Server/.project
 Nutrition-App-Server/bin/
 
 .metadata
+
