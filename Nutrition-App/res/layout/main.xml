@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
-    <ImageView
-        android:layout_width="334dp"
-        android:layout_height="123dp"
-        android:layout_gravity="center"
-        android:background="@drawable/app_logo"
-        android:contentDescription="@string/logo_content_description" />
+
+    <Button
+        android:id="@+id/about_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="20dp"
+        android:text="@string/about_us_text" />
 
     <Button
         android:id="@+id/camera_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_above="@+id/about_us"
+        android:layout_alignParentLeft="true"
         android:text="@string/camera_button_text" />
-    
-    <Button
-        android:id="@+id/about_us" 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/about_us_text"
-        />
 
-</LinearLayout>
+    <ImageView
+        android:layout_width="334dp"
+        android:layout_height="123dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="34dp"
+        android:background="@drawable/app_logo"
+        android:contentDescription="@string/logo_content_description" />
+
+</RelativeLayout>

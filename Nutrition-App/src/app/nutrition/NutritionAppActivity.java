@@ -28,10 +28,11 @@ public class NutritionAppActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        Button b;
-        b = (Button) findViewById(R.id.camera_button);
+        Button cam, about;
+        cam = (Button) findViewById(R.id.camera_button);
+        about = (Button) findViewById(R.id.about_us);
         
-        b.setOnClickListener(new View.OnClickListener() {
+        cam.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
 				Intent camera_intent = new Intent("android.media.action.IMAGE_CAPTURE");
@@ -43,6 +44,15 @@ public class NutritionAppActivity extends Activity {
 				startActivityForResult(camera_intent, TAKE_PICTURE);
 			}
 		});
+        
+        // Needs Implementing Still.
+        about.setOnClickListener(new View.OnClickListener() {
+        	
+        	public void onClick(View v) {
+        		
+        	}
+        });
+        
     }
 	
 	@Override

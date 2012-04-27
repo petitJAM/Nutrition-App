@@ -51,9 +51,9 @@ public class NGramModel {
 	/**
 	 * Trains a NGramModel based on the sequence
 	 * 
-	 * @param seq
-	 * @param name
-	 * @return
+	 * @param seq - color transition sequence
+	 * @param name - name of the model
+	 * @return a new trained NGramModel based on the given sequence
 	 */
 	public static NGramModel train(List<Integer> seq, String name) {
         TransitionMatrix t = new TransitionMatrix(ProcessImage.NUM_COLORS);
