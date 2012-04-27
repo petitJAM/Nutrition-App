@@ -1,5 +1,9 @@
 package app.nutrition;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +13,7 @@ import java.util.List;
  *         Created Apr 13, 2012.
  *         Last Updated Apr 26, 2012
  */
-public class NGramModel {
+public class NGramModel implements Serializable {
 
 	/**
 	 * Name of this NGramModel
@@ -80,6 +84,19 @@ public class NGramModel {
 			for (int j = 0; j < tmat.size; j++)
 				tmat.mat[i][j] /= (rowsum);
 		}
+	}
+	
+	/**
+	 * @throws IOException 
+	 * 
+	 * @return returns an instance of the NGramModel as a byte array
+	 */
+	byte[] getByteArray() throws IOException {
+		
+		ByteArrayOutputStream b = new ByteArrayOutputStream();
+		ObjectOutputStream o = new ObjectOutputStream(b);
+		o.writeObject(this);
+		return b.toByteArray();
 	}
 
 	@Override
