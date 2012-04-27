@@ -4,7 +4,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-
     <Button
         android:id="@+id/about_us"
         android:layout_width="match_parent"
@@ -21,7 +20,7 @@
         android:layout_above="@+id/about_us"
         android:layout_alignParentLeft="true"
         android:text="@string/camera_button_text" />
-
+
     <ImageView
         android:layout_width="334dp"
         android:layout_height="123dp"

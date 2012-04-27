@@ -1,6 +1,5 @@
 package app.nutrition.test;
 
-import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
 import app.nutrition.NutritionAppActivity;
@@ -54,7 +53,7 @@ public class NutritionAppTest extends
 	 */
 	@UiThreadTest
 	public void testCameraButton() {
-		Instrumentation instr = getInstrumentation();
-		
+//		Instrumentation instr = getInstrumentation();
+		fail("test not implemented");
 	}
 }

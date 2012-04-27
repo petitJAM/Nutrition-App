@@ -38,7 +38,6 @@ public class NutritionAppActivity extends Activity {
         
         cam.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				Intent camera_intent = new Intent("android.media.action.IMAGE_CAPTURE");
 				File image_file = new File(getFilesDir(), "image.png");
@@ -53,8 +52,7 @@ public class NutritionAppActivity extends Activity {
         // Needs Implementing Still.
         about.setOnClickListener(new View.OnClickListener() {
         	
-        	@Override
-			public void onClick(View v) {
+        	public void onClick(View v) {
         		
         	}
         });
