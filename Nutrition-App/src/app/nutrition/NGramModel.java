@@ -23,8 +23,8 @@ public class NGramModel {
 	/**
 	 * Create a model with the given name and TransitionMatrix
 	 * 
-	 * @param name name of this NGramModel
-	 * @param t TransitionMatrix associated with this NGramModel
+	 * @param name - name of this NGramModel
+	 * @param t - TransitionMatrix associated with this NGramModel
 	 */
 	public NGramModel(String name, TransitionMatrix t) {
 		this.name = name;
@@ -35,8 +35,8 @@ public class NGramModel {
 	 * Create a model with the given name and train it based on the given
 	 * sequence.
 	 * 
-	 * @param name
-	 * @param seq
+	 * @param name - name of this NGramModel
+	 * @param seq - the sequence of colors
 	 */
 	public NGramModel(String name, List<Integer> seq) {
 		this.name = name;
@@ -61,10 +61,10 @@ public class NGramModel {
 	}
 
 	/**
-	 * Trains a NGramModel based on the sequence
+	 * Trains a NGramModel based on the sequence. Counts the transitions between
+	 * colors in the sequence.
 	 * 
-	 * @param seq
-	 * @param name
+	 * @param seq - the sequence of colors
 	 */
 	public void train(List<Integer> seq) {
 		int s = seq.size();
@@ -78,5 +78,10 @@ public class NGramModel {
 			for (int j = 0; j < tmat.size; j++)
 				tmat.mat[i][j] /= (rowsum);
 		}
+	}
+
+	@Override
+	public String toString() {
+		return name;
 	}
 }
