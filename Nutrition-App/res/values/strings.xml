@@ -5,5 +5,6 @@
     <string name="app_name">Nutrition-App</string>
     <string name="logo_content_description">Logo</string>
     <string name="camera_button_text">Capture Image</string>
+    <string name="about_us_text">About Us</string>
 
 </resources>
