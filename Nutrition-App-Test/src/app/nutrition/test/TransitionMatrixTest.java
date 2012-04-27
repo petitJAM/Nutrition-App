@@ -29,7 +29,7 @@ public class TransitionMatrixTest extends TestCase {
 		assertEquals(N, t.size);
 		for (int i = 0; i < N; i++)
 			for (int j = 0; j < N; j++)
-				assertEquals(1, t.mat[i][j]);
+				assertEquals(1.0, t.mat[i][j]);
 	}
 	
 	/**
@@ -37,7 +37,7 @@ public class TransitionMatrixTest extends TestCase {
 	 */
 	public void testAddToAll() {
 		TransitionMatrix t = new TransitionMatrix(N);
-		t.addToAll(1);
+		t.addToAll(1.0);
 		
 		for (int i = 0; i < N; i++)
 			for (int j = 0; j < N; j++)

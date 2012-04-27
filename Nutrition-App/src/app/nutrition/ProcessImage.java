@@ -101,7 +101,6 @@ public class ProcessImage {
 		for (int i = 0; i < pixels.length; i++) {
 			ret.add(classify(getPixelRGB(pixels[i])));
 		}
-
 		return ret;
 	}
 

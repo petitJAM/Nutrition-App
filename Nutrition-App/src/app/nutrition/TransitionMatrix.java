@@ -7,8 +7,9 @@ package app.nutrition;
  * [0, i] and [0, j] are the same range and represent the possible states
  * to transition between.
  *
- * @author Alex Petitjean.
+ * @author Alex Petitjean, Rob Wagner
  *         Created Apr 18, 2012.
+ *         Last Updated Apr 26, 2012.
  */
 public class TransitionMatrix {
 	/**
@@ -35,13 +36,16 @@ public class TransitionMatrix {
 				mat[i][j] = 1;
 	}
 	
+	
 	/**
 	 * Add i to all elements of the matrix
 	 *
 	 * @param i - add to all elements
 	 */
-	public void addToAll(int i) {
-		
+	public void addToAll(double i) {
+		for (int j = 0; j < size; j++)
+			for (int k = 0; k < size; k++)
+				mat[j][k] += i;
 	}
 	
 	/**
@@ -49,8 +53,10 @@ public class TransitionMatrix {
 	 *
 	 * @param i - divide all elements by
 	 */
-	public void divideAllBy(int i) {
-		
+	public void divideAllBy(double i) {
+		for (int j = 0; j < size; j++)
+			for (int k = 0; k < size; k++)
+				mat[j][k] /= i;
 	}
 	
 	/**
@@ -66,6 +72,10 @@ public class TransitionMatrix {
 			throw new IllegalArgumentException("Matrix size mismatch");
 		
 		TransitionMatrix tnew = new TransitionMatrix(t1.size);
+		
+		for (int i = 0; i < t1.size; i++)
+			for (int j = 0; j < t1.size; j++)
+				tnew.mat[i][j] = (t1.mat[i][j] + t2.mat[i][j]) / 2.0;
 		
 		return tnew;
 	}
