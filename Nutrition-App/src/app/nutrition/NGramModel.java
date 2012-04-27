@@ -64,7 +64,9 @@ public class NGramModel {
 	 * Trains a NGramModel based on the sequence. Counts the transitions between
 	 * colors in the sequence.
 	 * 
-	 * @param seq - the sequence of colors
+	 * @param seq - color transition sequence
+	 * @param name - name of the model
+	 * @return a new trained NGramModel based on the given sequence
 	 */
 	public void train(List<Integer> seq) {
 		int s = seq.size();

@@ -27,15 +27,17 @@ public class NutritionAppActivity extends Activity {
 	private static Uri imageUri;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
 
-		Button b;
-		b = (Button) findViewById(R.id.camera_button);
-
-		b.setOnClickListener(new View.OnClickListener() {
-
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        
+        Button cam, about;
+        cam = (Button) findViewById(R.id.camera_button);
+        about = (Button) findViewById(R.id.about_us);
+        
+        cam.setOnClickListener(new View.OnClickListener() {
+			
 			@Override
 			public void onClick(View v) {
 				Intent camera_intent = new Intent("android.media.action.IMAGE_CAPTURE");
@@ -47,8 +49,18 @@ public class NutritionAppActivity extends Activity {
 				startActivityForResult(camera_intent, TAKE_PICTURE);
 			}
 		});
-	}
-
+        
+        // Needs Implementing Still.
+        about.setOnClickListener(new View.OnClickListener() {
+        	
+        	@Override
+			public void onClick(View v) {
+        		
+        	}
+        });
+        
+    }
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
