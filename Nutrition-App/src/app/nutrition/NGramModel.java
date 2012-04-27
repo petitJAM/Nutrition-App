@@ -10,7 +10,7 @@ import java.util.List;
  *         Last Updated Apr 26, 2012
  */
 public class NGramModel {
-	
+
 	/**
 	 * Name of this NGramModel
 	 */
@@ -32,44 +32,51 @@ public class NGramModel {
 	}
 
 	/**
+	 * Create a model with the given name and train it based on the given
+	 * sequence.
+	 * 
+	 * @param name
+	 * @param seq
+	 */
+	public NGramModel(String name, List<Integer> seq) {
+		this.name = name;
+		train(seq);
+	}
+
+	/**
 	 * Returns the log likelihood of the given sequence matching this model
 	 * 
 	 * @param seq - color transition sequence
 	 * @return loglikelihood of the sequence matching this NGramModel
 	 */
-    public double logLikelihood(List<Integer> seq) {
-        double ll = 0.0;
-        for (int i = 1; i < seq.size(); i++) {
-            int x = seq.get(i - 1);
-            int y = seq.get(i);
-            if (tmat.mat[x][y] != 0)
-                ll += Math.log10(tmat.mat[seq.get(i - 1)][seq.get(i)]);
-        }
-        return ll;
-    }
-	
+	public double logLikelihood(List<Integer> seq) {
+		double ll = 0.0;
+		for (int i = 1; i < seq.size(); i++) {
+			int x = seq.get(i - 1);
+			int y = seq.get(i);
+			if (tmat.mat[x][y] != 0)
+				ll += Math.log10(tmat.mat[seq.get(i - 1)][seq.get(i)]);
+		}
+		return ll;
+	}
+
 	/**
 	 * Trains a NGramModel based on the sequence
 	 * 
 	 * @param seq
 	 * @param name
-	 * @return
 	 */
-	public static NGramModel train(List<Integer> seq, String name) {
-        TransitionMatrix t = new TransitionMatrix(ProcessImage.NUM_COLORS);
-        
-        int s = seq.size();
-        for (int i = 1; i < s; i++)
-            t.mat[seq.get(i - 1)][seq.get(i)] += 1;
-        
-        for (int i = 0; i < t.size; i++) {
-            double rowsum = 0;
-            for (int j = 0; j < t.size; j++)
-                rowsum += t.mat[i][j];
-            for (int j = 0; j < t.size; j++) 
-            	t.mat[i][j] /= (rowsum);
-        }   
-        
-        return new NGramModel(name, t);
-    }
+	public void train(List<Integer> seq) {
+		int s = seq.size();
+		for (int i = 1; i < s; i++)
+			tmat.mat[seq.get(i - 1)][seq.get(i)] += 1;
+
+		for (int i = 0; i < tmat.size; i++) {
+			double rowsum = 0;
+			for (int j = 0; j < tmat.size; j++)
+				rowsum += tmat.mat[i][j];
+			for (int j = 0; j < tmat.size; j++)
+				tmat.mat[i][j] /= (rowsum);
+		}
+	}
 }
