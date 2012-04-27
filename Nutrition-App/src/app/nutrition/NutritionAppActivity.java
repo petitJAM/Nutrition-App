@@ -36,6 +36,7 @@ public class NutritionAppActivity extends Activity {
 
 		b.setOnClickListener(new View.OnClickListener() {
 
+			@Override
 			public void onClick(View v) {
 				Intent camera_intent = new Intent("android.media.action.IMAGE_CAPTURE");
 				File image_file = new File(getFilesDir(), "image.png");
@@ -70,7 +71,7 @@ public class NutritionAppActivity extends Activity {
 			sendNGramModel(ngm);
 
 		} catch (Exception e) {
-			Log.e("Analyze", "Failed to load image");
+			Log.e("Analyze", e.getMessage());
 		}
 	}
 

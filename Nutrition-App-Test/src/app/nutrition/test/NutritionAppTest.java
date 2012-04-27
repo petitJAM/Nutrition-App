@@ -1,6 +1,8 @@
 package app.nutrition.test;
 
+import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.UiThreadTest;
 import app.nutrition.NutritionAppActivity;
 
 /**
@@ -45,5 +47,14 @@ public class NutritionAppTest extends
 	 */
 	public void testAppName() {
 		assertEquals("Nutrition-App", appName);
+	}
+	
+	/**
+	 * Test camera calls
+	 */
+	@UiThreadTest
+	public void testCameraButton() {
+		Instrumentation instr = getInstrumentation();
+		
 	}
 }
