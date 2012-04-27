@@ -1,9 +1,12 @@
 package app.nutrition;
 
 import java.io.File;
+import java.util.List;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -59,6 +62,15 @@ public class NutritionAppActivity extends Activity {
 	}
 	
 	private void analyzeImage() {
-		
+		ContentResolver cr = getContentResolver();
+		Bitmap img;
+		try {
+			img = android.provider.MediaStore.Images.Media.getBitmap(cr, imageUri);
+			List<Integer> pixel_seq = ProcessImage.generateSequence(img);
+			NGramModel ngm = new NGramModel("result", pixel_seq);
+			
+		} catch (Exception e) {
+			Log.e("Analyze", "Failed to load image");
+		}
 	}
 }
