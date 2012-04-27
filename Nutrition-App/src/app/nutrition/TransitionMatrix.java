@@ -7,8 +7,9 @@ package app.nutrition;
  * [0, i] and [0, j] are the same range and represent the possible states
  * to transition between.
  *
- * @author Alex Petitjean.
+ * @author Alex Petitjean, Rob Wagner
  *         Created Apr 18, 2012.
+ *         Last Updated Apr 26, 2012.
  */
 public class TransitionMatrix {
 	/**
@@ -34,6 +35,7 @@ public class TransitionMatrix {
 			for (int j = 0; j < N; j++)
 				mat[i][j] = 1;
 	}
+	
 	
 	/**
 	 * Add i to all elements of the matrix
