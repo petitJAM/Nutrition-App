@@ -102,25 +102,25 @@ public class QueryClassTest {
 	@Test
 	public void testFoodEqualsTrue() {
 		Food f = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004,
-				1005, 1006, 1007);
+				1005, 1006, 1007, 1008);
 		Food g = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004,
-				1005, 1006, 1007);
+				1005, 1006, 1007, 1008);
 		assertTrue(f.equals(g));
 	}
 
 	@Test
 	public void testFoodEqualsFalse() {
 		Food f = new Food(new byte[] { 0 }, "pizza", 1005, 1002, 1003, 1004,
-				1005, 1006, 1007);
+				1005, 1006, 1007, 1008);
 		Food g = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004,
-				1005, 1006, 1007);
+				1005, 1006, 1007, 1008);
 		assertTrue(f.equals(g));
 	}
 
 	@Test
 	public void testAddFoodItem() {
 		Food f = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004,
-				1005, 1006, 1007);
+				1005, 1006, 1007, 1008);
 		QueryClass.addFoodItem(f);
 		ArrayList<Food> food = QueryClass.getFood();
 		boolean temp = false;

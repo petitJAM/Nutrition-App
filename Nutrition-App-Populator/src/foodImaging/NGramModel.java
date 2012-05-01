@@ -1,4 +1,4 @@
-package app.nutrition;
+package foodImaging;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -74,6 +74,7 @@ public class NGramModel implements Serializable {
 	 * 
 	 * @param seq - color transition sequence
 	 * @param name - name of the model
+	 * @return a new trained NGramModel based on the given sequence
 	 */
 	public void train(List<Integer> seq) {
 		int s = seq.size();
@@ -88,14 +89,14 @@ public class NGramModel implements Serializable {
 				tmat.mat[i][j] /= (rowsum);
 		}
 	}
-
+	
 	/**
-	 * @throws IOException
+	 * @throws IOException 
 	 * 
 	 * @return returns an instance of the NGramModel as a byte array
 	 */
 	byte[] getByteArray() throws IOException {
-
+		
 		ByteArrayOutputStream b = new ByteArrayOutputStream();
 		ObjectOutputStream o = new ObjectOutputStream(b);
 		o.writeObject(this);
