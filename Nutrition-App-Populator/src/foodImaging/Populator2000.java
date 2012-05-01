@@ -27,7 +27,7 @@ public class Populator2000 {
         NGramModel[] ngms = trainAll();
         for (int i = 0; i < ngms.length; i++) {
         	byte[] b = ngms[i].getByteArray();
-        	NutritionFacts n = new NutritionFacts(ngms[i]);
+        	NutritionFacts n = new NutritionFacts(ngms[i].name);
 			QueryClass.addFoodItem(new Food(b, ngms[i].name, n.calories, n.calFromFat, n.totalFat, n.sodium, n.carbs, n.fiber, n.sugar, n.protein));
 		}
     }
