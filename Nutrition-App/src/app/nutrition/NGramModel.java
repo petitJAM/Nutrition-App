@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.List;
 
+
 /**
  * Contains a matrix of color transitions and a name to identify it.
  * 
@@ -13,12 +14,15 @@ import java.util.List;
  *         Created Apr 13, 2012.
  *         Last Updated Apr 26, 2012
  */
-public class NGramModel implements Serializable {
 
+@SuppressWarnings("serial")
+public class NGramModel implements Serializable {
+	
 	/**
 	 * Name of this NGramModel
 	 */
 	public String name;
+	
 	/**
 	 * TransitionMatrix this NGramModel encases
 	 */
