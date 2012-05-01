@@ -3,8 +3,9 @@ package app.nutrition.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import foodImaging.NGramModel;
+
 import junit.framework.TestCase;
-import app.nutrition.NGramModel;
 import app.nutrition.TransitionMatrix;
 
 /**
