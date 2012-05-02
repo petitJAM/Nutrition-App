@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.util.Log;
 
 /**
  * Process an image
@@ -16,72 +17,72 @@ public class ProcessImage {
 	/**
 	 * Invalid color.
 	 */
-	public static final int BAD = -1;
+	public static final byte BAD = -1;
 	/**
 	 * Black
 	 */
-	public static final int BLACK = 0;
+	public static final byte BLACK = 0;
 	/**
 	 * Gray
 	 */
-	public static final int GRAY = 1;
+	public static final byte GRAY = 1;
 	/**
 	 * White
 	 */
-	public static final int WHITE = 2;
+	public static final byte WHITE = 2;
 	/**
 	 * Red
 	 */
-	public static final int RED = 3;
+	public static final byte RED = 3;
 	/**
 	 * Red-orange
 	 */
-	public static final int REDORANGE = 4;
+	public static final byte REDORANGE = 4;
 	/**
 	 * Orange
 	 */
-	public static final int ORANGE = 5;
+	public static final byte ORANGE = 5;
 	/**
 	 * Yellow-orange
 	 */
-	public static final int YELLOWORANGE = 6;
+	public static final byte YELLOWORANGE = 6;
 	/**
 	 * Yellow
 	 */
-	public static final int YELLOW = 7;
+	public static final byte YELLOW = 7;
 	/**
 	 * Yellow-green
 	 */
-	public static final int YELLOWGREEN = 8;
+	public static final byte YELLOWGREEN = 8;
 	/**
 	 * Green
 	 */
-	public static final int GREEN = 9;
+	public static final byte GREEN = 9;
 	/**
 	 * Blue-green
 	 */
-	public static final int BLUEGREEN = 10;
+	public static final byte BLUEGREEN = 10;
 	/**
 	 * Blue
 	 */
-	public static final int BLUE = 11;
+	public static final byte BLUE = 11;
 	/**
 	 * Blue-violet
 	 */
-	public static final int BLUEVIOLET = 12;
+	public static final byte BLUEVIOLET = 12;
 	/**
 	 * Violet
 	 */
-	public static final int VIOLET = 13;
+	public static final byte VIOLET = 13;
 	/**
 	 * Violet-red
 	 */
-	public static final int VIOLETRED = 14;
+	public static final byte VIOLETRED = 14;
 
 	/**
 	 * Total number of colors.
 	 */
-	public static final int NUM_COLORS = 15;
+	public static final byte NUM_COLORS = 15;
 
 	/**
 	 * Return a sequence of colors found from the given Bitmap image.
@@ -89,64 +90,61 @@ public class ProcessImage {
 	 * @param img - image to sequence
 	 * @return sequence of colors
 	 */
-	public static List<Integer> generateSequence(Bitmap img) {
-		ArrayList<Integer> ret = new ArrayList<Integer>();
+	public static List<Byte> generateSequence(Bitmap img) {
+		ArrayList<Byte> ret = new ArrayList<Byte>();
 
 		int width = img.getWidth();
 		int height = img.getHeight();
+		
+		Log.d("ProcessImage", "image width: " + width + "   image height: " + height);
 
 		int[] pixels = new int[width * height];
 		img.getPixels(pixels, 0, width, 0, 0, width, height);
+		Log.d("ProcessImage", "Pixel array filled");
 
 		for (int i = 0; i < pixels.length; i++) {
 			ret.add(classify(getPixelRGB(pixels[i])));
 		}
+		
+		Log.d("ProcessImage", "Processing complete");
 		return ret;
 	}
 
-	private static int[] getPixelRGB(int pixel) {
-		int red = (pixel >> 16) & 0xff;
-		int green = (pixel >> 8) & 0xff;
-		int blue = (pixel) & 0xff;
-		int[] rgb = { red, green, blue };
+	private static byte[] getPixelRGB(int pixel) {
+		byte red = (byte) ((pixel >> 16) & 0xff);
+		byte green = (byte) ((pixel >> 8) & 0xff);
+		byte blue = (byte) ((pixel) & 0xff);
+		byte[] rgb = { red, green, blue };
 		return rgb;
 	}
 
-	private static int classify(int[] rgb) {
+	private static byte classify(byte[] rgb) {
 		float[] hsv = new float[3];
+		
+		Color.RGBToHSV(rgb[0], rgb[1], rgb[2], hsv);
 
-		int red = rgb[0];
-		int green = rgb[1];
-		int blue = rgb[2];
-
-		Color.RGBToHSV(red, green, blue, hsv);
-
-		float hue = hsv[0];
-		float sat = hsv[1];
-		float bright = hsv[2];
-
-		if (sat < .25) {
-			if (bright < .2)
+		if (hsv[1] < .25) {
+			if (hsv[2] < .2)
 				return BLACK;
-			else if (bright > .8)
+			else if (hsv[2] > .8)
 				return WHITE;
 			else
 				return GRAY;
 		}
 		else {
-			if (hue < 15) return RED;
-			if (hue < 45) return REDORANGE;
-			if (hue < 75) return ORANGE;
-			if (hue < 105) return YELLOWORANGE;
-			if (hue < 135) return YELLOW;
-			if (hue < 165) return YELLOWGREEN;
-			if (hue < 195) return GREEN;
-			if (hue < 225) return BLUEGREEN;
-			if (hue < 255) return BLUE;
-			if (hue < 285) return BLUEVIOLET;
-			if (hue < 315) return VIOLET;
-			if (hue < 345) return VIOLETRED;
-			if (hue < 360) return RED;
+			if (hsv[0] < 15) return RED;
+			if (hsv[0] < 45) return REDORANGE;
+			if (hsv[0] < 75) return ORANGE;
+			if (hsv[0] < 105) return YELLOWORANGE;
+			if (hsv[0] < 135) return YELLOW;
+			if (hsv[0] < 165) return YELLOWGREEN;
+			if (hsv[0] < 195) return GREEN;
+			if (hsv[0] < 225) return BLUEGREEN;
+			if (hsv[0] < 255) return BLUE;
+			if (hsv[0] < 285) return BLUEVIOLET;
+			if (hsv[0] < 315) return VIOLET;
+			if (hsv[0] < 345) return VIOLETRED;
+			if (hsv[0] < 360) return RED;
 			return BAD;
 		}
 	}

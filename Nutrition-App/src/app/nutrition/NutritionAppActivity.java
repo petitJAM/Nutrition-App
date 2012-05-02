@@ -1,16 +1,16 @@
 package app.nutrition;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +32,10 @@ public class NutritionAppActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		Runtime rt = Runtime.getRuntime();
+
+		long maxMemory = rt.maxMemory();
+		Log.v("onCreate", "Max Mem: " + Long.toString(maxMemory));
 
 		Button cam, about;
 		cam = (Button) findViewById(R.id.camera_button);
@@ -41,20 +45,28 @@ public class NutritionAppActivity extends Activity {
 
 			public void onClick(View v) {
 				Intent camera_intent = new Intent("android.media.action.IMAGE_CAPTURE");
-				File filesdir = getFilesDir();
+				// File filesdir = getFilesDir();
+				// if (!filesdir.exists()) {
+				// Log.d("File", "Application directory does not exist");
+				// if (!filesdir.mkdirs()) {
+				// Log.d("File", "Could not create application directory");
+				// }
+				// }
+
+				File filesdir = new File(Environment.getExternalStorageDirectory(),
+						"nutrition-app");
 				if (!filesdir.exists()) {
-					Log.d("File", "Application directory does not exist");
+					Log.d("File", filesdir.toString() + " does not exist. Creating...");
 					if (!filesdir.mkdirs()) {
-						Log.d("File", "Could not create application directory");
+						Log.d("File", filesdir.toString() + " could not be created!");
 					}
 				}
-				
+
 				File image_file = new File(filesdir, "image.png");
 				if (!image_file.exists()) {
 					Log.d("File", "Created image file does not exist");
 					try {
 						image_file.createNewFile();
-						
 					} catch (IOException e) {
 						Log.e("File", e.getMessage());
 					}
@@ -81,31 +93,42 @@ public class NutritionAppActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		
+
 		switch (requestCode) {
 		case TAKE_PICTURE:
-			Log.i("Picture taken", imageUri.toString());
-			analyzeImage();
+			if (resultCode == RESULT_OK) {
+				Log.i("Picture taken", imageUri.toString());
+				analyzeImage();
+			}
+			else if (resultCode == RESULT_CANCELED) {
+				Log.d("on result", "result canceled!");
+			}
+			else {
+				Log.d("on result", "result not ok!");
+			}
 			break;
 		}
 	}
 
 	private void analyzeImage() {
-		ContentResolver cr = getContentResolver();
 		Bitmap img = null;
 		try {
-			img = android.provider.MediaStore.Images.Media.getBitmap(cr, imageUri);
-			List<Integer> pixel_seq = ProcessImage.generateSequence(img);
+			Log.d("Analyze", imageUri.getPath());
+			img = BitmapFactory.decodeFile(imageUri.getPath());
+			img = scaleImage(img);
+			
+			List<Byte> pixel_seq = ProcessImage.generateSequence(img);
 			NGramModel ngm = new NGramModel("result", pixel_seq);
 			sendNGramModel(ngm);
-
-		} catch (FileNotFoundException fofe) {
-			Log.d("Analyze", fofe.getMessage());
-		} catch (IOException ioe) {
-			Log.d("Analyze", ioe.getMessage());
 		} catch (Exception e) {
 			Log.e("Analyze", e.toString());
 		}
+	}
+
+	private Bitmap scaleImage(Bitmap b) {
+		Bitmap newb; // lol
+		newb = Bitmap.createScaledBitmap(b, 640, 368, false);
+		return newb;
 	}
 
 	private void sendNGramModel(NGramModel ngm) {
