@@ -4,8 +4,8 @@ public class Food {
 
 	public Object Transition_Matrix;
 
-	public Food(byte[] bs, String string, int i, int j, int k, int l, int m,
-			int n, int o, int p) {
+	public Food(byte[] bs, String string, double calories, double calFromFat, double totalFat, double sodium, double carbs,
+			double fiber, double sugar, double protein) {
 		// TODO Auto-generated constructor stub
 	}
 	

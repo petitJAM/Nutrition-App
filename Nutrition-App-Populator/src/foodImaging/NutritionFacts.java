@@ -5,31 +5,43 @@ import java.io.IOException;
 import java.util.Locale;
 
 import jxl.LabelCell;
-import jxl.NumberCell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.WorkbookSettings;
 import jxl.read.biff.BiffException;
 
+/**
+ * This class is used for storing/collecting the nutrition information for each food.
+ * 
+ * @author Rob Wagner
+ * Last Updated
+ */
+
 public class NutritionFacts {
 	
-	public int calories;
-	public int calFromFat;
-	public int totalFat;
-	public int protein;
-	public int sugar;
-	public int fiber;
-	public int carbs;
-	public int sodium;
+	public double calories;
+	public double calFromFat;
+	public double totalFat;
+	public double protein;
+	public double sugar;
+	public double fiber;
+	public double carbs;
+	public double sodium;
 	
 	public String name;
 	
 	private static final int calCol = 2;
-	private static final int 
+	private static final int fatCol = 4;
+	private static final int proCol = 3;
+	private static final int sugCol = 8;
+	private static final int fibCol = 7;
+	private static final int carbCol = 6;
+	private static final int sodCol = 14;
 
 
 	public NutritionFacts(String modelName) {
 		this.name = modelName;
+		readExcel();
 	}
 	
 	public void readExcel() {
@@ -39,11 +51,10 @@ public class NutritionFacts {
 	      WorkbookSettings ws = new WorkbookSettings();
 	      ws.setLocale(new Locale("en", "EN"));
 
-	      Workbook workbook = Workbook.getWorkbook(
-	        new File(filename),ws);
+	      Workbook workbook = Workbook.getWorkbook(new File(filename),ws);
 
 	      Sheet s  = workbook.getSheet(0);
-	      readDataSheet(s);
+	      readDataRow(s);
 	      workbook.close();      
 	    }
 	    catch (IOException e)
@@ -56,19 +67,54 @@ public class NutritionFacts {
 	    }
 	}
 
-	private void readDataSheet(Sheet s) {
+	/**
+	 * Reads the row of the corresponding food in the excel spreadsheet
+	 * 
+	 * @param s - excel worksheet
+	 */
+	private void readDataRow(Sheet s) {
 	    LabelCell lc = s.findLabelCell(this.name);
 	    int row = lc.getRow();
-	    this.calories = (int) ((NumberCell) s.getCell(calCol, row)).getValue();
-	    this.calFromFat = (int) ((NumberCell) s.getCell(calCol, row)).getValue();
-	    this.totalFat = (int) ((NumberCell) s.getCell(calCol, row)).getValue();
-	    this.protein = (int) ((NumberCell) s.getCell(calCol, row)).getValue();
-	    this.sugar = (int) ((NumberCell) s.getCell(calCol, row)).getValue();
-	    this.fiber = (int) ((NumberCell) s.getCell(calCol, row)).getValue();
-	    this.carbs = (int) ((NumberCell) s.getCell(calCol, row)).getValue();
-	    this.sodium = (int) ((NumberCell) s.getCell(calCol, row)).getValue();
-	    
-		
+	    this.calories = getValue(s, calCol, row);
+	    this.totalFat = getValue(s, fatCol, row);
+	    this.calFromFat = Math.round(this.totalFat * 9);
+	    this.protein = getValue(s, proCol, row);
+	    this.sugar = getValue(s, sugCol, row);
+	    this.fiber = getValue(s, fibCol, row);
+	    this.carbs = getValue(s, carbCol, row);
+	    this.sodium = getValue(s, sodCol, row);
 	}
-
+	
+	/**
+	 * Handles getting the values from the spreadsheet nicely
+	 * 
+	 * @param s - the worksheet
+	 * @param col
+	 * @param row
+	 * @return value of the cell (as a double)
+	 */
+	
+	private double getValue (Sheet s, int col, int row) {
+		String val = s.getCell(col, row).getContents();
+		if(val.isEmpty())
+			return 0;
+		return Double.parseDouble(val);
+	}
+	
+	/**
+	 * @return Handy printout for testing purposes.
+	 */
+	public String stringify() {
+		return ("=====================================================\n"
+				+ "Name: " + this.name + "\n"
+				+ "Calories: " + this.calories + "\n"
+				+ "Fat: " + this.totalFat + "\n"
+				+ "Calories from Fat: " + this.calFromFat + "\n"
+				+ "Protein: " + this.protein + "\n"
+				+ "Sugar: " + this.sugar + "\n"
+				+ "Fiber: " + this.fiber + "\n"
+				+ "Carbs: " + this.carbs + "\n"
+				+ "Sodium: " + this.sodium + "\n" +
+				"=====================================================\n");
+	}
 }
