@@ -1,5 +1,7 @@
 package app.nutrition;
 
+import java.io.Serializable;
+
 /**
  * This class represents a transition probability matrix where 
  * TransitionMatrix[i][j] is the probability of transitioning from i to j.
@@ -11,7 +13,7 @@ package app.nutrition;
  *         Created Apr 18, 2012.
  *         Last Updated Apr 26, 2012.
  */
-public class TransitionMatrix {
+public class TransitionMatrix implements Serializable {
 	/**
 	 * Size of the TransitionMatrix
 	 */

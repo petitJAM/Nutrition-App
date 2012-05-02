@@ -1,6 +1,5 @@
 package foodImaging;
 
-
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

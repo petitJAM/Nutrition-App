@@ -97,7 +97,7 @@ public class NGramModel implements Serializable {
 	 * 
 	 * @return returns an instance of the NGramModel as a byte array
 	 */
-	byte[] getByteArray() throws IOException {
+	public byte[] getByteArray() throws IOException {
 
 		ByteArrayOutputStream b = new ByteArrayOutputStream();
 		ObjectOutputStream o = new ObjectOutputStream(b);
