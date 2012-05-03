@@ -22,10 +22,12 @@
         android:text="@string/camera_button_text" />
 
     <ImageView
+        android:id="@+id/logo_view"
         android:layout_width="334dp"
         android:layout_height="123dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="14dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
         android:background="@drawable/app_logo"
         android:contentDescription="@string/logo_content_description" />
 

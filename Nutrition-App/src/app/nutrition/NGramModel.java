@@ -46,8 +46,9 @@ public class NGramModel implements Serializable {
 	 * @param name - name of this NGramModel
 	 * @param seq - the sequence of colors
 	 */
-	public NGramModel(String name, List<Integer> seq) {
+	public NGramModel(String name, List<Byte> seq) {
 		this.name = name;
+		tmat = new TransitionMatrix(ProcessImage.NUM_COLORS);
 		train(seq);
 	}
 
@@ -75,7 +76,7 @@ public class NGramModel implements Serializable {
 	 * @param seq - color transition sequence
 	 * @param name - name of the model
 	 */
-	public void train(List<Integer> seq) {
+	public void train(List<Byte> seq) {
 		int s = seq.size();
 		for (int i = 1; i < s; i++)
 			tmat.mat[seq.get(i - 1)][seq.get(i)] += 1;

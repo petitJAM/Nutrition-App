@@ -4,12 +4,23 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+/**
+ * TODO Put here a description of what this class does.
+ *
+ * @author Alex Petitjean.
+ *         Created May 2, 2012.
+ */
 public class Connection {
 
 	private Socket sock;
 	private DataInputStream in;
 	private DataOutputStream out;
 
+	/**
+	 * TODO Put here a description of what this constructor does.
+	 *
+	 * @param sock
+	 */
 	public Connection(Socket sock) {
 		this.sock = sock;
 		try {
