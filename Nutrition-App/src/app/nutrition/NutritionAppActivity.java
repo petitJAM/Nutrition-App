@@ -26,6 +26,7 @@ public class NutritionAppActivity extends Activity {
 	/** Called when the activity is first created. */
 
 	private final static int TAKE_PICTURE = 0;
+	private final static int RESULTS = 1;
 	private static Uri imageUri;
 
 	@Override
@@ -84,7 +85,7 @@ public class NutritionAppActivity extends Activity {
 		about.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
-
+				Log.d("About us", "Button not implemented!");
 			}
 		});
 
@@ -107,6 +108,9 @@ public class NutritionAppActivity extends Activity {
 				Log.d("on result", "result not ok!");
 			}
 			break;
+		case RESULTS:
+			Log.d("on result", "ResultsViewActivity ended");
+			break;
 		}
 	}
 
@@ -116,7 +120,7 @@ public class NutritionAppActivity extends Activity {
 			Log.d("Analyze", imageUri.getPath());
 			img = BitmapFactory.decodeFile(imageUri.getPath());
 			img = scaleImage(img);
-			
+
 			List<Byte> pixel_seq = ProcessImage.generateSequence(img);
 			NGramModel ngm = new NGramModel("result", pixel_seq);
 			sendNGramModel(ngm);

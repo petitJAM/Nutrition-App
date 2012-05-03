@@ -6,8 +6,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.List;
 
-import android.util.Log;
-
 
 /**
  * Contains a matrix of color transitions and a name to identify it.
