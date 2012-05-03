@@ -1,7 +1,11 @@
 package app.nutrition.test;
 
+import android.app.Instrumentation;
+import android.app.Instrumentation.ActivityMonitor;
+import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
+import android.widget.Button;
 import app.nutrition.NutritionAppActivity;
 
 /**
@@ -15,14 +19,14 @@ public class NutritionAppTest extends
 
 	private NutritionAppActivity naa;
 	private String appName;
-
+	
 	/**
-	 * Constructor
+	 * Constructor.
 	 * 
-	 * @param activityClass
+	 * (Shut up Rob)
 	 */
-	public NutritionAppTest(Class<NutritionAppActivity> activityClass) {
-		super(activityClass);
+	public NutritionAppTest() {
+		super(NutritionAppActivity.class);
 	}
 
 	@Override
@@ -46,6 +50,20 @@ public class NutritionAppTest extends
 	 */
 	public void testAppName() {
 		assertEquals("Nutrition-App", appName);
+	}
+	
+
+	/**
+	 * Test that Camera Intent is opened.
+	 */
+	public void testCameraIntentCalled() {
+		Instrumentation instr = getInstrumentation();
+		Button cb = (Button) naa.findViewById(app.nutrition.R.id.camera_button);
+		cb.setPressed(true);
+//		int req_code = getStartedActivityRequest();
+//		Intent intent = getStartedActivityIntent();
+//		assertEquals(NutritionAppActivity.TAKE_PICTURE, req_code);
+//		assertEquals("android.media.action.IMAGE_CAPTURE", intent.getAction());
 	}
 	
 	/**

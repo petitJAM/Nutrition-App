@@ -6,6 +6,7 @@ Nutrition-App/.settings
 Nutrition-App-Test/.classpath
 Nutrition-App-Test/.project
 Nutrition-App-Test/bin/
+Nutrition-App-Test/*.log
 
 Nutrition-App-Server/.classpath
 Nutrition-App-Server/.project
