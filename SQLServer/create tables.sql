@@ -10,11 +10,12 @@ times_correct int
 create table Food(
 Transition_Matrix varbinary(512),
 Name varchar(256),
-Serving_Size int,
-Calories int,
-Calories_from_Fat int,
-Total_Fat int,
-Cholsterol int,
-Sodium int,
-Total_Carbohydrate int
+Calories float,
+Calories_from_Fat float,
+Total_Fat float,
+Sodium float,
+Carbohydrates float,
+Fiber float,
+Sugar float,
+Protein float
 );
