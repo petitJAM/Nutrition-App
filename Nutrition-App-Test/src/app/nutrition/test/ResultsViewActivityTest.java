@@ -18,8 +18,8 @@ public class ResultsViewActivityTest extends ActivityInstrumentationTestCase2<Re
 	 *
 	 * @param activityClass
 	 */
-	public ResultsViewActivityTest(Class<ResultsViewActivity> activityClass) {
-		super(activityClass);
+	public ResultsViewActivityTest() {
+		super(ResultsViewActivity.class);
 	}
 	
 	@Override

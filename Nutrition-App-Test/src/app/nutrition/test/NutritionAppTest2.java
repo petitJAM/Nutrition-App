@@ -1,6 +1,5 @@
 package app.nutrition.test;
 
-import junit.framework.TestCase;
 import android.content.Intent;
 import android.test.ActivityUnitTestCase;
 import android.widget.Button;
@@ -18,18 +17,23 @@ public class NutritionAppTest2 extends ActivityUnitTestCase<NutritionAppActivity
 	
 	/**
 	 * Constructor
-	 *
-	 * @param activityClass
+	 * 
 	 */
-	public NutritionAppTest2(Class<NutritionAppActivity> activityClass) {
-		super(activityClass);
+	public NutritionAppTest2() {
+		super(NutritionAppActivity.class);
 	}
 	
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		
 		naa = getActivity();
+	}
+	
+	/**
+	 * Test Activity Creation
+	 */
+	public void testActivityCreation() {
+		assertNotNull(naa);
 	}
 
 	/**
