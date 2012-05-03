@@ -23,7 +23,8 @@ import android.widget.Button;
  *         Created Apr 19, 2012.
  */
 public class NutritionAppActivity extends Activity {
-	/** Called when the activity is first created. */
+	/** The NGramModel created from images. */
+	public NGramModel ngm;
 
 	/** Code for opening Camera Intent */
 	public final static int TAKE_PICTURE = 0;
@@ -126,25 +127,25 @@ public class NutritionAppActivity extends Activity {
 			img = scaleImage(img);
 
 			List<Byte> pixel_seq = ProcessImage.generateSequence(img);
-			NGramModel ngm = new NGramModel("result", pixel_seq);
-			sendNGramModel(ngm);
+			ngm = new NGramModel("result", pixel_seq);
+			sendNGramModel();
 		} catch (Exception e) {
 			Log.e("Analyze", e.toString());
 		}
 	}
 
 	private Bitmap scaleImage(Bitmap b) {
+		Bitmap newb; // lol
 		if (b.getWidth() > SCALED_WIDTH && b.getHeight() > SCALED_HEIGHT) {
-			Bitmap newb; // lol
 			newb = Bitmap.createScaledBitmap(b, SCALED_WIDTH, SCALED_HEIGHT, false);
-			return newb;
 		}
 		else {
-			return b;
+			newb = b;
 		}
+		return newb;
 	}
 
-	private void sendNGramModel(NGramModel ngm) {
+	private void sendNGramModel() {
 		Log.d("send n-gram model", ngm.toString());
 	}
 }

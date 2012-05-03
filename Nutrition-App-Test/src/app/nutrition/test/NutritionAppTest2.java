@@ -1,5 +1,6 @@
 package app.nutrition.test;
 
+import junit.framework.TestCase;
 import android.content.Intent;
 import android.test.ActivityUnitTestCase;
 import android.widget.Button;

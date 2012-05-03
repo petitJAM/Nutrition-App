@@ -15,7 +15,7 @@ public class NutritionAppTest extends
 
 	private NutritionAppActivity naa;
 	private String appName;
-
+	
 	/**
 	 * Constructor
 	 * 
