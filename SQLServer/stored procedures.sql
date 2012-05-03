@@ -36,6 +36,8 @@ go
 
 CREATE PROCEDURE [dbo].addDevice
 as
+begin
+select max(ID)+1 from Device
 insert into Device values (0,0)
-select max(ID) from Device
+end
 go
