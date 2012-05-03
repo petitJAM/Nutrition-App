@@ -11,6 +11,8 @@ import app.nutrition.ResultsViewActivity;
  */
 public class ResultsViewActivityTest extends ActivityInstrumentationTestCase2<ResultsViewActivity> {
 
+	private ResultsViewActivity rva;
+	
 	/**
 	 * Constructor
 	 *
@@ -23,5 +25,17 @@ public class ResultsViewActivityTest extends ActivityInstrumentationTestCase2<Re
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		
+		setActivityInitialTouchMode(false);
+		rva = getActivity();
 	}
+	
+	/**
+	 * Test creation of activity
+	 */
+	public void testSuccessfulCreation() {
+		assertNotNull(rva);
+	}
+	
+	
 }

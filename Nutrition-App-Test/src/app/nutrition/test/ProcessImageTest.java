@@ -1,6 +1,7 @@
 package app.nutrition.test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import junit.framework.TestCase;
 import android.graphics.Bitmap;
@@ -24,8 +25,8 @@ public class ProcessImageTest extends TestCase {
 		int[] pixels = {0xFFFFFF, 0xFFFFFF, 0xFFFFFF, 0xFFFFFF};
 		b = Bitmap.createBitmap(pixels, 2, 2, Bitmap.Config.RGB_565);
 		
-		ArrayList<Integer> expected = new ArrayList<Integer>();
-		expected.add(2);expected.add(2);expected.add(2);expected.add(2);
+		List<Byte> expected = new ArrayList<Byte>();
+		expected.add((byte) 2);expected.add((byte) 2);expected.add((byte) 2);expected.add((byte) 2);
 		
 		assertEquals(expected, ProcessImage.generateSequence(b));
 	}
@@ -39,9 +40,11 @@ public class ProcessImageTest extends TestCase {
 		int[] pixels = {0x000000, 0x000000, 0x000000, 0x000000};
 		b = Bitmap.createBitmap(pixels, 2, 2, Bitmap.Config.RGB_565);
 		
-		ArrayList<Integer> expected = new ArrayList<Integer>();
-		expected.add(0);expected.add(0);expected.add(0);expected.add(0);
+		List<Byte> expected = new ArrayList<Byte>();
+		expected.add((byte) 0);expected.add((byte) 0);expected.add((byte) 0);expected.add((byte) 0);
+		List<Byte> result = ProcessImage.generateSequence(b);
 		
-		assertEquals(expected, ProcessImage.generateSequence(b));
+		for (int i = 0; i < pixels.length; i++)
+			assertEquals(expected.get(i), result.get(i));
 	}
 }

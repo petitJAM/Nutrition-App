@@ -25,9 +25,13 @@ import android.widget.Button;
 public class NutritionAppActivity extends Activity {
 	/** Called when the activity is first created. */
 
-	private final static int TAKE_PICTURE = 0;
-	private final static int RESULTS = 1;
+	/** Code for opening Camera Intent */
+	public final static int TAKE_PICTURE = 0;
+	/** Code for opening ResultsViewActivity */
+	public final static int RESULTS = 1;
 	private static Uri imageUri;
+	private static int SCALED_HEIGHT = 368;
+	private static int SCALED_WIDTH = 640;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -130,9 +134,14 @@ public class NutritionAppActivity extends Activity {
 	}
 
 	private Bitmap scaleImage(Bitmap b) {
-		Bitmap newb; // lol
-		newb = Bitmap.createScaledBitmap(b, 640, 368, false);
-		return newb;
+		if (b.getWidth() > SCALED_WIDTH && b.getHeight() > SCALED_HEIGHT) {
+			Bitmap newb; // lol
+			newb = Bitmap.createScaledBitmap(b, SCALED_WIDTH, SCALED_HEIGHT, false);
+			return newb;
+		}
+		else {
+			return b;
+		}
 	}
 
 	private void sendNGramModel(NGramModel ngm) {
