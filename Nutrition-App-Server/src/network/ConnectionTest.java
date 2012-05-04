@@ -11,17 +11,29 @@ import java.net.UnknownHostException;
 
 import org.junit.Test;
 
+/**
+ * tests for the Connection networking component
+ * 
+ * @author bellrj
+ * 
+ */
 public class ConnectionTest {
 
 	String ip = "127.0.0.1";
 	int port = 12345;
 
+	/**
+	 * the client can create a connection which is not null
+	 */
 	@Test
 	public void testCreateClientConnectionSucceeds() {
 		Connection connection = new Connection(new Socket());
 		assertNotNull(connection);
 	}
 
+	/**
+	 * the server can create a connection
+	 */
 	@Test
 	public void testCreateServerConnectionSucceeds() {
 		Server server = new Server(port);
@@ -29,24 +41,35 @@ public class ConnectionTest {
 		server.stop();
 	}
 
+	/**
+	 * the client can connect to the server
+	 */
 	@Test
 	public void testOpenConnectionFromClientToServer() {
 		Server server = new Server(port);
+		@SuppressWarnings("unused")
 		Connection client = new Connection(connection(ip, port));
 		// if there is no exception we pass this test
 		assertTrue(true);
 		server.stop();
 	}
 
+	/**
+	 * checks to see that the server creates a new thread to handle the client
+	 */
 	@Test
 	public void testServerCreatesNewThreadToHandleClient() {
 		Server server = new Server(port);
+		@SuppressWarnings("unused")
 		Connection client = new Connection(connection(ip, port));
 		doWait(100);
 		assertNotNull(server.getClientConnection(0));
 		server.stop();
 	}
 
+	/**
+	 * tests sending a byte from the client to the server
+	 */
 	@Test
 	public void testClientSendsServerByteProperly() {
 		Server server = new Server(port);
@@ -62,6 +85,9 @@ public class ConnectionTest {
 		server.stop();
 	}
 
+	/**
+	 * tests sending a byte from the server to the client
+	 */
 	@Test
 	public void testServerSendsClientByteProperly() {
 		Server server = new Server(port);
@@ -77,6 +103,9 @@ public class ConnectionTest {
 		server.stop();
 	}
 
+	/**
+	 * tests sending and integer from the client to the server
+	 */
 	@Test
 	public void testClientSendsServerIntProperly() {
 		Server server = new Server(port);
@@ -92,6 +121,9 @@ public class ConnectionTest {
 		server.stop();
 	}
 
+	/**
+	 * tests sending an integer from the server to the client
+	 */
 	@Test
 	public void testServerSendsClientIntProperly() {
 		Server server = new Server(port);
@@ -107,6 +139,9 @@ public class ConnectionTest {
 		server.stop();
 	}
 
+	/**
+	 * tests sending a character from the client to the server
+	 */
 	@Test
 	public void testClientSendsServerCharProperly() {
 		Server server = new Server(port);
@@ -122,6 +157,9 @@ public class ConnectionTest {
 		server.stop();
 	}
 
+	/**
+	 * tests sending a character from the server to the client
+	 */
 	@Test
 	public void testServerSendsClientCharProperly() {
 		Server server = new Server(port);
@@ -137,6 +175,9 @@ public class ConnectionTest {
 		server.stop();
 	}
 
+	/**
+	 * tests sending a string from the client to the server
+	 */
 	@Test
 	public void testClientSendsServerStringProperly() {
 		Server server = new Server(port);
@@ -153,6 +194,9 @@ public class ConnectionTest {
 		server.stop();
 	}
 
+	/**
+	 * tests sending a string from the server to the client
+	 */
 	@Test
 	public void testServerSendsClientStringProperly() {
 		Server server = new Server(port);
@@ -170,6 +214,9 @@ public class ConnectionTest {
 		server.stop();
 	}
 
+	/**
+	 * tests sending a byteArray from the client to the server
+	 */
 	@Test
 	public void testClientSendsServerByteArrayProperly() {
 		Server server = new Server(port);
@@ -186,6 +233,9 @@ public class ConnectionTest {
 		server.stop();
 	}
 
+	/**
+	 * tests sending a byteArray from the server to the client
+	 */
 	@Test
 	public void testServerSendsClientByteArrayProperly() {
 		Server server = new Server(port);
@@ -203,10 +253,15 @@ public class ConnectionTest {
 		server.stop();
 	}
 
+	/**
+	 * tests creating two connections from clients to the server
+	 */
 	@Test
 	public void testServerAllowsTwoClients() {
 		Server server = new Server(port);
+		@SuppressWarnings("unused")
 		Connection client1 = new Connection(connection(ip, port));
+		@SuppressWarnings("unused")
 		Connection client2 = new Connection(connection(ip, port));
 		doWait(100);
 		// there will be an exception if either fails
@@ -214,6 +269,10 @@ public class ConnectionTest {
 		server.stop();
 	}
 
+	/**
+	 * tests connecting multiple clients to the server, and managing their
+	 * messages properly
+	 */
 	@Test
 	public void testServerHandlesTwoClients() {
 		Server server = new Server(port);
