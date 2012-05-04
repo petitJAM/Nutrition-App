@@ -8,9 +8,17 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+/**
+ * tests the functionality of the Database.QueryClass
+ * 
+ * @author bellrj
+ * 
+ */
 public class QueryClassTest {
 
-	
+	/**
+	 * inserts a device, and tries to get it back from the database
+	 */
 	@Test
 	public void testGetDevice() {
 		QueryClass qc = new QueryClass();
@@ -19,6 +27,9 @@ public class QueryClassTest {
 		assertTrue(d.times_correct == 0);
 	}
 
+	/**
+	 * tries to get a device that does not exist
+	 */
 	@Test
 	public void testGetNonexistantDevice() {
 		QueryClass qc = new QueryClass();
@@ -26,6 +37,10 @@ public class QueryClassTest {
 		assertNull(d);
 	}
 
+	/**
+	 * tries to create a new device, and ensures it is not null after the
+	 * creation
+	 */
 	@Test
 	public void testCreateDeviceNotNull() {
 		QueryClass qc = new QueryClass();
@@ -33,6 +48,9 @@ public class QueryClassTest {
 		assertNotNull(d);
 	}
 
+	/**
+	 * creates a new device, and checks that the initial times_correct
+	 */
 	@Test
 	public void testCreateDevice() {
 		QueryClass qc = new QueryClass();
@@ -41,58 +59,77 @@ public class QueryClassTest {
 		assertTrue(d.times_used == 0);
 	}
 
+	/**
+	 * tries to insert a new device, modifies it, then checks that it has the
+	 * correct changed parameters
+	 */
 	@Test
 	public void testUpdateDevice() {
 		QueryClass qc = new QueryClass();
 		Device d = qc.newDevice();
-		if(d==null){
-			System.out.println("null 1");
-		}
 		d = qc.updateDevice(d.id, 1, 0);
-		if(d==null){
-			System.out.println("null 2");
-		}
 		assertTrue(d.times_used == 1);
 		assertTrue(d.times_correct == 0);
 	}
 
+	/**
+	 * Tries to update a device which does not exist in the database
+	 */
 	@Test
-	public void testUpdateNonexistantDevice(){
+	public void testUpdateNonexistantDevice() {
 		QueryClass qc = new QueryClass();
 		Device d = qc.updateDevice(-1, 1, 0);
 		assertNull(d);
 	}
-	
+
+	/**
+	 * tries to update a device to have a negative number of uses
+	 */
 	@Test
-	public void testUpdateDeviceInvalidNumberOfUses(){
+	public void testUpdateDeviceInvalidNumberOfUses() {
 		QueryClass qc = new QueryClass();
-		Device d = qc.updateDevice(0, -1, 0);
+		Device d = qc.newDevice();
+		d = qc.updateDevice(d.id, -1, 0);
 		assertNull(d);
 	}
-	
+
+	/**
+	 * tries to update a device to have a negative number of uses and successes
+	 */
 	@Test
-	public void testUpdateDeviceInvalidNumberOfUsesAndSuccesses(){
+	public void testUpdateDeviceInvalidNumberOfUsesAndSuccesses() {
 		QueryClass qc = new QueryClass();
 		Device d = qc.updateDevice(0, -1, -2);
 		assertNull(d);
 	}
-	
+
+	/**
+	 * tries to update a device to have a negative number of successes
+	 */
 	@Test
-	public void testUpdateDeviceInvalidNumberOfSuccesses(){
+	public void testUpdateDeviceInvalidNumberOfSuccesses() {
 		QueryClass qc = new QueryClass();
 		Device d = qc.updateDevice(0, 0, -1);
 		assertNull(d);
 	}
-	
+
+	/**
+	 * tries to update a device to have a number of successes less than the
+	 * number of uses
+	 */
 	@Test
-	public void testUpdateDeviceSuccessesGreaterThanUses(){
+	public void testUpdateDeviceSuccessesGreaterThanUses() {
 		QueryClass qc = new QueryClass();
 		Device d = qc.updateDevice(0, 5, 7);
 		assertNull(d);
 	}
-	
+
+	/**
+	 * adds two devices, modifies one of them, and checks to ensure that only to
+	 * correct device was modified
+	 */
 	@Test
-	public void testUpdateCorrectDevice(){
+	public void testUpdateCorrectDevice() {
 		QueryClass qc = new QueryClass();
 		Device a = qc.newDevice();
 		Device b = qc.newDevice();
@@ -100,16 +137,19 @@ public class QueryClassTest {
 		Device newA = qc.updateDevice(a.id, 5, 2);
 		Device getA = qc.getDevice(a.id);
 		Device getB = qc.getDevice(b.id);
-		
-		assertTrue(newA.id==a.id);
-		assertTrue(getA.id==a.id);
-		assertTrue(getA.times_correct==2);
-		assertTrue(getA.times_used==5);
-		assertTrue(getB.times_correct==0);
-		assertTrue(getB.times_used==0);
+
+		assertTrue(newA.id == a.id);
+		assertTrue(getA.id == a.id);
+		assertTrue(getA.times_correct == 2);
+		assertTrue(getA.times_used == 5);
+		assertTrue(getB.times_correct == 0);
+		assertTrue(getB.times_used == 0);
 	}
-	
-	
+
+	/**
+	 * Checks to make sure that all of the foods have a non-null transition
+	 * matrix
+	 */
 	@Test
 	public void testGetAllFood() {
 		QueryClass qc = new QueryClass();
@@ -120,6 +160,9 @@ public class QueryClassTest {
 		}
 	}
 
+	/**
+	 * Checks to see if two foods with all the same parameters are equal
+	 */
 	@Test
 	public void testFoodEqualsTrue() {
 		Food f = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004,
@@ -129,6 +172,9 @@ public class QueryClassTest {
 		assertTrue(f.equals(g));
 	}
 
+	/**
+	 * Checks to see that two foods that are slightly different are not equal
+	 */
 	@Test
 	public void testFoodEqualsFalse() {
 		Food f = new Food(new byte[] { 0 }, "pizza", 1005, 1002, 1003, 1004,
@@ -138,6 +184,10 @@ public class QueryClassTest {
 		assertTrue(!f.equals(g));
 	}
 
+	/**
+	 * Tries to add a new food item, then gets all of the foods out of the
+	 * database and checks that the one it just added is there
+	 */
 	@Test
 	public void testAddFoodItem() {
 		QueryClass qc = new QueryClass();
