@@ -24,7 +24,7 @@ import android.widget.Button;
  */
 public class NutritionAppActivity extends Activity {
 	/** The NGramModel created from images. */
-	public NGramModel ngm;
+	public static NGramModel ngm;
 
 	/** Code for opening Camera Intent */
 	public final static int TAKE_PICTURE = 0;
