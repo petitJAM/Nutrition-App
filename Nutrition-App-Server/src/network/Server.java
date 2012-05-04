@@ -6,6 +6,13 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 
+/**
+ * the class which handles connections from clients to the server spinning off
+ * threads to communicate with them
+ * 
+ * @author bellrj
+ * 
+ */
 public class Server {
 
 	private boolean running;
@@ -14,6 +21,12 @@ public class Server {
 	private ServerSocket sSock;
 	ArrayList<Connection> clientConnections;
 
+	/**
+	 * creates a serversocket and listens for connections from clients
+	 * 
+	 * @param port
+	 *            the port to listen on
+	 */
 	public Server(int port) {
 		running = true;
 		stop = false;
@@ -28,12 +41,23 @@ public class Server {
 		serverThread.start();
 	}
 
+	/**
+	 * gets a numbered clientConnection from the array of them (primarily used
+	 * for debugging)
+	 * 
+	 * @param i
+	 *            the identifier for the client
+	 * @return the Connection connected to the given client
+	 */
 	public Connection getClientConnection(int i) {
 		if (clientConnections.size() > i)
 			return clientConnections.get(i);
 		return null;
 	}
 
+	/**
+	 * stops the server and closes the listening socket
+	 */
 	public void stop() {
 		running = false;
 		stop = true;
