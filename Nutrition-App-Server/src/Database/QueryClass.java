@@ -7,6 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * handles connection to the database and running queries
+ * 
+ * @author bellrj
+ * 
+ */
 public class QueryClass {
 
 	private static final String CONNECTION_PROTOCOL = "jdbc:sqlserver";
@@ -15,6 +21,9 @@ public class QueryClass {
 	private static final String PASSWORD = "";
 	private static final String DATABASE = "Nutrition-App";
 
+	/**
+	 * default constructor, registers the Driver, and tests the connection
+	 */
 	public QueryClass() {
 		try {
 			registerSQLServerDriver();
@@ -25,6 +34,14 @@ public class QueryClass {
 		}
 	}
 
+	/**
+	 * gets the device with the specified id from the database
+	 * 
+	 * @param i
+	 *            the id of the Device to retrieve from the Database
+	 * @return object describing the Device gotten from the database, null if
+	 *         there was an error
+	 */
 	public Device getDevice(int i) {
 		Device result = null;
 		try {
@@ -59,6 +76,19 @@ public class QueryClass {
 		return result;
 	}
 
+	/**
+	 * updates a Device in the database and returns it
+	 * 
+	 * @param i
+	 *            the id of the device to update
+	 * @param j
+	 *            the number of times this device has used our service
+	 * @param k
+	 *            the number of times we correctly identified a food for this
+	 *            device
+	 * @return a new Device object representing the modified device we created,
+	 *         null if error
+	 */
 	public Device updateDevice(int i, int j, int k) {
 		if (j < 0 || k < 0 || k > j) {
 			return null;
@@ -91,6 +121,12 @@ public class QueryClass {
 		return new Device(i, j, k);
 	}
 
+	/**
+	 * adds a new food item to the database
+	 * 
+	 * @param f
+	 *            the food to add to the database
+	 */
 	public void addFoodItem(Food f) {
 		try {
 			String url = CONNECTION_PROTOCOL + "://" + SERVER
@@ -113,8 +149,6 @@ public class QueryClass {
 			proc.setFloat(10, f.protein);
 			proc.execute();
 
-			ResultSet rs = null;
-
 			proc.close();
 			proc = null;
 			conn.close();
@@ -125,6 +159,11 @@ public class QueryClass {
 		}
 	}
 
+	/**
+	 * gets all of the Food objects in the database
+	 * 
+	 * @return an ArrayList<Food> of all the foods in the database
+	 */
 	public ArrayList<Food> getFood() {
 		ArrayList<Food> food = new ArrayList<Food>();
 		try {
@@ -160,6 +199,11 @@ public class QueryClass {
 		return food;
 	}
 
+	/**
+	 * creates a new device in the database, and returns the new id for it
+	 * 
+	 * @return the unique identifier for this device
+	 */
 	public Device newDevice() {
 		Device result = null;
 		try {
