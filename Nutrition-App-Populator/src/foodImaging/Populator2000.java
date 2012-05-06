@@ -38,10 +38,11 @@ public class Populator2000 {
     
     public static void main(String[] args) throws IOException {
         NGramModel[] ngms = trainAll(newImgDir);
+        QueryClass q = new QueryClass();
         for (int i = 0; i < ngms.length; i++) {
         	byte[] b = ngms[i].getByteArray();
         	NutritionFacts n = new NutritionFacts(ngms[i].name);
-			QueryClass.addFoodItem(new Food(b, ngms[i].name, n.calories, n.calFromFat, n.totalFat, n.sodium, n.carbs, n.fiber, n.sugar, n.protein));
+			q.addFoodItem(new Food(b, ngms[i].name, n.calories, n.calFromFat, n.totalFat, n.sodium, n.carbs, n.fiber, n.sugar, n.protein));
 		}
     }
     
@@ -57,7 +58,7 @@ public class Populator2000 {
         
         for (int i = 0; i < training.length; i++) {
             BufferedImage img = ImageUtil.readImage(newImgDir, training[i]);
-            ArrayList<Integer> seq = ProcessImage.generateSequence(img);
+            ArrayList<Byte> seq = ProcessImage.generateSequence(img);
             NGramModel ngm = new NGramModel(training[i].substring(0, training[i].lastIndexOf('.')), new TransitionMatrix(ProcessImage.NUM_COLORS));
             ngm.train(seq);
             ngms[i] = ngm;

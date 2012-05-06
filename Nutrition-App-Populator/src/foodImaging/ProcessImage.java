@@ -9,32 +9,32 @@ import java.util.ArrayList;
  */
 public class ProcessImage {
     
-    public static final int BAD          = -1;
-    public static final int BLACK        = 0;
-    public static final int GRAY         = 1;
-    public static final int WHITE        = 2;
-    public static final int RED          = 3;
-    public static final int REDORANGE    = 4;
-    public static final int ORANGE       = 5;
-    public static final int YELLOWORANGE = 6;
-    public static final int YELLOW       = 7;
-    public static final int YELLOWGREEN  = 8;
-    public static final int GREEN        = 9;
-    public static final int BLUEGREEN    = 10;
-    public static final int BLUE         = 11;
-    public static final int BLUEVIOLET   = 12;
-    public static final int VIOLET       = 13;
-    public static final int VIOLETRED    = 14;
+    public static final byte BAD          = -1;
+    public static final byte BLACK        = 0;
+    public static final byte GRAY         = 1;
+    public static final byte WHITE        = 2;
+    public static final byte RED          = 3;
+    public static final byte REDORANGE    = 4;
+    public static final byte ORANGE       = 5;
+    public static final byte YELLOWORANGE = 6;
+    public static final byte YELLOW       = 7;
+    public static final byte YELLOWGREEN  = 8;
+    public static final byte GREEN        = 9;
+    public static final byte BLUEGREEN    = 10;
+    public static final byte BLUE         = 11;
+    public static final byte BLUEVIOLET   = 12;
+    public static final byte VIOLET       = 13;
+    public static final byte VIOLETRED    = 14;
     
-    public static final int NUM_COLORS   = 15;
+    public static final byte NUM_COLORS   = 15;
     
-    public static ArrayList<Integer> generateSequence(BufferedImage img) {
-        ArrayList<Integer> seq = new ArrayList<Integer>();
+    public static ArrayList<Byte> generateSequence(BufferedImage img) {
+        ArrayList<Byte> seq = new ArrayList<Byte>();
         
         int[][] pixelArray = getPixelArray(img);
         for (int x = 0; x < img.getWidth(); x++) {
             for (int y = 0; y < img.getHeight(); y++) {
-                int color = classify(getPixelRGB(pixelArray[x][y]));
+                byte color = classify(getPixelRGB(pixelArray[x][y]));
                 seq.add(color);
             }
         }
@@ -65,50 +65,42 @@ public class ProcessImage {
         return pixelArray;
     }
     
-    public static int[] getPixelRGB(int pixel) {
-        int red = (pixel >> 16) & 0xff;
-        int green = (pixel >> 8) & 0xff;
-        int blue = (pixel) & 0xff;
-        int[] rgb = { red, green, blue };
-        return rgb;
-    }
+	private static byte[] getPixelRGB(int pixel) {
+		byte red = (byte) ((pixel >> 16) & 0xff);
+		byte green = (byte) ((pixel >> 8) & 0xff);
+		byte blue = (byte) ((pixel) & 0xff);
+		byte[] rgb = { red, green, blue };
+		return rgb;
+	}
     
-    public static int classify(int[] rgb) {
-        float[] hsbvals = new float[3];
-        
-        int red = rgb[0];
-        int green = rgb[1];
-        int blue = rgb[2];
-        
-        Color.RGBtoHSB(red, green, blue, hsbvals);
-        
-        float hue = hsbvals[0] * 360;
-        float sat = hsbvals[1];
-        float bright = hsbvals[2];
-        
-        if (sat < .25) {
-            if (bright < .2)
-                return BLACK;
-            else if (bright > .8)
-                return WHITE;
-            else
-                return GRAY;
-        }
-        else {
-            if (hue < 15) return RED;
-            if (hue < 45) return REDORANGE;
-            if (hue < 75) return ORANGE;
-            if (hue < 105) return YELLOWORANGE;
-            if (hue < 135) return YELLOW;
-            if (hue < 165) return YELLOWGREEN;
-            if (hue < 195) return GREEN;
-            if (hue < 225) return BLUEGREEN;
-            if (hue < 255) return BLUE;
-            if (hue < 285) return BLUEVIOLET;
-            if (hue < 315) return VIOLET;
-            if (hue < 345) return VIOLETRED;
-            if (hue < 360) return RED;
-            return BAD;
-        }
-    }
+	private static byte classify(byte[] rgb) {
+		float[] hsv = new float[3];
+		
+		Color.RGBtoHSB(rgb[0], rgb[1], rgb[2], hsv);
+
+		if (hsv[1] < .25) {
+			if (hsv[2] < .2)
+				return BLACK;
+			else if (hsv[2] > .8)
+				return WHITE;
+			else
+				return GRAY;
+		}
+		else {
+			if (hsv[0] < 15) return RED;
+			if (hsv[0] < 45) return REDORANGE;
+			if (hsv[0] < 75) return ORANGE;
+			if (hsv[0] < 105) return YELLOWORANGE;
+			if (hsv[0] < 135) return YELLOW;
+			if (hsv[0] < 165) return YELLOWGREEN;
+			if (hsv[0] < 195) return GREEN;
+			if (hsv[0] < 225) return BLUEGREEN;
+			if (hsv[0] < 255) return BLUE;
+			if (hsv[0] < 285) return BLUEVIOLET;
+			if (hsv[0] < 315) return VIOLET;
+			if (hsv[0] < 345) return VIOLETRED;
+			if (hsv[0] < 360) return RED;
+			return BAD;
+		}
+	}
 }
