@@ -70,9 +70,11 @@ public class NutritionAppActivity extends Activity {
 
 				File image_file = new File(filesdir, "image.png");
 				if (!image_file.exists()) {
-					Log.d("File", "Created image file does not exist");
+					Log.d("File", "Created image file does not exist. Creating...");
 					try {
-						image_file.createNewFile();
+						if (!image_file.createNewFile()) {
+							Log.d("File", "Creation failed!");
+						}
 					} catch (IOException e) {
 						Log.e("File", e.getMessage());
 					}

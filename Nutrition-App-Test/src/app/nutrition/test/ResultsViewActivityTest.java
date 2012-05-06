@@ -1,7 +1,11 @@
 package app.nutrition.test;
 
+import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
+import app.nutrition.NGramModel;
+import app.nutrition.NutritionAppActivity;
 import app.nutrition.ResultsViewActivity;
+import app.nutrition.TransitionMatrix;
 
 /**
  * Test the ResultsViewActivity class.
@@ -42,7 +46,12 @@ public class ResultsViewActivityTest extends
 	 * Test that the NGM from NutritionAppActivity is successfully accessed.
 	 */
 	public void testGetNGMFromNutritionAppActivity() {
-		fail();
+		NutritionAppActivity naa = new NutritionAppActivity();
+		TransitionMatrix t = new TransitionMatrix(4);
+		NGramModel ngm = new NGramModel("test", t);
+		naa.ngm = ngm;
+		rva.getNGM();
+		assertEquals(ngm, rva.ngm);
 	}
 	
 	/**
