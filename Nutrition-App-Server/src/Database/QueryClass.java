@@ -122,7 +122,7 @@ public class QueryClass {
 	}
 
 	/**
-	 * adds a new food item to the database
+	 * s a new food item to the database
 	 * 
 	 * @param f
 	 *            the food to add to the database
@@ -238,8 +238,7 @@ public class QueryClass {
 
 	private boolean registerSQLServerDriver() throws SQLException {
 		// Register JDBC driver
-		DriverManager
-				.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		return true;
 	}
 
