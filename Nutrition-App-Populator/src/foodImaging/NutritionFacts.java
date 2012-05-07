@@ -19,14 +19,14 @@ import jxl.read.biff.BiffException;
 
 public class NutritionFacts {
 	
-	public double calories;
-	public double calFromFat;
-	public double totalFat;
-	public double protein;
-	public double sugar;
-	public double fiber;
-	public double carbs;
-	public double sodium;
+	public float calories;
+	public float calFromFat;
+	public float totalFat;
+	public float protein;
+	public float sugar;
+	public float fiber;
+	public float carbs;
+	public float sodium;
 	
 	public String name;
 	
@@ -94,11 +94,11 @@ public class NutritionFacts {
 	 * @return value of the cell (as a double)
 	 */
 	
-	private double getValue (Sheet s, int col, int row) {
+	private float getValue (Sheet s, int col, int row) {
 		String val = s.getCell(col, row).getContents();
 		if(val.isEmpty())
 			return 0;
-		return Double.parseDouble(val);
+		return Float.parseFloat(val);
 	}
 	
 	/**
