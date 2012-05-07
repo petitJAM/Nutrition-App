@@ -17,8 +17,8 @@ public class QueryClass {
 
 	private static final String CONNECTION_PROTOCOL = "jdbc:sqlserver";
 	private static final String SERVER = "whale.cs.rose-hulman.edu";
-	private static final String USER = "";
-	private static final String PASSWORD = "";
+	private static final String USER = "376nutritionApp";
+	private static final String PASSWORD = "nutrition";
 	private static final String DATABASE = "Nutrition-App";
 
 	/**
