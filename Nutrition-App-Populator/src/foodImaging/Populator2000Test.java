@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
