@@ -1,11 +1,14 @@
 package Database;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Formatter;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -189,19 +192,34 @@ public class QueryClassTest {
 	 * database and checks that the one it just added is there
 	 */
 	@Test
-	public void testAddFoodItem() {
+	public void testAddAndDeleteFoodItem() {
 		QueryClass qc = new QueryClass();
-		Food f = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004,
+		Food f = new Food(new byte[] { 0 }, "dummy", 1001, 1002, 1003, 1004,
 				1005, 1006, 1007, 1008);
 		qc.addFoodItem(f);
-		ArrayList<Food> food = qc.getFood();
-		boolean temp = false;
-		for (Food fo : food) {
-			if (fo.equals(f)) {
-				temp = true;
-				break;
-			}
-			assertTrue(temp);
-		}
+		f = qc.getFoodItem("dummy");
+		assertNotNull(f);
+		qc.deleteFoodItem("dummy");
+		f = qc.getFoodItem("dummy");
+		assertNull(f);	
+	}
+	
+	/**
+	 * Checks to see that we get all the correct information for grabbing a single item.
+	 */
+	@Test
+	public void testGetFoodItem() {
+		QueryClass qc = new QueryClass();
+		Food f = null;
+		f = qc.getFoodItem("Banana");
+		assertEquals(f.name, "Banana");
+		assertTrue(f.calories == 89);
+		assertTrue(f.totalFat == (float) 0.33);
+		assertTrue(f.calFromFat == 3);
+		assertTrue(f.protein == (float) 1.09);
+		assertTrue(f.sugar == (float) 12.23);
+		assertTrue(f.fiber == (float) 2.60);
+		assertTrue(f.carbs == (float) 22.84);
+		assertTrue(f.sodium == 1);
 	}
 }
