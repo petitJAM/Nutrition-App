@@ -5,5 +5,9 @@
     <string name="logo_content_description">Logo</string>
     <string name="camera_button_text">Capture Image</string>
     <string name="about_us_text">About Us</string>
+    <!-- &#8230 is Unicode for the ellipsis character '...' -->
+    <string name="wait_dialog">Waiting for server &#8230;</string>
+    <string name="no_response_server">Failed to receive information from server!</string>
+    <string name="ok">Ok</string>
 
 </resources>
