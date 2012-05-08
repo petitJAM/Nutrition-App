@@ -11,9 +11,22 @@ import android.os.Bundle;
  */
 public class ResultsViewActivity extends Activity {
 
+	/** NGramModel to work with */
+	public NGramModel ngm = null;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.results);
 	}
+	
+	/**
+	 * Set ResultsViewActivity.ngm to the NGramModel in NutritionAppActivity
+	 * @throws Exception 
+	 */
+	public void getNGM() throws Exception {
+		
+	}
+	
+	
 }

@@ -1,8 +1,5 @@
 package app.nutrition.test;
 
-import android.app.Instrumentation;
-import android.app.Instrumentation.ActivityMonitor;
-import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
 import android.widget.Button;
@@ -19,6 +16,7 @@ public class NutritionAppTest extends
 
 	private NutritionAppActivity naa;
 	private String appName;
+	private Button camera_button;
 	
 	/**
 	 * Constructor.
@@ -35,6 +33,7 @@ public class NutritionAppTest extends
 
 		setActivityInitialTouchMode(false);
 		naa = getActivity();
+		camera_button = (Button) naa.findViewById(app.nutrition.R.id.camera_button);
 		appName = naa.getString(app.nutrition.R.string.app_name);
 	}
 
@@ -56,14 +55,15 @@ public class NutritionAppTest extends
 	/**
 	 * Test that Camera Intent is opened.
 	 */
+	@UiThreadTest
 	public void testCameraIntentCalled() {
-		Instrumentation instr = getInstrumentation();
-		Button cb = (Button) naa.findViewById(app.nutrition.R.id.camera_button);
-		cb.setPressed(true);
+//		Instrumentation instr = getInstrumentation();
+		camera_button.setPressed(true);
 //		int req_code = getStartedActivityRequest();
 //		Intent intent = getStartedActivityIntent();
 //		assertEquals(NutritionAppActivity.TAKE_PICTURE, req_code);
 //		assertEquals("android.media.action.IMAGE_CAPTURE", intent.getAction());
+		fail();
 	}
 	
 	/**

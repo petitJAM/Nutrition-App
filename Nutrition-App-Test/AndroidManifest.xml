@@ -9,6 +9,8 @@
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
         android:targetPackage="app.nutrition" />
+    
+    <activity android:name="app.nutrition.ResultsViewActivity" />
 
     <application
         android:icon="@drawable/ic_launcher"
