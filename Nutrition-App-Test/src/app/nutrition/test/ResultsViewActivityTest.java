@@ -1,6 +1,5 @@
 package app.nutrition.test;
 
-import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import app.nutrition.NGramModel;
 import app.nutrition.NutritionAppActivity;
@@ -46,28 +45,46 @@ public class ResultsViewActivityTest extends
 	 * Test that the NGM from NutritionAppActivity is successfully accessed.
 	 */
 	public void testGetNGMFromNutritionAppActivity() {
-		NutritionAppActivity naa = new NutritionAppActivity();
 		TransitionMatrix t = new TransitionMatrix(4);
 		NGramModel ngm = new NGramModel("test", t);
-		naa.ngm = ngm;
-		rva.getNGM();
+		NutritionAppActivity.ngm = ngm;
+		try {
+			rva.getNGM();
+		} catch (Exception e) {
+			fail("Exception");
+		}
 		assertEquals(ngm, rva.ngm);
 	}
-	
+
+	/**
+	 * Test exception thrown on null ngm.
+	 */
+	public void testGetNGMFromNutritionAppActivityWithNullNGM() {
+		NutritionAppActivity.ngm = null;
+		try {
+			rva.getNGM();
+			fail();
+		} catch (Exception e) {
+			assertTrue(e instanceof NullPointerException);
+		}
+	}
+
 	/**
 	 * Test sending NGM to server.
 	 */
 	public void testSendingNGMtoServer() {
-		fail();
+		TransitionMatrix t = new TransitionMatrix(4);
+		rva.ngm = new NGramModel("test", t);
+		
 	}
-	
+
 	/**
-	 * Test receiving info
+	 * Test receiving info.
 	 */
 	public void testReceiveInfoFromServer() {
 		fail();
 	}
-	
+
 	/**
 	 * Test displaying results
 	 * 

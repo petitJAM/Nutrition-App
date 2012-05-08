@@ -24,7 +24,7 @@ import android.widget.Button;
  */
 public class NutritionAppActivity extends Activity {
 	/** The NGramModel created from images. */
-	public static NGramModel ngm;
+	public static NGramModel ngm = null;
 
 	/** Code for opening Camera Intent */
 	public final static int TAKE_PICTURE = 0;
@@ -51,14 +51,6 @@ public class NutritionAppActivity extends Activity {
 
 			public void onClick(View v) {
 				Intent camera_intent = new Intent("android.media.action.IMAGE_CAPTURE");
-				// File filesdir = getFilesDir();
-				// if (!filesdir.exists()) {
-				// Log.d("File", "Application directory does not exist");
-				// if (!filesdir.mkdirs()) {
-				// Log.d("File", "Could not create application directory");
-				// }
-				// }
-
 				File filesdir = new File(Environment.getExternalStorageDirectory(),
 						"nutrition-app");
 				if (!filesdir.exists()) {
@@ -67,7 +59,7 @@ public class NutritionAppActivity extends Activity {
 						Log.d("File", filesdir.toString() + " could not be created!");
 					}
 				}
-
+				
 				File image_file = new File(filesdir, "image.png");
 				if (!image_file.exists()) {
 					Log.d("File", "Created image file does not exist. Creating...");
@@ -80,7 +72,6 @@ public class NutritionAppActivity extends Activity {
 					}
 				}
 				imageUri = Uri.fromFile(image_file);
-
 				camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 
 				Log.d("Camera", "Starting camera intent");
