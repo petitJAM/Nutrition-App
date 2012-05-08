@@ -8,6 +8,6 @@
     <!-- &#8230 is Unicode for the ellipsis character '...' -->
     <string name="wait_dialog">Waiting for server &#8230;</string>
     <string name="no_response_server">Failed to receive information from server!</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
 
 </resources>
