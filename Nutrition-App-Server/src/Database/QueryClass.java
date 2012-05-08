@@ -10,16 +10,18 @@ import java.util.ArrayList;
 /**
  * handles connection to the database and running queries
  * 
- * @author bellrj
+ * @author bellrj, Rob Wagner
  * 
  */
 public class QueryClass {
 
 	private static final String CONNECTION_PROTOCOL = "jdbc:sqlserver";
 	private static final String SERVER = "whale.cs.rose-hulman.edu";
-	private static final String USER = "";
-	private static final String PASSWORD = "";
+	private static final String USER = "376nutritionApp";
+	private static final String PASSWORD = "nutrition";
 	private static final String DATABASE = "Nutrition-App";
+	private static final String URL = CONNECTION_PROTOCOL + "://" + SERVER
+			+ ";DatabaseName=" + DATABASE + ";SelectMethod=cursor;";
 
 	/**
 	 * default constructor, registers the Driver, and tests the connection
@@ -45,10 +47,8 @@ public class QueryClass {
 	public Device getDevice(int i) {
 		Device result = null;
 		try {
-			String url = CONNECTION_PROTOCOL + "://" + SERVER
-					+ ";DatabaseName=" + DATABASE + ";SelectMethod=cursor;";
 			Connection conn = null;
-			conn = getConnection(url);
+			conn = getConnection(URL);
 
 			CallableStatement proc;
 			proc = conn.prepareCall("{ call getDevice(?) }");
@@ -94,10 +94,8 @@ public class QueryClass {
 			return null;
 		}
 		try {
-			String url = CONNECTION_PROTOCOL + "://" + SERVER
-					+ ";DatabaseName=" + DATABASE + ";SelectMethod=cursor;";
 			Connection conn = null;
-			conn = getConnection(url);
+			conn = getConnection(URL);
 
 			CallableStatement proc;
 			proc = conn.prepareCall("{ call updateDevice(?,?,?) }");
@@ -129,10 +127,8 @@ public class QueryClass {
 	 */
 	public void addFoodItem(Food f) {
 		try {
-			String url = CONNECTION_PROTOCOL + "://" + SERVER
-					+ ";DatabaseName=" + DATABASE + ";SelectMethod=cursor;";
 			Connection conn = null;
-			conn = getConnection(url);
+			conn = getConnection(URL);
 
 			CallableStatement proc;
 			proc = conn
@@ -154,7 +150,31 @@ public class QueryClass {
 			conn.close();
 			conn = null;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/**
+	 * Removes the row of a given food item.
+	 * 
+	 * @param name
+	 */
+	public void deleteFoodItem(String name) {
+		try {
+			Connection conn = null;
+			conn = getConnection(URL);
+			
+			CallableStatement proc;
+			proc = conn.prepareCall("{ call deleteFoodItem(?) }");
+			proc.setString(1, name);
+			proc.execute();
+			
+			proc.close();
+			proc = null;
+			conn.close();
+			conn = null;
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -167,10 +187,8 @@ public class QueryClass {
 	public ArrayList<Food> getFood() {
 		ArrayList<Food> food = new ArrayList<Food>();
 		try {
-			String url = CONNECTION_PROTOCOL + "://" + SERVER
-					+ ";DatabaseName=" + DATABASE + ";SelectMethod=cursor;";
 			Connection conn = null;
-			conn = getConnection(url);
+			conn = getConnection(URL);
 
 			CallableStatement proc;
 			proc = conn.prepareCall("{ call getFood() }");
@@ -198,6 +216,39 @@ public class QueryClass {
 		}
 		return food;
 	}
+	
+	public Food getFoodItem(String name) {
+		Food food = null;
+		try {
+			Connection conn = null;
+			conn = getConnection(URL);
+			
+			CallableStatement proc;
+			proc = conn.prepareCall("{ call getFoodItem(?) }");
+			proc.setString(1, name);
+			proc.execute();
+			
+			ResultSet rs = proc.getResultSet();
+			
+			// Should return some sort of error if result set is null
+			
+			if (rs != null) {
+				while (rs.next()) {
+					food = new Food(rs.getBytes(1), rs.getString(2), rs
+							.getFloat(3), rs.getFloat(4), rs.getFloat(5), rs
+							.getFloat(6), rs.getFloat(7), rs.getFloat(8), rs
+							.getFloat(9), rs.getFloat(10));
+				}
+			}
+			proc.close();
+			proc = null;
+			conn.close();
+			conn = null;			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return food;
+	}
 
 	/**
 	 * creates a new device in the database, and returns the new id for it
@@ -207,10 +258,8 @@ public class QueryClass {
 	public Device newDevice() {
 		Device result = null;
 		try {
-			String url = CONNECTION_PROTOCOL + "://" + SERVER
-					+ ";DatabaseName=" + DATABASE + ";SelectMethod=cursor;";
 			Connection conn = null;
-			conn = getConnection(url);
+			conn = getConnection(URL);
 
 			CallableStatement proc;
 			proc = conn.prepareCall("{ call addDevice() }");

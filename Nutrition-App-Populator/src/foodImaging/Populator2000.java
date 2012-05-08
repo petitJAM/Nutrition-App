@@ -24,7 +24,7 @@ import Database.QueryClass;
 public class Populator2000 {
 
     private static String newImgDir = "imgs-to-add/";
-    private static String completeImgDir = "old-imgs";
+//    private static String completeImgDir = "old-imgs";
     
     /**
      * -Sends images to trainer, and gets all their NGramModels
@@ -44,6 +44,7 @@ public class Populator2000 {
         	NutritionFacts n = new NutritionFacts(ngms[i].name);
 			q.addFoodItem(new Food(b, ngms[i].name, n.calories, n.calFromFat, n.totalFat, n.sodium, n.carbs, n.fiber, n.sugar, n.protein));
 		}
+        System.out.println("Upload Complete");
     }
     
     
