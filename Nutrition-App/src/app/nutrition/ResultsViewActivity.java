@@ -9,9 +9,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -97,5 +94,7 @@ public class ResultsViewActivity extends Activity {
 	public void displayResults(ArrayList<Object> foods) { //TODO change to ArrayList<Food>
 		// might have to pull this out to a class that extends ListView
 		// idk.
+		ListView results = (ListView) findViewById(R.id.results_list);
+		//results.setAdapter(new ArrayAdapter<Object>(this, foods, null)); //not correct
 	}
 }
