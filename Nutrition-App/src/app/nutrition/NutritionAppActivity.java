@@ -14,7 +14,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 /**
  * Starting point and main screen of the app
@@ -38,13 +38,9 @@ public class NutritionAppActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		Runtime rt = Runtime.getRuntime();
 
-		long maxMemory = rt.maxMemory();
-		Log.v("onCreate", "Max Mem: " + Long.toString(maxMemory));
-
-		Button cam;
-		cam = (Button) findViewById(R.id.camera_button);
+		ImageButton cam;
+		cam = (ImageButton) findViewById(R.id.camera_button);
 
 		cam.setOnClickListener(new View.OnClickListener() {
 
