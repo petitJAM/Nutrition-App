@@ -25,6 +25,7 @@ public final class R {
         public static final int exit_button=0x7f050005;
         public static final int info_button=0x7f050004;
         public static final int logo_view=0x7f050000;
+        public static final int results_list=0x7f050006;
         public static final int search_button=0x7f050002;
         public static final int settings_button=0x7f050003;
     }
@@ -33,6 +34,7 @@ public final class R {
         public static final int results=0x7f030001;
     }
     public static final class string {
+        public static final int about_us_text=0x7f04000a;
         public static final int app_name=0x7f040000;
         public static final int camera_button_text=0x7f040002;
         public static final int exit_button_text=0x7f040006;
