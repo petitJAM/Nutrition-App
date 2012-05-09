@@ -38,7 +38,12 @@ public final class R {
         public static final int exit_button_text=0x7f040006;
         public static final int info_button_text=0x7f040005;
         public static final int logo_content_description=0x7f040001;
+        public static final int no_response_server=0x7f040008;
+        public static final int ok=0x7f040009;
         public static final int search_button_text=0x7f040003;
         public static final int settings_button_text=0x7f040004;
+        /**  &#8230 is Unicode for the ellipsis character '...' 
+         */
+        public static final int wait_dialog=0x7f040007;
     }
 }
