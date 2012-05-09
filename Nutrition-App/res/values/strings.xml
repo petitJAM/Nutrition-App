@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Nutrition-App</string>
+    <string name="app_name">Nutrition App</string>
     <string name="logo_content_description">Logo</string>
     <string name="camera_button_text">Capture Image</string>
-    <string name="about_us_text">About Us</string>
+    <string name="search_button_text">Search</string>
+    <string name="settings_button_text">Settings</string>
+    <string name="info_button_text">About Us</string>
+    <string name="exit_button_text">Exit</string>
+
 
 </resources>

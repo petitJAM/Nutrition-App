@@ -1,34 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:background="@drawable/background"
+    android:columnCount="2"
+    android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/about_us"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="20dp"
-        android:text="@string/about_us_text" />
+    <TableRow>
+        <ImageView
+            android:id="@+id/logo_view"
+            android:layout_span="2"
+            android:layout_weight="1"
+            android:layout_height="123dp"
+			android:background="@drawable/app_logo"
+       		android:contentDescription="@string/logo_content_description" />
+    </TableRow>
+    
+    <TableRow>
+        <ImageButton
+            android:id="@+id/camera_button"
+            android:layout_column="0"
+            android:layout_weight="1"
+            android:contentDescription="@string/camera_button_text"
+            android:src="@drawable/cammerabutton" />
 
-    <Button
-        android:id="@+id/camera_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/about_us"
-        android:layout_alignParentLeft="true"
-        android:text="@string/camera_button_text" />
+        <ImageButton
+            android:id="@+id/search_button"
+            android:layout_column="1"
+            android:layout_weight="1"
+            android:contentDescription="@string/search_button_text"
+            android:src="@drawable/searchbutton" />
+    </TableRow>
+    
+    <TableRow >
+	    <ImageButton
+	        android:id="@+id/settings_button"
+            android:layout_column="0"
+            android:layout_weight="1"
+	        android:contentDescription="@string/settings_button_text"
+	        android:src="@drawable/settingsbutton" />    
+	           
+	    <ImageButton
+	        android:id="@+id/info_button"
+            android:layout_column="1"
+            android:layout_weight="1"
+	        android:contentDescription="@string/info_button_text"
+	        android:src="@drawable/infobutton" />
+    </TableRow>
+    
+    <TableRow>
+        <ImageButton
+            android:id="@+id/exit_button"
+            android:layout_span="2"
+            android:layout_weight="1"
+            android:contentDescription="@string/exit_button_text"
+            android:src="@drawable/exitbutton" />
+    </TableRow>
 
-    <ImageView
-        android:id="@+id/logo_view"
-        android:layout_width="334dp"
-        android:layout_height="123dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/app_logo"
-        android:contentDescription="@string/logo_content_description" />
-
-</RelativeLayout>
+</TableLayout>
