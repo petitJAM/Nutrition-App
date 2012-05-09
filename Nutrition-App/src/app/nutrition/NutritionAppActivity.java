@@ -43,9 +43,8 @@ public class NutritionAppActivity extends Activity {
 		long maxMemory = rt.maxMemory();
 		Log.v("onCreate", "Max Mem: " + Long.toString(maxMemory));
 
-		Button cam, about;
+		Button cam;
 		cam = (Button) findViewById(R.id.camera_button);
-		about = (Button) findViewById(R.id.about_us);
 
 		cam.setOnClickListener(new View.OnClickListener() {
 
@@ -76,14 +75,6 @@ public class NutritionAppActivity extends Activity {
 
 				Log.d("Camera", "Starting camera intent");
 				startActivityForResult(camera_intent, TAKE_PICTURE);
-			}
-		});
-
-		// Needs Implementing Still.
-		about.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View v) {
-				Log.d("About us", "Button not implemented!");
 			}
 		});
 
