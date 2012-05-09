@@ -9,8 +9,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 /**
  * Activity to send analyzed image data to a server and wait for the results.
@@ -27,7 +25,14 @@ public class ResultsViewActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.results);
-		sendNGM();
+		Log.d("ResultsViewActivity", "opened");
+		try {
+			getNGM();
+			sendNGM();
+		} catch (Exception e) {
+			Log.d("getNGM()", e.getMessage());
+			finish();
+		}
 	}
 
 	/**
@@ -36,10 +41,10 @@ public class ResultsViewActivity extends Activity {
 	 * @throws Exception
 	 */
 	public void getNGM() throws Exception {
-
+		ngm = NutritionAppActivity.ngm;
+		if (ngm == null) throw new Exception("No NGramModel available!");
 	}
 
-	
 	// you don't really want to run the code in the state it's in
 	// it needs some work with connecting
 	// and i honestly have no idea why all the dialogs are named with '*dog'
@@ -52,12 +57,12 @@ public class ResultsViewActivity extends Activity {
 		Log.d("send NGM", "Sending NGM");
 		// convert the ngm to a transmitable format
 		// send to server
-		
+
 		ProgressDialog progdog = ProgressDialog.show(this, "",
 			getString(R.string.wait_dialog), true);
-		
+
 		Log.d("send NGM", "Progress dialog created");
-		
+
 		// wait for response with timeout
 		// waitloop
 		progdog.dismiss();
@@ -70,9 +75,11 @@ public class ResultsViewActivity extends Activity {
 
 						public void onClick(DialogInterface dialog, int which) {
 							Log.d("Failed to hear server dialog", "Server did not return");
-							dialog.cancel(); // probably change this to handle
+							finish();		    // probably change this to handle
 												// failed server request
-												// quit back to NutritionAppActivity or try again maybe?
+												// quit back to
+												// NutritionAppActivity or try
+												// again maybe?
 						}
 					});
 			AlertDialog alertdog = dogbuilder.create();
@@ -82,6 +89,7 @@ public class ResultsViewActivity extends Activity {
 		// get the returned list of foods and somehow store so display results
 		// knows about them (or pass them along, i guess)
 		// call display results
+		
 	}
 
 	/**
@@ -91,10 +99,12 @@ public class ResultsViewActivity extends Activity {
 	 * 
 	 * @param foods - list of all the foods in order of most likeliness
 	 */
-	public void displayResults(ArrayList<Object> foods) { //TODO change to ArrayList<Food>
+	public void displayResults(ArrayList<Object> foods) { // TODO change to
+															// ArrayList<Food>
 		// might have to pull this out to a class that extends ListView
 		// idk.
-		ListView results = (ListView) findViewById(R.id.results_list);
-		//results.setAdapter(new ArrayAdapter<Object>(this, foods, null)); //not correct
+//		ListView results = (ListView) findViewById(R.id.results_list);
+		// results.setAdapter(new ArrayAdapter<Object>(this, foods, null));
+		// //not correct
 	}
 }
