@@ -39,8 +39,9 @@ public class NutritionAppActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		ImageButton cam;
+		ImageButton cam, exit;
 		cam = (ImageButton) findViewById(R.id.camera_button);
+		exit = (ImageButton) findViewById(R.id.exit_button);
 
 		cam.setOnClickListener(new View.OnClickListener() {
 
@@ -71,6 +72,14 @@ public class NutritionAppActivity extends Activity {
 
 				Log.d("Camera", "Starting camera intent");
 				startActivityForResult(camera_intent, TAKE_PICTURE);
+			}
+		});
+		
+		exit.setOnClickListener(new View.OnClickListener() {
+					
+			public void onClick(View v) {
+				android.os.Process.killProcess(android.os.Process.myPid());
+				
 			}
 		});
 

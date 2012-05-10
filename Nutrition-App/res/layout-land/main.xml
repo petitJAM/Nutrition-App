@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background"
+    android:columnCount="2"
+    android:orientation="horizontal" >
+
+    <TableRow>
+    </TableRow>
+    
+    <TableRow>
+        <ImageButton
+            android:id="@+id/camera_button"
+            android:layout_column="0"
+            android:layout_weight="1"
+            android:contentDescription="@string/camera_button_text"
+            android:src="@drawable/cammerabutton" />
+
+        <ImageButton
+            android:id="@+id/search_button"
+            android:layout_column="1"
+            android:layout_weight="1"
+            android:contentDescription="@string/search_button_text"
+            android:src="@drawable/searchbutton" />
+    </TableRow>
+    
+    <TableRow>
+	    <ImageButton
+	        android:id="@+id/settings_button"
+            android:layout_column="0"
+            android:layout_weight="1"
+	        android:contentDescription="@string/settings_button_text"
+	        android:src="@drawable/settingsbutton" />    
+	           
+	    <ImageButton
+	        android:id="@+id/info_button"
+            android:layout_column="1"
+            android:layout_weight="1"
+	        android:contentDescription="@string/info_button_text"
+	        android:src="@drawable/infobutton" />
+    </TableRow>
+    
+    <TableRow>
+        <ImageButton
+            android:id="@+id/exit_button"
+            android:layout_span="2"
+            android:layout_weight="1"
+            android:contentDescription="@string/exit_button_text"
+            android:src="@drawable/exitbutton" />
+    </TableRow>
+</TableLayout>
