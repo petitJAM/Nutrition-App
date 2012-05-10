@@ -6,6 +6,8 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 
+import app.nutrition.NGramModel;
+
 /**
  * the class which handles connections from clients to the server spinning off
  * threads to communicate with them
@@ -83,7 +85,9 @@ public class Server {
 					}
 					try {
 						Socket sock = sSock.accept();
-						clientConnections.add(new Connection(sock));
+						Connection con = new Connection(sock);
+						clientConnections.add(con);
+						(new Thread(new ClientConnection(con))).start();
 					} catch (SocketException e) {
 						if (!running) {
 							// this was probably caused by closing the
@@ -94,6 +98,41 @@ public class Server {
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+					}
+				}
+			}
+		}
+
+		private class ClientConnection implements Runnable {
+			private Connection con;
+			private boolean stoping;
+
+			public ClientConnection(Connection con) {
+				this.con = con;
+				this.stoping = false;
+			}
+
+			public void run() {
+				while (!stoping) {
+					int type = -1;
+					try {
+						type = con.recieveInt();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if (type == 0) { // this is a request for a list of matches
+						NGramModel ngm = null;
+						try {
+							ngm = (NGramModel) Connection.deSerialize(con
+									.recieveByteArray());
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				}
 			}

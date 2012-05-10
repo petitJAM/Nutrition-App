@@ -1,7 +1,11 @@
 package app.nutrition;
 
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.List;
 
+import network.Connection;
 import Database.Food;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,8 +18,7 @@ import android.util.Log;
 /**
  * Activity to send analyzed image data to a server and wait for the results.
  * 
- * @author Alex Petitjean.
- *         Created May 2, 2012.
+ * @author Alex Petitjean. Created May 2, 2012.
  */
 public class ResultsViewActivity extends Activity {
 
@@ -59,8 +62,12 @@ public class ResultsViewActivity extends Activity {
 		// convert the ngm to a transmitable format
 		// send to server
 
+		Connection con = getConnection();
+		con.sendInt(0); // 0 means this connection is asking for a list of results
+//		con.sendByteArray(); TODO send byte array
+
 		ProgressDialog progdog = ProgressDialog.show(this, "",
-			getString(R.string.wait_dialog), true);
+				getString(R.string.wait_dialog), true);
 
 		Log.d("send NGM", "Progress dialog created");
 
@@ -72,17 +79,20 @@ public class ResultsViewActivity extends Activity {
 		{
 			AlertDialog.Builder dogbuilder = new AlertDialog.Builder(this);
 			dogbuilder.setMessage(getString(R.string.no_response_server))
-					.setPositiveButton(getString(R.string.ok), new OnClickListener() {
+					.setPositiveButton(getString(R.string.ok),
+							new OnClickListener() {
 
-						public void onClick(DialogInterface dialog, int which) {
-							Log.d("Failed to hear server dialog", "Server did not return");
-							finish();		    // probably change this to handle
+								public void onClick(DialogInterface dialog,
+										int which) {
+									Log.d("Failed to hear server dialog",
+											"Server did not return");
+									finish(); // probably change this to handle
 												// failed server request
 												// quit back to
 												// NutritionAppActivity or try
 												// again maybe?
-						}
-					});
+								}
+							});
 			AlertDialog alertdog = dogbuilder.create();
 			alertdog.show();
 		}
@@ -90,21 +100,35 @@ public class ResultsViewActivity extends Activity {
 		// get the returned list of foods and somehow store so display results
 		// knows about them (or pass them along, i guess)
 		// call display results
-		
+
+	}
+
+	private Connection getConnection() {
+		Socket sock = null;
+		try {
+			sock = new Socket("127.0.0.1", 12345);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new Connection(sock);
 	}
 
 	/**
 	 * This method is called after the ResultsViewActivity.ngm is sent to the
-	 * server
-	 * and the server returns the results.
+	 * server and the server returns the results.
 	 * 
-	 * @param foods - list of all the foods in order of most likeliness
+	 * @param foods
+	 *            - list of all the foods in order of most likeliness
 	 */
 	public void displayResults(List<Food> foods) { // TODO change to
-															// ArrayList<Food>
+													// ArrayList<Food>
 		// might have to pull this out to a class that extends ListView
 		// idk.
-//		ListView results = (ListView) findViewById(R.id.results_list);
+		// ListView results = (ListView) findViewById(R.id.results_list);
 		// results.setAdapter(new ArrayAdapter<Object>(this, foods, null));
 		// //not correct
 	}

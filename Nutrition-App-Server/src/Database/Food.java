@@ -12,7 +12,7 @@ public class Food {
 	/**
 	 * the matrix describing the image of this food item
 	 */
-	public byte[] Transition_Matrix;
+	public byte[] NGramModel;
 	/**
 	 * the name of this food item
 	 */
@@ -82,7 +82,7 @@ public class Food {
 	public Food(byte[] bs, String string, float calories, float calFromFat,
 			float totalFat, float sodium, float carbs, float fiber,
 			float sugar, float protein) {
-		this.Transition_Matrix = bs;
+		this.NGramModel = bs;
 		this.name = string;
 		this.calories = calories;
 		this.calFromFat = calFromFat;
@@ -103,7 +103,7 @@ public class Food {
 	 * @return true if they are the same, false otherwise
 	 */
 	public boolean equals(Food f) {
-		return compareMatrix(f.Transition_Matrix, this.Transition_Matrix)
+		return compareMatrix(f.NGramModel, this.NGramModel)
 				&& f.name.equals(this.name) && f.calories == this.calories
 				&& f.calFromFat == this.calFromFat
 				&& this.totalFat == f.totalFat && f.sodium == this.sodium
@@ -120,5 +120,4 @@ public class Food {
 		}
 		return false;
 	}
-
 }

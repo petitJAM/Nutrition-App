@@ -133,7 +133,7 @@ public class QueryClass {
 			CallableStatement proc;
 			proc = conn
 					.prepareCall("{ call addFoodItem(?,?,?,?,?,?,?,?,?,?) }");
-			proc.setBytes(1, f.Transition_Matrix);
+			proc.setBytes(1, f.NGramModel);
 			proc.setString(2, f.name);
 			proc.setFloat(3, f.calories);
 			proc.setFloat(4, f.calFromFat);
@@ -153,8 +153,7 @@ public class QueryClass {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	/**
 	 * Removes the row of a given food item.
 	 * 
@@ -164,12 +163,12 @@ public class QueryClass {
 		try {
 			Connection conn = null;
 			conn = getConnection(URL);
-			
+
 			CallableStatement proc;
 			proc = conn.prepareCall("{ call deleteFoodItem(?) }");
 			proc.setString(1, name);
 			proc.execute();
-			
+
 			proc.close();
 			proc = null;
 			conn.close();
@@ -216,35 +215,35 @@ public class QueryClass {
 		}
 		return food;
 	}
-	
+
 	public Food getFoodItem(String name) {
 		Food food = null;
 		try {
 			Connection conn = null;
 			conn = getConnection(URL);
-			
+
 			CallableStatement proc;
 			proc = conn.prepareCall("{ call getFoodItem(?) }");
 			proc.setString(1, name);
 			proc.execute();
-			
+
 			ResultSet rs = proc.getResultSet();
-			
+
 			// Should return some sort of error if result set is null
-			
+
 			if (rs != null) {
 				while (rs.next()) {
-					food = new Food(rs.getBytes(1), rs.getString(2), rs
-							.getFloat(3), rs.getFloat(4), rs.getFloat(5), rs
-							.getFloat(6), rs.getFloat(7), rs.getFloat(8), rs
-							.getFloat(9), rs.getFloat(10));
+					food = new Food(rs.getBytes(1), rs.getString(2),
+							rs.getFloat(3), rs.getFloat(4), rs.getFloat(5),
+							rs.getFloat(6), rs.getFloat(7), rs.getFloat(8),
+							rs.getFloat(9), rs.getFloat(10));
 				}
 			}
 			proc.close();
 			proc = null;
 			conn.close();
-			conn = null;			
-		} catch(SQLException e) {
+			conn = null;
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return food;
@@ -287,7 +286,8 @@ public class QueryClass {
 
 	private boolean registerSQLServerDriver() throws SQLException {
 		// Register JDBC driver
-		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+		DriverManager
+				.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		return true;
 	}
 
