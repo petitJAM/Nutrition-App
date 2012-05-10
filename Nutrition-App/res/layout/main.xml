@@ -13,8 +13,9 @@
             android:layout_height="123dp"
             android:layout_span="2"
             android:layout_weight="1"
-            android:background="@drawable/app_logo"
-            android:contentDescription="@string/logo_content_description" />
+            android:layout_height="165dp"
+						android:background="@drawable/app_logo"
+						android:contentDescription="@string/logo_content_description" />
     </TableRow>
 
     <TableRow>
@@ -50,9 +51,8 @@
             android:contentDescription="@string/info_button_text"
             android:src="@drawable/infobutton" />
     </TableRow>
-
+    
     <TableRow>
-
         <ImageButton
             android:id="@+id/exit_button"
             android:layout_span="2"
