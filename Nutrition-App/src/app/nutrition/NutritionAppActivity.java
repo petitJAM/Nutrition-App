@@ -39,6 +39,7 @@ public class NutritionAppActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
+<<<<<<< HEAD
 		ImageButton cam, exit;
 		cam = (ImageButton) findViewById(R.id.camera_button);
 		exit = (ImageButton) findViewById(R.id.exit_button);
@@ -83,6 +84,20 @@ public class NutritionAppActivity extends Activity {
 			}
 		});
 
+=======
+		ImageButton cam, set, info, search, exit;
+		cam = (ImageButton) findViewById(R.id.camera_button);
+		set = (ImageButton) findViewById(R.id.settings_button);
+		info = (ImageButton) findViewById(R.id.info_button);
+		search = (ImageButton) findViewById(R.id.search_button);
+		exit = (ImageButton) findViewById(R.id.exit_button);
+
+		cam.setOnClickListener(new CameraOnClickListener());
+		set.setOnClickListener(new SettingsOnClickListener());
+		info.setOnClickListener(new InfoOnClickListener());
+		search.setOnClickListener(new SearchOnClickListener());
+		exit.setOnClickListener(new ExitOnClickListener());
+>>>>>>> bd4ccd89956ba74ce4820f785a809e56abdfe06a
 	}
 
 	@Override
@@ -136,5 +151,63 @@ public class NutritionAppActivity extends Activity {
 
 	private void sendNGramModel() {
 		Log.d("send n-gram model", ngm.toString());
+
+		Intent resultsIntent = new Intent(this, ResultsViewActivity.class);
+		startActivityForResult(resultsIntent, RESULTS);
+	}
+
+	private class CameraOnClickListener implements View.OnClickListener {
+		public void onClick(View v) {
+			Intent camera_intent = new Intent("android.media.action.IMAGE_CAPTURE");
+			File filesdir = new File(Environment.getExternalStorageDirectory(),
+					"nutrition-app");
+			if (!filesdir.exists()) {
+				Log.d("File", filesdir.toString() + " does not exist. Creating...");
+				if (!filesdir.mkdirs()) {
+					Log.d("File", filesdir.toString() + " could not be created!");
+				}
+			}
+
+			File image_file = new File(filesdir, "image.png");
+			if (!image_file.exists()) {
+				Log.d("File", "Created image file does not exist. Creating...");
+				try {
+					if (!image_file.createNewFile()) {
+						Log.d("File", "Creation failed!");
+					}
+				} catch (IOException e) {
+					Log.e("File", e.getMessage());
+				}
+			}
+			imageUri = Uri.fromFile(image_file);
+			camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+
+			Log.d("Camera", "Starting camera intent");
+			startActivityForResult(camera_intent, TAKE_PICTURE);
+		}
+	}
+	
+	private class SettingsOnClickListener implements View.OnClickListener {
+		public void onClick(View v) {
+			//TODO implement onClick
+		}
+	}
+	
+	private class InfoOnClickListener implements View.OnClickListener {
+		public void onClick(View v) {
+			//TODO implement onClick
+		}
+	}
+	
+	private class SearchOnClickListener implements View.OnClickListener {
+		public void onClick(View v) {
+			//TODO implement onClick
+		}
+	}
+
+	private class ExitOnClickListener implements View.OnClickListener {
+		public void onClick(View v) {
+			NutritionAppActivity.this.finish();
+		}
 	}
 }

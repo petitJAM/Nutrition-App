@@ -7,16 +7,19 @@
     android:orientation="horizontal" >
 
     <TableRow>
+
         <ImageView
             android:id="@+id/logo_view"
+            android:layout_height="123dp"
             android:layout_span="2"
             android:layout_weight="1"
             android:layout_height="165dp"
-			android:background="@drawable/app_logo"
-       		android:contentDescription="@string/logo_content_description" />
+						android:background="@drawable/app_logo"
+						android:contentDescription="@string/logo_content_description" />
     </TableRow>
-    
+
     <TableRow>
+
         <ImageButton
             android:id="@+id/camera_button"
             android:layout_column="0"
@@ -31,21 +34,22 @@
             android:contentDescription="@string/search_button_text"
             android:src="@drawable/searchbutton" />
     </TableRow>
-    
+
     <TableRow>
-	    <ImageButton
-	        android:id="@+id/settings_button"
+
+        <ImageButton
+            android:id="@+id/settings_button"
             android:layout_column="0"
             android:layout_weight="1"
-	        android:contentDescription="@string/settings_button_text"
-	        android:src="@drawable/settingsbutton" />    
-	           
-	    <ImageButton
-	        android:id="@+id/info_button"
+            android:contentDescription="@string/settings_button_text"
+            android:src="@drawable/settingsbutton" />
+
+        <ImageButton
+            android:id="@+id/info_button"
             android:layout_column="1"
             android:layout_weight="1"
-	        android:contentDescription="@string/info_button_text"
-	        android:src="@drawable/infobutton" />
+            android:contentDescription="@string/info_button_text"
+            android:src="@drawable/infobutton" />
     </TableRow>
     
     <TableRow>

@@ -6,7 +6,9 @@
 
     <uses-sdk android:minSdkVersion="10" />
 
-    <uses-feature android:name="android.hardware.camera" android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -20,6 +22,13 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ResultsViewActivity"
+            android:label="" >
+            <intent-filter>
+                <category android:name="android.intent.category.ALTERNATIVE" />
             </intent-filter>
         </activity>
     </application>
