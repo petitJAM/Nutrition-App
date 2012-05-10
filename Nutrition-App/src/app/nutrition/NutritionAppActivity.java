@@ -160,6 +160,7 @@ public class NutritionAppActivity extends Activity {
 
 	private class ExitOnClickListener implements View.OnClickListener {
 		public void onClick(View v) {
+			Log.d("Exit", "exit");
 			NutritionAppActivity.this.finish();
 		}
 	}
