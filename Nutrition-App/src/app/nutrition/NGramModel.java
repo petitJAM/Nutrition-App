@@ -58,13 +58,13 @@ public class NGramModel implements Serializable {
 	 * @param seq - color transition sequence
 	 * @return loglikelihood of the sequence matching this NGramModel
 	 */
-	public double logLikelihood(List<Byte> seq) {
+	public double logLikelihood(byte[] seq) {
 		double ll = 0.0;
-		for (int i = 1; i < seq.size(); i++) {
-			int x = seq.get(i - 1);
-			int y = seq.get(i);
+		for (int i = 1; i < seq.length; i++) {
+			int x = seq[i-1];
+			int y = seq[i];
 			if (tmat.mat[x][y] != 0)
-				ll += Math.log10(tmat.mat[seq.get(i - 1)][seq.get(i)]);
+				ll += Math.log10(tmat.mat[seq[i-1]][seq[i]]);
 		}
 		return ll;
 	}
