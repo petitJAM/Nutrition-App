@@ -1,7 +1,8 @@
 package app.nutrition;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import Database.Food;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -99,7 +100,7 @@ public class ResultsViewActivity extends Activity {
 	 * 
 	 * @param foods - list of all the foods in order of most likeliness
 	 */
-	public void displayResults(ArrayList<Object> foods) { // TODO change to
+	public void displayResults(List<Food> foods) { // TODO change to
 															// ArrayList<Food>
 		// might have to pull this out to a class that extends ListView
 		// idk.
