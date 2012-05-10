@@ -20,7 +20,7 @@ import android.util.Log;
 public class ResultsViewActivity extends Activity {
 
 	/** NGramModel to work with */
-	public NGramModel ngm = null;
+	public byte[] colorSequence = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -42,8 +42,8 @@ public class ResultsViewActivity extends Activity {
 	 * @throws Exception
 	 */
 	public void getNGM() throws Exception {
-		ngm = NutritionAppActivity.ngm;
-		if (ngm == null) throw new Exception("No NGramModel available!");
+		colorSequence = NutritionAppActivity.colorSequence;
+		if (colorSequence == null) throw new Exception("No Color Sequence available!");
 	}
 
 	// you don't really want to run the code in the state it's in

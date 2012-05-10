@@ -1,8 +1,5 @@
 package app.nutrition;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.util.Log;
@@ -90,20 +87,22 @@ public class ProcessImage {
 	 * @param img - image to sequence
 	 * @return sequence of colors
 	 */
-	public static List<Byte> generateSequence(Bitmap img) {
-		ArrayList<Byte> ret = new ArrayList<Byte>();
+	public static byte[] generateSequence(Bitmap img) {
+		byte[] ret;
+		int[] pixels;
 
 		int width = img.getWidth();
 		int height = img.getHeight();
 		
 		Log.d("ProcessImage", "image width: " + width + "   image height: " + height);
 
-		int[] pixels = new int[width * height];
+		pixels = new int[width * height];
+		ret = new byte[width * height];
+		
 		img.getPixels(pixels, 0, width, 0, 0, width, height);
-		Log.d("ProcessImage", "Pixel array filled");
 
 		for (int i = 0; i < pixels.length; i++) {
-			ret.add(classify(getPixelRGB(pixels[i])));
+			ret[i] = classify(getPixelRGB(pixels[i]));
 		}
 		
 		Log.d("ProcessImage", "Processing complete");

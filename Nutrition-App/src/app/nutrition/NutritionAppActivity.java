@@ -2,7 +2,6 @@ package app.nutrition;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,8 +22,8 @@ import android.widget.ImageButton;
  *         Created Apr 19, 2012.
  */
 public class NutritionAppActivity extends Activity {
-	/** The NGramModel created from images. */
-	public static NGramModel ngm = null;
+	/** The color sequence read from images. */
+	public static byte[] colorSequence = null;
 
 	/** Code for opening Camera Intent */
 	public final static int TAKE_PICTURE = 0;
@@ -82,9 +81,7 @@ public class NutritionAppActivity extends Activity {
 			Log.d("Analyze", imageUri.getPath());
 			img = BitmapFactory.decodeFile(imageUri.getPath());
 			img = scaleImage(img);
-
-			List<Byte> pixel_seq = ProcessImage.generateSequence(img);
-			ngm = new NGramModel("result", pixel_seq);
+			colorSequence = ProcessImage.generateSequence(img);
 			sendNGramModel();
 		} catch (Exception e) {
 			Log.e("Analyze", e.toString());
@@ -103,7 +100,7 @@ public class NutritionAppActivity extends Activity {
 	}
 
 	private void sendNGramModel() {
-		Log.d("send n-gram model", ngm.toString());
+		Log.d("send color sequence", "");
 
 		Intent resultsIntent = new Intent(this, ResultsViewActivity.class);
 		startActivityForResult(resultsIntent, RESULTS);
