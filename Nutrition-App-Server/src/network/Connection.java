@@ -1,8 +1,12 @@
 package network;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 /**
@@ -12,6 +16,7 @@ import java.net.Socket;
  */
 public class Connection {
 
+	public static int port=12345;
 	private DataInputStream in;
 	private DataOutputStream out;
 
@@ -150,6 +155,22 @@ public class Connection {
 		for (int i = 0; i < length;)
 			i += in.read(array, i, length - i);
 		return array;
+	}
+	
+	public static byte[] serialize(Object obj) throws IOException {
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		ObjectOutputStream oout;
+			oout = new ObjectOutputStream(bos);
+			oout.writeObject(obj);
+		return bos.toByteArray();
+	}
+	
+	public static Object deSerialize(byte[] b) throws ClassNotFoundException, IOException {
+		ByteArrayInputStream bis = new ByteArrayInputStream(
+				b);
+		ObjectInputStream oin;
+		oin = new ObjectInputStream(bis);
+		return oin.readObject();
 	}
 
 	private byte[] intToByteArray(int value) {
