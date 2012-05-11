@@ -3,6 +3,7 @@ package app.nutrition;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
 
 import Database.Food;
@@ -13,6 +14,9 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListPopupWindow;
 
 /**
  * Activity to send analyzed image data to a server and wait for the results.
@@ -139,10 +143,9 @@ public class ResultsViewActivity extends Activity {
 	 */
 	public void displayResults(List<Food> foods) { // TODO change to
 													// ArrayList<Food>
-		// might have to pull this out to a class that extends ListView
-		// idk.
-		// ListView results = (ListView) findViewById(R.id.results_list);
-		// results.setAdapter(new ArrayAdapter<Object>(this, foods, null));
-		// //not correct
+		ListPopupWindow foodDisplay = new ListPopupWindow(this);
+		ListAdapter la = new ArrayAdapter<Food>(this, 0, foods);
+		foodDisplay.setAdapter(la);
+		foodDisplay.show();
 	}
 }

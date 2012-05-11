@@ -174,15 +174,11 @@ public class QueryClassTest {
 	@Test
 	public void testFoodEqualsTrue() {
 		Food f, g;
-		try {
-			f = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004, 1005, 1006,
-					1007, 1008);
-			g = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004, 1005, 1006,
-					1007, 1008);
-			assertTrue(f.equals(g));
-		} catch (IOException exception) {
-			fail();
-		}
+		f = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004, 1005, 1006,
+				1007, 1008);
+		g = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004, 1005, 1006,
+				1007, 1008);
+		assertTrue(f.equals(g));
 	}
 
 	/**
@@ -191,15 +187,11 @@ public class QueryClassTest {
 	@Test
 	public void testFoodEqualsFalse() {
 		Food f, g;
-		try {
-			f = new Food(new byte[] { 0 }, "pizza", 1005, 1002, 1003, 1004, 1005, 1006,
-					1007, 1008);
-			g = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004, 1005, 1006,
-					1007, 1008);
-			assertTrue(!f.equals(g));
-		} catch (IOException exception) {
-			fail();
-		}
+		f = new Food(new byte[] { 0 }, "pizza", 1005, 1002, 1003, 1004, 1005, 1006,
+				1007, 1008);
+		g = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004, 1005, 1006,
+				1007, 1008);
+		assertTrue(!f.equals(g));
 	}
 
 	/**

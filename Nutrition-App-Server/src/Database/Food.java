@@ -86,10 +86,10 @@ public class Food {
 	 */
 	public Food(byte[] bs, String string, float calories, float calFromFat,
 			float totalFat, float sodium, float carbs, float fiber, float sugar,
-			float protein) throws IOException {
+			float protein) {
 		try {
 			this.ngm = (NGramModel) Connection.deSerialize(bs);
-		} catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
 		this.name = string;
