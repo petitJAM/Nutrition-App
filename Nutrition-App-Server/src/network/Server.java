@@ -157,36 +157,37 @@ public class Server {
 
 			private ArrayList<Food> getTop3(ArrayList<Food> array, byte[] seq) {
 				Double a[] = { 0.0, 0.0, 0.0 };
-				ArrayList<Food> top3 = new ArrayList<Food>();
-				top3.add(null);
-				top3.add(null);
-				top3.add(null);
+				Food top3[] = {null,null,null};
 				for (Food f : array) {
 					Food tempF = f;
 					Food tempF2 = f;
 					double tempD = logLikelihood(f.ngm, seq);
 					double tempD2 = tempD;
-					if (top3.get(0) == null || tempD > a[0]) {
+					if (top3[0] == null || tempD > a[0]) {
 						tempD2 = a[0];
 						a[0] = tempD;
-						tempF = top3.get(0);
-						top3.set(0, f);
+						tempF = top3[0];
+						top3[0]= f;
 					}
-					if (top3.get(1) == null || tempD2 > a[1]) {
+					if (top3[1] == null || tempD2 > a[1]) {
 						tempD = a[1];
 						a[1] = tempD2;
-						tempF2 = top3.get(0);
-						top3.set(1, tempF);
+						tempF2 = top3[0];
+						top3[1]= tempF;
 					} else {
 						tempD = tempD2;
 						tempF2 = tempF;
 					}
-					if (top3.get(2) == null || tempD > a[2]) {
+					if (top3[2] == null || tempD > a[2]) {
 						a[2] = tempD;
-						top3.set(2, tempF2);
+						top3[2]= tempF2;
 					}
 				}
-				return null;
+				ArrayList<Food> top3ArrayList = new ArrayList<Food>();
+				for(Food f : top3){
+					top3ArrayList.add(f);
+				}
+				return top3ArrayList;
 			}
 
 			private Double logLikelihood(NGramModel nGramModel, byte[] ngm) {
