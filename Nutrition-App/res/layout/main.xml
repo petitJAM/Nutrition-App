@@ -6,21 +6,17 @@
     android:columnCount="2"
     android:orientation="horizontal" >
 
-    <!-- android:layout_height="165dp" -->
-
     <TableRow>
-
         <ImageView
             android:id="@+id/logo_view"
             android:layout_height="123dp"
             android:layout_span="2"
             android:layout_weight="1"
             android:background="@drawable/app_logo"
-            android:contentDescription="@string/logo_content_description" />
+            android:contentDescription="@string/logo_content_description"/>
     </TableRow>
 
     <TableRow>
-
         <ImageButton
             android:id="@+id/camera_button"
             android:layout_column="0"
@@ -37,7 +33,6 @@
     </TableRow>
 
     <TableRow>
-
         <ImageButton
             android:id="@+id/settings_button"
             android:layout_column="0"
