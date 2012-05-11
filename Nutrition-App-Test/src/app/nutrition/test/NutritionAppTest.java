@@ -3,7 +3,6 @@ package app.nutrition.test;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.ImageButton;
 import app.nutrition.NutritionAppActivity;
-import app.nutrition.R;
 
 /**
  * Test the NutritionAppActivity class
@@ -34,10 +33,10 @@ public class NutritionAppTest extends
 		setActivityInitialTouchMode(false);
 		naa = getActivity();
 		camera = (ImageButton) naa.findViewById(app.nutrition.R.id.camera_button);
-		set = (ImageButton) naa.findViewById(R.id.settings_button);
-		info = (ImageButton) naa.findViewById(R.id.info_button);
-		search = (ImageButton) naa.findViewById(R.id.search_button);
-		exit = (ImageButton) naa.findViewById(R.id.exit_button);
+		set = (ImageButton) naa.findViewById(app.nutrition.R.id.settings_button);
+		info = (ImageButton) naa.findViewById(app.nutrition.R.id.info_button);
+		search = (ImageButton) naa.findViewById(app.nutrition.R.id.search_button);
+		exit = (ImageButton) naa.findViewById(app.nutrition.R.id.exit_button);
 		appName = naa.getString(app.nutrition.R.string.app_name);
 	}
 
