@@ -156,6 +156,7 @@ public class Server {
 			}
 
 			private ArrayList<Food> getTop3(ArrayList<Food> array, byte[] seq) {
+				System.out.println("Get Top 3");
 				Double a[] = { 0.0, 0.0, 0.0 };
 				Food top3[] = {null,null,null};
 				for (Food f : array) {

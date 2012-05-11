@@ -195,7 +195,7 @@ public class Connection {
 	 * TODO Put here a description of what this method does.
 	 * 
 	 * @param b
-	 * @return
+	 * @return de serialized object
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */

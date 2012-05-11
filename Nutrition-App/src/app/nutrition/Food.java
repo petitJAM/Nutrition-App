@@ -1,10 +1,7 @@
-package Database;
+package app.nutrition;
 
 import java.io.IOException;
 import java.io.Serializable;
-
-import network.Connection;
-import NGramModel.NGramModel;
 
 /**
  * a class to hold both the transition matrix, and nutrition facts for a given
@@ -15,10 +12,6 @@ import NGramModel.NGramModel;
  */
 public class Food implements Serializable {
 
-	/**
-	 * the matrix describing the image of this food item
-	 */
-	public NGramModel ngm;
 	/**
 	 * the name of this food item
 	 */
@@ -63,8 +56,6 @@ public class Food implements Serializable {
 	/**
 	 * constructor for a food object
 	 * 
-	 * @param bs
-	 *            NGramModel for this food object
 	 * @param string
 	 *            the name of this food object
 	 * @param calories
@@ -86,14 +77,9 @@ public class Food implements Serializable {
 	 *            the amount of protein in one serving of this food
 	 * @throws IOException
 	 */
-	public Food(byte[] bs, String string, float calories, float calFromFat,
-			float totalFat, float sodium, float carbs, float fiber, float sugar,
-			float protein) {
-		try {
-			this.ngm = (NGramModel) Connection.deSerialize(bs);
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
-		}
+	public Food(String string, float calories, float calFromFat,
+			float totalFat, float sodium, float carbs, float fiber,
+			float sugar, float protein) {
 		this.name = string;
 		this.calories = calories;
 		this.calFromFat = calFromFat;
@@ -114,8 +100,9 @@ public class Food implements Serializable {
 	 * @return true if they are the same, false otherwise
 	 */
 	public boolean equals(Food f) {
-		return f.ngm.equals(this.ngm) && f.name.equals(this.name)
-				&& f.calories == this.calories && f.calFromFat == this.calFromFat
+		return f.name.equals(this.name)
+				&& f.calories == this.calories
+				&& f.calFromFat == this.calFromFat
 				&& this.totalFat == f.totalFat && f.sodium == this.sodium
 				&& f.carbs == this.carbs && f.fiber == this.fiber
 				&& f.sugar == this.sugar && f.protein == this.protein;
