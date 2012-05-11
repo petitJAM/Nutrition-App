@@ -14,7 +14,7 @@ update Device set times_used =@times_used, times_correct = @times_correct where 
 go
 
 CREATE PROCEDURE [dbo].addFoodItem
-(@Transition_Matrix varbinary(512),
+(@Transition_Matrix varbinary(max),
 @Name varchar(256),
 @Calories float,
 @Calories_from_Fat float,

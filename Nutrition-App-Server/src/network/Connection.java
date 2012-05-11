@@ -11,16 +11,14 @@ import java.net.Socket;
 
 /**
  * A Connection with the server.
- *
- * @author Ryne Bell, Alex Petitjean.
- *         Created May 10, 2012.
+ * 
+ * @author Ryne Bell, Alex Petitjean. Created May 10, 2012.
  */
 public class Connection {
 
-	public static int port=12345;
+	public static int port = 12345;
 	private DataInputStream in;
 	private DataOutputStream out;
-
 
 	/**
 	 * Create a new Connection with the given Socket
@@ -157,10 +155,10 @@ public class Connection {
 			i += in.read(array, i, length - i);
 		return array;
 	}
-	
+
 	/**
 	 * TODO Put here a description of what this method does.
-	 *
+	 * 
 	 * @param obj
 	 * @return serialized byte[]
 	 * @throws IOException
@@ -168,24 +166,34 @@ public class Connection {
 	public static byte[] serialize(Object obj) throws IOException {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutputStream oout;
-			oout = new ObjectOutputStream(bos);
-			oout.writeObject(obj);
+		oout = new ObjectOutputStream(bos);
+		oout.writeObject(obj);
 		return bos.toByteArray();
 	}
-	
+
 	/**
 	 * TODO Put here a description of what this method does.
-	 *
+	 * 
 	 * @param b
-	 * @return
+	 * @return de serialized object
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
-	public static Object deSerialize(byte[] b) throws ClassNotFoundException, IOException {
+	public static Object deSerialize(byte[] b) throws ClassNotFoundException,
+			IOException {
+		System.out.println("deserializing:" + getString(b));
 		ByteArrayInputStream bis = new ByteArrayInputStream(b);
 		ObjectInputStream oin;
 		oin = new ObjectInputStream(bis);
 		return oin.readObject();
+	}
+
+	private static String getString(byte[] b) {
+		String s = "";
+		for (byte a : b) {
+			s += a;
+		}
+		return s;
 	}
 
 	private byte[] intToByteArray(int value) {

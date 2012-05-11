@@ -176,7 +176,7 @@ public class QueryClassTest {
 	@Test
 	public void testFoodEqualsTrue() {
 		Food f, g;
-		NGramModel ngm = new NGramModel("pizza", new TransitionMatrix(20));
+		NGramModel ngm = new NGramModel("pizza", new TransitionMatrix(5));
 		try {
 			f = new Food(ngm.getByteArray(), "pizza", 1001, 1002, 1003, 1004, 1005, 1006,
 					1007, 1008);
@@ -194,8 +194,8 @@ public class QueryClassTest {
 	@Test
 	public void testFoodEqualsFalse() {
 		Food f, g;
-		NGramModel ngm = new NGramModel("pizza", new TransitionMatrix(20));
-		NGramModel ngm2 = new NGramModel("sauce", new TransitionMatrix(20));
+		NGramModel ngm = new NGramModel("pizza", new TransitionMatrix(5));
+		NGramModel ngm2 = new NGramModel("sauce", new TransitionMatrix(5));
 		try {
 			f = new Food(ngm.getByteArray(), "pizza", 1005, 1002, 1003, 1004, 1005, 1006,
 					1007, 1008);
@@ -226,6 +226,7 @@ public class QueryClassTest {
 			f = qc.getFoodItem("dummy");
 			assertNull(f);
 		} catch (IOException exception) {
+			exception.printStackTrace();
 			fail();
 		}
 	}
@@ -241,6 +242,7 @@ public class QueryClassTest {
 		try {
 			f = qc.getFoodItem("Banana");
 		} catch (IOException exception) {
+			exception.printStackTrace();
 			fail();
 		}
 		assertEquals(f.name, "Banana");

@@ -8,7 +8,7 @@ times_correct int
 );
 
 create table Food(
-Transition_Matrix varbinary(512),
+Transition_Matrix varbinary(max),
 Name varchar(256),
 Calories float,
 Calories_from_Fat float,
