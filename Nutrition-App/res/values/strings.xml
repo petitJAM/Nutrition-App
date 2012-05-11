@@ -12,5 +12,13 @@
     <string name="wait_dialog">Waiting for server …</string>
     <string name="no_response_server">Failed to receive information from server!</string>
     <string name="ok">OK</string>
-
+    <string name="about_us">
+        Welcome to Nutrition App!\n
+        This application is your very smart, very adorable companion.\n
+        If youre ever curious about what is hiding in your food, 
+        just take a quick snapshot using the camera button,
+        and watch as computer magic sends its nutrition info to your phone!\n
+        This application was designed by three poor, starving college students,
+        so give us money!    
+    </string>
 </resources>

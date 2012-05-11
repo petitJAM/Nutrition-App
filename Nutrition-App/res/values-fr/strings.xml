@@ -12,5 +12,13 @@
     <string name="wait_dialog">Attente pour le serveur…</string>
     <string name="no_response_server">Impossible de recevoir des informations depuis le serveur!</string>
     <string name="ok">OK</string>
-
+	<string name="about_us">
+	    Bienvenue sur App nutrition!\n
+         Cette application est votre très intelligent, très adorable compagnon.\n
+         Si jamais vous êtes curieux de savoir ce qui se cache dans votre alimentation,
+         il suffit de prendre un instantané rapide en utilisant le bouton de la caméra,
+         et regardez la magie ordinateur envoie son info nutrition à votre téléphone!\n
+         Cette application a été conçu par trois étudiants de niveau collégial, les pauvres meurent de faim,
+         afin de nous donner de l\'argent!
+	</string>
 </resources>
