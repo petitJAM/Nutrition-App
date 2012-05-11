@@ -21,6 +21,8 @@ import android.util.Log;
  */
 public class ResultsViewActivity extends Activity {
 
+	private static final int PORT = 12345;
+	private static final String IP_ADDRESS = "137.112.115.102";
 	/** Color Sequence to work with */
 	public byte[] colorSequence = null;
 
@@ -76,6 +78,19 @@ public class ResultsViewActivity extends Activity {
 
 		Log.d("send NGM", "Progress dialog created");
 
+		// get the returned list of foods and somehow store so display results
+		// knows about them (or pass them along, i guess)
+		// call display results
+		try {
+			con.recieveInt(); // should be 3 indicating the 3 results
+			Connection.deSerialize(con.recieveByteArray());
+			Connection.deSerialize(con.recieveByteArray());
+			Connection.deSerialize(con.recieveByteArray());
+		} catch (IOException e) {
+			Log.d("sendSequence", e.getMessage());
+		} catch (ClassNotFoundException e) {
+			Log.d("sendSequence", e.getMessage());
+		}
 		// wait for response with timeout
 		// waitloop
 		progdog.dismiss();
@@ -102,26 +117,13 @@ public class ResultsViewActivity extends Activity {
 			alertdog.show();
 		}
 
-		// get the returned list of foods and somehow store so display results
-		// knows about them (or pass them along, i guess)
-		// call display results
-		try {
-			con.recieveInt(); // should be 3 indicating the 3 results
-			Connection.deSerialize(con.recieveByteArray());
-			Connection.deSerialize(con.recieveByteArray());
-			Connection.deSerialize(con.recieveByteArray());
-		} catch (IOException e) {
-			Log.d("sendSequence", e.getMessage());
-		} catch (ClassNotFoundException e) {
-			Log.d("sendSequence", e.getMessage());
-		}
 
 	}
 
 	private Connection getConnection() {
 		Socket sock = null;
 		try {
-			sock = new Socket("127.0.0.1", 12345);
+			sock = new Socket(IP_ADDRESS, PORT);
 		} catch (UnknownHostException e) {
 			Log.d("getConnection", e.getMessage());
 		} catch (IOException e) {
