@@ -132,10 +132,7 @@ public class Server {
 					if (type == 0) { // this is a request for a list of matches
 						byte[] seq = null;
 						try {
-							seq = (byte[]) Connection.deSerialize(con
-									.recieveByteArray());
-						} catch (ClassNotFoundException e) {
-							e.printStackTrace();
+							seq = con.recieveByteArray();
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
