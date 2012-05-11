@@ -182,8 +182,7 @@ public class Connection {
 	 * @throws IOException
 	 */
 	public static Object deSerialize(byte[] b) throws ClassNotFoundException, IOException {
-		ByteArrayInputStream bis = new ByteArrayInputStream(
-				b);
+		ByteArrayInputStream bis = new ByteArrayInputStream(b);
 		ObjectInputStream oin;
 		oin = new ObjectInputStream(bis);
 		return oin.readObject();
