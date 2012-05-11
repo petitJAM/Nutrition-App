@@ -62,11 +62,9 @@ public class ResultsViewActivity extends Activity {
 		// convert the ngm to a transmitable format
 		// send to server
 
-
 		Connection con = getConnection();
 		con.sendInt(0); // 0 means this connection is asking for a list of results
 		con.sendByteArray(colorSequence);
-
 
 		ProgressDialog progdog = ProgressDialog.show(this, "",
 				getString(R.string.wait_dialog), true);
