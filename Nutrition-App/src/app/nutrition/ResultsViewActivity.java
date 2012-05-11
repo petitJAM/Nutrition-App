@@ -65,7 +65,7 @@ public class ResultsViewActivity extends Activity {
 	 * 
 	 */
 	public void sendSequence() {
-		Log.d("send NGM", "Sending NGM");
+		Log.d("send Seq", "Sending NGM");
 		// convert the ngm to a transmitable format
 		// send to server
 
@@ -75,8 +75,7 @@ public class ResultsViewActivity extends Activity {
 
 		ProgressDialog progdog = ProgressDialog.show(this, "",
 				getString(R.string.wait_dialog), true);
-
-		Log.d("send NGM", "Progress dialog created");
+		Log.d("send Seq", "Progress dialog created");
 
 		// get the returned list of foods and somehow store so display results
 		// knows about them (or pass them along, i guess)
@@ -93,31 +92,30 @@ public class ResultsViewActivity extends Activity {
 		}
 		// wait for response with timeout
 		// waitloop
+		Log.d("send Seq", "Progress dialog dismissed");
 		progdog.dismiss();
 
 		// show another dialog on fail
-		{
-			AlertDialog.Builder dogbuilder = new AlertDialog.Builder(this);
-			dogbuilder.setMessage(getString(R.string.no_response_server))
-					.setPositiveButton(getString(R.string.ok),
-							new OnClickListener() {
-
-								public void onClick(DialogInterface dialog,
-										int which) {
-									Log.d("Failed to hear server dialog",
-											"Server did not return");
-									finish(); // probably change this to handle
-												// failed server request
-												// quit back to
-												// NutritionAppActivity or try
-												// again maybe?
-								}
-							});
-			AlertDialog alertdog = dogbuilder.create();
-			alertdog.show();
-		}
-
-
+//		{
+//			AlertDialog.Builder dogbuilder = new AlertDialog.Builder(this);
+//			dogbuilder.setMessage(getString(R.string.no_response_server))
+//					.setPositiveButton(getString(R.string.ok),
+//							new OnClickListener() {
+//
+//								public void onClick(DialogInterface dialog,
+//										int which) {
+//									Log.d("Failed to hear server dialog",
+//											"Server did not return");
+//									finish(); // probably change this to handle
+//												// failed server request
+//												// quit back to
+//												// NutritionAppActivity or try
+//												// again maybe?
+//								}
+//							});
+//			AlertDialog alertdog = dogbuilder.create();
+//			alertdog.show();
+//		}
 	}
 
 	private Connection getConnection() {

@@ -17,6 +17,7 @@ import java.net.Socket;
  */
 public class Connection {
 
+	/** port number to use */
 	public static int port=12345;
 	private DataInputStream in;
 	private DataOutputStream out;
@@ -32,7 +33,7 @@ public class Connection {
 			this.in = new DataInputStream(sock.getInputStream());
 			this.out = new DataOutputStream(sock.getOutputStream());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -177,7 +178,7 @@ public class Connection {
 	 * TODO Put here a description of what this method does.
 	 *
 	 * @param b
-	 * @return
+	 * @return deserialized object
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
