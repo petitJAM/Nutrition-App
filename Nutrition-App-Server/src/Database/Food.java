@@ -62,7 +62,8 @@ public class Food implements Serializable {
 
 	/**
 	 * constructor for a food object
-	 * @param bs 
+	 * 
+	 * @param bs
 	 *            NGramModel for this food object
 	 * @param string
 	 *            the name of this food object
@@ -83,11 +84,11 @@ public class Food implements Serializable {
 	 *            the amount of sugar in one serving of this food
 	 * @param protein
 	 *            the amount of protein in one serving of this food
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public Food(byte[] bs, String string, float calories, float calFromFat,
 			float totalFat, float sodium, float carbs, float fiber, float sugar,
-			float protein) {
+			float protein) throws IOException {
 		try {
 			this.ngm = (NGramModel) Connection.deSerialize(bs);
 		} catch (ClassNotFoundException | IOException e) {
@@ -120,12 +121,12 @@ public class Food implements Serializable {
 				&& f.sugar == this.sugar && f.protein == this.protein;
 	}
 
-//	private boolean compareMatrix(byte[] a, byte[] b) {
-//		if (a.length == b.length) {
-//			for (int i = 0; i < a.length; i++)
-//				if (a[i] != b[i]) return false;
-//			return true;
-//		}
-//		return false;
-//	}
+	// private boolean compareMatrix(byte[] a, byte[] b) {
+	// if (a.length == b.length) {
+	// for (int i = 0; i < a.length; i++)
+	// if (a[i] != b[i]) return false;
+	// return true;
+	// }
+	// return false;
+	// }
 }
