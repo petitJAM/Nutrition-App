@@ -46,7 +46,7 @@ public class ResultsViewActivity extends Activity {
 	 */
 	public void getNGM() throws Exception {
 		colorSequence = NutritionAppActivity.colorSequence;
-		if (colorSequence == null) throw new Exception("No Color Sequence available!");
+		if (colorSequence == null) throw new NullPointerException("No Color Sequence available!");
 	}
 
 	// you don't really want to run the code in the state it's in

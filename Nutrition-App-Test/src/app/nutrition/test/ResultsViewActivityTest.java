@@ -46,21 +46,23 @@ public class ResultsViewActivityTest extends
 	 */
 	public void testGetNGMFromNutritionAppActivity() {
 		TransitionMatrix t = new TransitionMatrix(4);
-		NGramModel ngm = new NGramModel("test", t);
-		NutritionAppActivity.ngm = ngm;
+		byte[] seq = new byte[3];
+		seq[0] = 0; seq[1] = 0; seq[2] = 0;
+		NutritionAppActivity.colorSequence = seq;
 		try {
 			rva.getNGM();
 		} catch (Exception e) {
 			fail("Exception");
 		}
-		assertEquals(ngm, rva.ngm);
+		for (int i = 0; i < 3; i++)
+			assertEquals(seq[i], rva.colorSequence[i]);
 	}
 
 	/**
 	 * Test exception thrown on null ngm.
 	 */
 	public void testGetNGMFromNutritionAppActivityWithNullNGM() {
-		NutritionAppActivity.ngm = null;
+		NutritionAppActivity.colorSequence = null;
 		try {
 			rva.getNGM();
 			fail();
@@ -74,8 +76,9 @@ public class ResultsViewActivityTest extends
 	 */
 	public void testSendingNGMtoServer() {
 		TransitionMatrix t = new TransitionMatrix(4);
-		rva.ngm = new NGramModel("test", t);
+		rva.colorSequence = new byte[4];
 		
+		fail();
 	}
 
 	/**
