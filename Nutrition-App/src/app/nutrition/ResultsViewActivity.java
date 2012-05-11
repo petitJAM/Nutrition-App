@@ -46,7 +46,7 @@ public class ResultsViewActivity extends Activity {
 	 */
 	public void getNGM() throws Exception {
 		colorSequence = NutritionAppActivity.colorSequence;
-		if (colorSequence == null) throw new Exception("No Color Sequence available!");
+		if (colorSequence == null) throw new NullPointerException("No Color Sequence available!");
 	}
 
 	// you don't really want to run the code in the state it's in
@@ -62,9 +62,11 @@ public class ResultsViewActivity extends Activity {
 		// convert the ngm to a transmitable format
 		// send to server
 
+
 		Connection con = getConnection();
 		con.sendInt(0); // 0 means this connection is asking for a list of results
 		con.sendByteArray(colorSequence);
+
 
 		ProgressDialog progdog = ProgressDialog.show(this, "",
 				getString(R.string.wait_dialog), true);
