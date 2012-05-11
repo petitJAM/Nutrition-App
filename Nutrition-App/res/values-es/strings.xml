@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Nutrición App</string>
+    <string name="logo_content_description">Logotipo</string>
+    <string name="camera_button_text">Captura de Imagen</string>
+    <string name="search_button_text">Búsqueda</string>
+    <string name="settings_button_text">Ajustes</string>
+    <string name="info_button_text">Sobre Nosotros</string>
+    <string name="exit_button_text">Salida</string>
+    <!-- &#8230 is Unicode for the ellipsis character '...' -->
+    <string name="wait_dialog">Esperando que el servidor…</string>
+    <string name="no_response_server">¡No se pudo recibir la información desde el servidor!</string>
+    <string name="ok">OK</string>
+
+</resources>

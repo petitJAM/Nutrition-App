@@ -1,6 +1,8 @@
 package foodImaging;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import app.nutrition.NGramModel;
+import NGramModel.NGramModel;
 
 public class Populator2000Test {
 

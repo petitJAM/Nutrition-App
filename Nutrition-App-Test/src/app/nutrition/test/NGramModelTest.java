@@ -52,9 +52,10 @@ public class NGramModelTest extends TestCase {
 		TransitionMatrix t = new TransitionMatrix(2);
 		NGramModel ngm = new NGramModel("name", t);
 		double expected = 0.0;
-		List<Integer> seq = new ArrayList<Integer>();
-		seq.add(0);
-		seq.add(0);
+		
+		byte[] seq = new byte[2];
+		seq[0] = 0;
+		seq[1] = 0;
 		
 		assertEquals(expected, ngm.logLikelihood(seq));
 	}

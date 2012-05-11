@@ -1,4 +1,4 @@
-package app.nutrition;
+package NGramModel;
 
 import java.io.Serializable;
 

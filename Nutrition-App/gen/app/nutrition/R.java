@@ -35,7 +35,6 @@ public final class R {
         public static final int results=0x7f030001;
     }
     public static final class string {
-        public static final int about_us_text=0x7f04000a;
         public static final int app_name=0x7f040000;
         public static final int camera_button_text=0x7f040002;
         public static final int exit_button_text=0x7f040006;
@@ -46,6 +45,9 @@ public final class R {
         public static final int search_button_text=0x7f040003;
         public static final int settings_button_text=0x7f040004;
         /**  &#8230 is Unicode for the ellipsis character '...' 
+ &#8230 is Unicode for the ellipsis character '...' 
+ &#8230 is Unicode for the ellipsis character '...' 
+ &#8230 is Unicode for the ellipsis character '...' 
          */
         public static final int wait_dialog=0x7f040007;
     }

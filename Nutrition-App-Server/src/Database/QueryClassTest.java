@@ -154,7 +154,7 @@ public class QueryClassTest {
 		ArrayList<Food> food = qc.getFood();
 		assertNotNull(food);
 		for (Food f : food) {
-			assertNotNull(f.Transition_Matrix);
+			assertNotNull(f.NGramModel);
 		}
 	}
 

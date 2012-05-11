@@ -6,7 +6,8 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 
-import app.nutrition.NGramModel;
+import Database.Food;
+import NGramModel.NGramModel;
 
 /**
  * the class which handles connections from clients to the server spinning off
@@ -133,8 +134,77 @@ public class Server {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						// get the top 3 food items to send
+						ArrayList<Food> possiblitites = getTop3(
+								Serv.qc.getFood(), ngm);
+
+						con.sendInt(3);
+						try {
+							con.sendByteArray(Connection
+									.serialize(possiblitites.get(0)));
+							con.sendByteArray(Connection
+									.serialize(possiblitites.get(1)));
+							con.sendByteArray(Connection
+									.serialize(possiblitites.get(2)));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				}
+			}
+
+			private ArrayList<Food> getTop3(ArrayList<Food> array,
+					NGramModel ngm) {
+				Double a[] = { 0.0, 0.0, 0.0 };
+				ArrayList<Food> top3 = new ArrayList<Food>();
+				top3.add(null);
+				top3.add(null);
+				top3.add(null);
+				for (Food f : array) {
+					Food tempF = f;
+					Food tempF2 = f;
+					double tempD = logLikelihood(f.NGramModel, ngm);
+					double tempD2 = tempD;
+					if (top3.get(0) == null || tempD > a[0]) {
+						tempD2 = a[0];
+						a[0] = tempD;
+						tempF = top3.get(0);
+						top3.set(0, f);
+					}
+					if (top3.get(1) == null || tempD2 > a[1]) {
+						tempD = a[1];
+						a[1] = tempD2;
+						tempF2 = top3.get(0);
+						top3.set(1, tempF);
+					} else {
+						tempD = tempD2;
+						tempF2 = tempF;
+					}
+					if (top3.get(2) == null || tempD > a[2]) {
+						a[2] = tempD;
+						top3.set(2, tempF2);
+					}
+				}
+				return null;
+			}
+
+			private Double logLikelihood(byte[] nGramModel, NGramModel ngm) {
+				NGramModel ngm2 = null;
+				try {
+					ngm2 = (NGramModel) Connection.deSerialize(nGramModel);
+				} catch (ClassNotFoundException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Double ret = 0.0;
+				try {
+					ret = ngm.logLikelihood(ngm2.getByteArray());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return ret;
 			}
 		}
 	}

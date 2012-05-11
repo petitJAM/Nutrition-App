@@ -1,7 +1,6 @@
 package app.nutrition.test;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.UiThreadTest;
 import android.widget.Button;
 import app.nutrition.NutritionAppActivity;
 
@@ -52,26 +51,26 @@ public class NutritionAppTest extends
 	}
 	
 
-	/**
-	 * Test that Camera Intent is opened.
-	 */
-	@UiThreadTest
-	public void testCameraIntentCalled() {
-//		Instrumentation instr = getInstrumentation();
-		camera_button.setPressed(true);
-//		int req_code = getStartedActivityRequest();
-//		Intent intent = getStartedActivityIntent();
-//		assertEquals(NutritionAppActivity.TAKE_PICTURE, req_code);
-//		assertEquals("android.media.action.IMAGE_CAPTURE", intent.getAction());
-		fail();
-	}
-	
-	/**
-	 * Test camera calls
-	 */
-	@UiThreadTest
-	public void testCameraButton() {
-//		Instrumentation instr = getInstrumentation();
-		fail("test not implemented");
-	}
+//	/**
+//	 * Test that Camera Intent is opened.
+//	 */
+//	//@UiThreadTest
+//	public void testCameraIntentCalled() {
+////		Instrumentation instr = getInstrumentation();
+//		camera_button.setPressed(true);
+////		int req_code = getStartedActivityRequest();
+////		Intent intent = getStartedActivityIntent();
+////		assertEquals(NutritionAppActivity.TAKE_PICTURE, req_code);
+////		assertEquals("android.media.action.IMAGE_CAPTURE", intent.getAction());
+//		fail();
+//	}
+//	
+//	/**
+//	 * Test camera calls
+//	 */
+//	//@UiThreadTest
+//	public void testCameraButton() {
+////		Instrumentation instr = getInstrumentation();
+//		fail("test not implemented");
+//	}
 }

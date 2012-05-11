@@ -1,4 +1,4 @@
-package app.nutrition;
+package NGramModel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -39,18 +39,6 @@ public class NGramModel implements Serializable {
 		tmat = t;
 	}
 
-	/**
-	 * Create a model with the given name and train it based on the given
-	 * sequence.
-	 * 
-	 * @param name - name of this NGramModel
-	 * @param seq - the sequence of colors
-	 */
-	public NGramModel(String name, List<Byte> seq) {
-		this.name = name;
-		tmat = new TransitionMatrix(ProcessImage.NUM_COLORS);
-		train(seq);
-	}
 
 	/**
 	 * Returns the log likelihood of the given sequence matching this model
@@ -58,13 +46,13 @@ public class NGramModel implements Serializable {
 	 * @param seq - color transition sequence
 	 * @return loglikelihood of the sequence matching this NGramModel
 	 */
-	public double logLikelihood(List<Byte> seq) {
+	public double logLikelihood(byte[] seq) {
 		double ll = 0.0;
-		for (int i = 1; i < seq.size(); i++) {
-			int x = seq.get(i - 1);
-			int y = seq.get(i);
+		for (int i = 1; i < seq.length; i++) {
+			int x = seq[i-1];
+			int y = seq[i];
 			if (tmat.mat[x][y] != 0)
-				ll += Math.log10(tmat.mat[seq.get(i - 1)][seq.get(i)]);
+				ll += Math.log10(tmat.mat[seq[i-1]][seq[i]]);
 		}
 		return ll;
 	}
