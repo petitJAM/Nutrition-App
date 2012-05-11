@@ -1,21 +1,25 @@
 package network;
 
-import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.SocketImpl;
 
 import Database.QueryClass;
 
+/**
+ * Run the server
+ *
+ * @author Ryne Bell.
+ *         Created May 10, 2012.
+ */
 public class Serv {
 
-	private static boolean stoping;
+	private static boolean stopping;
 	public static QueryClass qc;
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		stoping = false;
+		stopping = false;
 		ServerSocket sock = null;
 		qc = new QueryClass();
 		Server server = new Server(Connection.port);
