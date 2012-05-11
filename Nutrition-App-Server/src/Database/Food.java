@@ -1,6 +1,7 @@
 package Database;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import network.Connection;
 import NGramModel.NGramModel;
@@ -12,7 +13,7 @@ import NGramModel.NGramModel;
  * @author bellrj
  * 
  */
-public class Food {
+public class Food implements Serializable {
 
 	/**
 	 * the matrix describing the image of this food item
@@ -61,7 +62,8 @@ public class Food {
 
 	/**
 	 * constructor for a food object
-	 * @param bs 
+	 * 
+	 * @param bs
 	 *            NGramModel for this food object
 	 * @param string
 	 *            the name of this food object
@@ -82,11 +84,11 @@ public class Food {
 	 *            the amount of sugar in one serving of this food
 	 * @param protein
 	 *            the amount of protein in one serving of this food
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public Food(byte[] bs, String string, float calories, float calFromFat,
-			float totalFat, float sodium, float carbs, float fiber, float sugar,
-			float protein) throws IOException {
+			float totalFat, float sodium, float carbs, float fiber,
+			float sugar, float protein) throws IOException {
 		try {
 			this.ngm = (NGramModel) Connection.deSerialize(bs);
 		} catch (ClassNotFoundException e) {
@@ -113,18 +115,19 @@ public class Food {
 	 */
 	public boolean equals(Food f) {
 		return f.ngm.equals(this.ngm) && f.name.equals(this.name)
-				&& f.calories == this.calories && f.calFromFat == this.calFromFat
+				&& f.calories == this.calories
+				&& f.calFromFat == this.calFromFat
 				&& this.totalFat == f.totalFat && f.sodium == this.sodium
 				&& f.carbs == this.carbs && f.fiber == this.fiber
 				&& f.sugar == this.sugar && f.protein == this.protein;
 	}
 
-//	private boolean compareMatrix(byte[] a, byte[] b) {
-//		if (a.length == b.length) {
-//			for (int i = 0; i < a.length; i++)
-//				if (a[i] != b[i]) return false;
-//			return true;
-//		}
-//		return false;
-//	}
+	// private boolean compareMatrix(byte[] a, byte[] b) {
+	// if (a.length == b.length) {
+	// for (int i = 0; i < a.length; i++)
+	// if (a[i] != b[i]) return false;
+	// return true;
+	// }
+	// return false;
+	// }
 }

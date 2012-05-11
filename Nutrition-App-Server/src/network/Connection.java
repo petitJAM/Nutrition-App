@@ -9,6 +9,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import Database.Food;
+
 /**
  * A Connection with the server.
  * 
@@ -43,6 +45,24 @@ public class Connection {
 	 */
 	public boolean sendByte(byte b) {
 		return sendByteArray(new byte[] { b });
+	}
+
+	public boolean sendFood(Food f) {
+		sendString(f.name);
+		try {
+			out.writeFloat(f.calories);
+			out.writeFloat(f.calFromFat);
+			out.writeFloat(f.totalFat);
+			out.writeFloat(f.sodium);
+			out.writeFloat(f.carbs);
+			out.writeFloat(f.fiber);
+			out.writeFloat(f.sugar);
+			out.writeFloat(f.protein);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	/**
