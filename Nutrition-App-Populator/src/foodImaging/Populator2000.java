@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import network.Connection;
+
 import Database.Food;
 import Database.QueryClass;
 import NGramModel.NGramModel;
@@ -34,9 +36,10 @@ public class Populator2000 {
      * 
      * @param args 
      * @throws IOException 
+     * @throws ClassNotFoundException 
      */
     
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         NGramModel[] ngms = trainAll(newImgDir);
         QueryClass q = new QueryClass();
         for (int i = 0; i < ngms.length; i++) {
@@ -45,6 +48,8 @@ public class Populator2000 {
 			q.addFoodItem(new Food(b, ngms[i].name, n.calories, n.calFromFat, n.totalFat, n.sodium, n.carbs, n.fiber, n.sugar, n.protein));
 		}
         System.out.println("Upload Complete");
+    	
+    	
     }
     
     

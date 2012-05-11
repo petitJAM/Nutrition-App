@@ -5,9 +5,6 @@
     android:background="@drawable/background"
     android:columnCount="2"
     android:orientation="horizontal" >
-
-    <TableRow>
-    </TableRow>
     
     <TableRow>
         <ImageButton
