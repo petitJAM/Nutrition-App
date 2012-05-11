@@ -5,11 +5,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import app.nutrition.NGramModel;
-import app.nutrition.TransitionMatrix;
-
 import Database.Food;
 import Database.QueryClass;
+import NGramModel.NGramModel;
+import NGramModel.TransitionMatrix;
 
 
 /**

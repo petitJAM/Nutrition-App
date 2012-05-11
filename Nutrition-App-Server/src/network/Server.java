@@ -5,11 +5,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
 
 import Database.Food;
-import app.nutrition.NGramModel;
+import NGramModel.NGramModel;
 
 /**
  * the class which handles connections from clients to the server spinning off
