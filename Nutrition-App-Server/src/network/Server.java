@@ -54,7 +54,8 @@ public class Server {
 	 * @return the Connection connected to the given client
 	 */
 	public Connection getClientConnection(int i) {
-		if (clientConnections.size() > i) return clientConnections.get(i);
+		if (clientConnections.size() > i)
+			return clientConnections.get(i);
 		return null;
 	}
 
@@ -89,8 +90,12 @@ public class Server {
 						Socket sock = sSock.accept();
 						Connection con = new Connection(sock);
 						clientConnections.add(con);
-						System.out.println("Added connection: " + con.toString());
-						(new Thread(new ClientConnection(con))).start();
+
+						System.out.println("Added connection: "
+								+ con.toString());
+						if (Serv.startClientThreads)
+							(new Thread(new ClientConnection(con))).start();
+
 					} catch (SocketException e) {
 						if (!running) {
 							// this was probably caused by closing the
@@ -127,7 +132,8 @@ public class Server {
 					if (type == 0) { // this is a request for a list of matches
 						byte[] seq = null;
 						try {
-							seq = (byte[]) Connection.deSerialize(con.recieveByteArray());
+							seq = (byte[]) Connection.deSerialize(con
+									.recieveByteArray());
 						} catch (ClassNotFoundException e) {
 							e.printStackTrace();
 						} catch (IOException e) {
@@ -138,9 +144,12 @@ public class Server {
 						try {
 							possiblitites = getTop3(Serv.qc.getFood(), seq);
 							con.sendInt(3);
-							con.sendByteArray(Connection.serialize(possiblitites.get(0)));
-							con.sendByteArray(Connection.serialize(possiblitites.get(1)));
-							con.sendByteArray(Connection.serialize(possiblitites.get(2)));
+							con.sendByteArray(Connection
+									.serialize(possiblitites.get(0)));
+							con.sendByteArray(Connection
+									.serialize(possiblitites.get(1)));
+							con.sendByteArray(Connection
+									.serialize(possiblitites.get(2)));
 						} catch (IOException exception) {
 							exception.printStackTrace();
 						}
@@ -171,8 +180,7 @@ public class Server {
 						a[1] = tempD2;
 						tempF2 = top3.get(0);
 						top3.set(1, tempF);
-					}
-					else {
+					} else {
 						tempD = tempD2;
 						tempF2 = tempF;
 					}
