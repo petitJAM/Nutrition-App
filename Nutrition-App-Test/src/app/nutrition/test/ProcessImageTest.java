@@ -1,8 +1,5 @@
 package app.nutrition.test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import junit.framework.TestCase;
 import android.graphics.Bitmap;
 import app.nutrition.ProcessImage;

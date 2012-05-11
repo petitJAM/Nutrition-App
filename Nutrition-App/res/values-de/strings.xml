@@ -12,5 +12,13 @@
     <string name="wait_dialog">Warten auf den Server…</string>
     <string name="no_response_server">Konnte Informationen vom Server zu empfangen!</string>
     <string name="ok">OK</string>
-
+	<string name="about_us">
+	    Willkommen bei Nutrition App!\n
+         Diese Anwendung ist Ihr sehr klug, sehr liebenswert Begleiter.\n
+         Wenn Sie schon einmal neugierig, was in Ihrem Essen versteckt sind,
+         Werfen Sie einen schnellen Überblick über die Kamera-Taste,
+         und zusehen, wie Computer Magie sendet seine Ernährung Info auf Ihr Handy!\n
+         Diese Anwendung wurde von drei armen, hungernden Studenten konzipiert,
+         so geben uns Geld!
+	</string>
 </resources>
