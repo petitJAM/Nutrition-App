@@ -10,11 +10,13 @@ public class Serv {
 
 	private static boolean stoping;
 	public static QueryClass qc;
+	public static boolean startClientThreads = false;
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		startClientThreads = true;
 		stoping = false;
 		ServerSocket sock = null;
 		qc = new QueryClass();

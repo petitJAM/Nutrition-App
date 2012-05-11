@@ -88,7 +88,8 @@ public class Server {
 						Socket sock = sSock.accept();
 						Connection con = new Connection(sock);
 						clientConnections.add(con);
-						(new Thread(new ClientConnection(con))).start();
+						if (Serv.startClientThreads)
+							(new Thread(new ClientConnection(con))).start();
 					} catch (SocketException e) {
 						if (!running) {
 							// this was probably caused by closing the
