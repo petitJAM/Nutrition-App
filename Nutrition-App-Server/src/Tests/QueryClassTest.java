@@ -10,6 +10,8 @@ import org.junit.Test;
 import Database.Device;
 import Database.Food;
 import Database.QueryClass;
+import NGramModel.NGramModel;
+import NGramModel.TransitionMatrix;
 
 /**
  * tests the functionality of the Database.QueryClass
@@ -174,10 +176,11 @@ public class QueryClassTest {
 	@Test
 	public void testFoodEqualsTrue() {
 		Food f, g;
+		NGramModel ngm = new NGramModel("pizza", new TransitionMatrix(20));
 		try {
-			f = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004, 1005, 1006,
+			f = new Food(ngm.getByteArray(), "pizza", 1001, 1002, 1003, 1004, 1005, 1006,
 					1007, 1008);
-			g = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004, 1005, 1006,
+			g = new Food(ngm.getByteArray(), "pizza", 1001, 1002, 1003, 1004, 1005, 1006,
 					1007, 1008);
 			assertTrue(f.equals(g));
 		} catch (IOException exception) {
@@ -191,10 +194,12 @@ public class QueryClassTest {
 	@Test
 	public void testFoodEqualsFalse() {
 		Food f, g;
+		NGramModel ngm = new NGramModel("pizza", new TransitionMatrix(20));
+		NGramModel ngm2 = new NGramModel("sauce", new TransitionMatrix(20));
 		try {
-			f = new Food(new byte[] { 0 }, "pizza", 1005, 1002, 1003, 1004, 1005, 1006,
+			f = new Food(ngm.getByteArray(), "pizza", 1005, 1002, 1003, 1004, 1005, 1006,
 					1007, 1008);
-			g = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004, 1005, 1006,
+			g = new Food(ngm2.getByteArray(), "pizza", 1001, 1002, 1003, 1004, 1005, 1006,
 					1007, 1008);
 			assertTrue(!f.equals(g));
 		} catch (IOException exception) {
@@ -210,8 +215,9 @@ public class QueryClassTest {
 	public void testAddAndDeleteFoodItem() {
 		QueryClass qc = new QueryClass();
 		Food f;
+		NGramModel ngm = new NGramModel("dummy", new TransitionMatrix(20));
 		try {
-			f = new Food(new byte[] { 0 }, "dummy", 1001, 1002, 1003, 1004, 1005, 1006,
+			f = new Food(ngm.getByteArray(), "dummy", 1001, 1002, 1003, 1004, 1005, 1006,
 					1007, 1008);
 			qc.addFoodItem(f);
 			f = qc.getFoodItem("dummy");

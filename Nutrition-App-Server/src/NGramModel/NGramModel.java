@@ -99,6 +99,6 @@ public class NGramModel implements Serializable {
 	@Override
 	public boolean equals(Object o) {
 		NGramModel n = (NGramModel) o;
-		return n.name == name;
+		return n.name.equals(name);
 	}
 }
