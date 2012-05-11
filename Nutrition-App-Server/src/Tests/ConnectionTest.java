@@ -1,4 +1,4 @@
-package network;
+package Tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -8,6 +8,9 @@ import static org.junit.Assert.fail;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+
+import network.Connection;
+import network.Server;
 
 import org.junit.Test;
 

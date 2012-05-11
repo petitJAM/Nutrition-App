@@ -1,7 +1,7 @@
-package app.nutrition.test;
+package Tests;
 
+import NGramModel.TransitionMatrix;
 import junit.framework.TestCase;
-import app.nutrition.TransitionMatrix;
 
 /**
  * Test the TransitionMatrix class

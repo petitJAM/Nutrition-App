@@ -10,9 +10,10 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 /**
- * TODO Put here a description of what this class does.
- * 
- * @author bellrj. Created May 2, 2012.
+ * A Connection with the server.
+ *
+ * @author Ryne Bell, Alex Petitjean.
+ *         Created May 10, 2012.
  */
 public class Connection {
 
@@ -20,8 +21,9 @@ public class Connection {
 	private DataInputStream in;
 	private DataOutputStream out;
 
+
 	/**
-	 * TODO Put here a description of what this constructor does.
+	 * Create a new Connection with the given Socket
 	 * 
 	 * @param sock
 	 */
@@ -134,7 +136,6 @@ public class Connection {
 			out.writeInt(bs.length);
 			out.write(bs);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -157,6 +158,13 @@ public class Connection {
 		return array;
 	}
 	
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param obj
+	 * @return serialized byte[]
+	 * @throws IOException
+	 */
 	public static byte[] serialize(Object obj) throws IOException {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutputStream oout;
@@ -165,6 +173,14 @@ public class Connection {
 		return bos.toByteArray();
 	}
 	
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param b
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	public static Object deSerialize(byte[] b) throws ClassNotFoundException, IOException {
 		ByteArrayInputStream bis = new ByteArrayInputStream(
 				b);

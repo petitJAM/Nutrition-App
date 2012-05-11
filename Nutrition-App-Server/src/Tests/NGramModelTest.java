@@ -1,11 +1,9 @@
-package app.nutrition.test;
+package Tests;
 
-import java.util.ArrayList;
-import java.util.List;
+import NGramModel.NGramModel;
+import NGramModel.TransitionMatrix;
 
 import junit.framework.TestCase;
-import app.nutrition.NGramModel;
-import app.nutrition.TransitionMatrix;
 
 /**
  * Test NGramModel
