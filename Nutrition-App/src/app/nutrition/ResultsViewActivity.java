@@ -62,8 +62,8 @@ public class ResultsViewActivity extends Activity {
 		// convert the ngm to a transmitable format
 		// send to server
 
-//		Connection con = getConnection();
-//		con.sendInt(0); // 0 means this connection is asking for a list of results
+		Connection con = getConnection();
+		con.sendInt(0); // 0 means this connection is asking for a list of results
 //		con.sendByteArray(); TODO send byte array
 
 		ProgressDialog progdog = ProgressDialog.show(this, "",
