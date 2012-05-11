@@ -1,10 +1,15 @@
-package Database;
+package Tests;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.junit.Test;
+
+import Database.Device;
+import Database.Food;
+import Database.QueryClass;
 
 /**
  * tests the functionality of the Database.QueryClass
@@ -151,10 +156,15 @@ public class QueryClassTest {
 	@Test
 	public void testGetAllFood() {
 		QueryClass qc = new QueryClass();
-		ArrayList<Food> food = qc.getFood();
-		assertNotNull(food);
-		for (Food f : food) {
-			assertNotNull(f.NGramModel);
+		ArrayList<Food> food;
+		try {
+			food = qc.getFood();
+			assertNotNull(food);
+			for (Food f : food) {
+				assertNotNull(f.ngm);
+			}
+		} catch (IOException exception) {
+			exception.printStackTrace();
 		}
 	}
 
@@ -163,11 +173,16 @@ public class QueryClassTest {
 	 */
 	@Test
 	public void testFoodEqualsTrue() {
-		Food f = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004,
-				1005, 1006, 1007, 1008);
-		Food g = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004,
-				1005, 1006, 1007, 1008);
-		assertTrue(f.equals(g));
+		Food f, g;
+		try {
+			f = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004, 1005, 1006,
+					1007, 1008);
+			g = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004, 1005, 1006,
+					1007, 1008);
+			assertTrue(f.equals(g));
+		} catch (IOException exception) {
+			fail();
+		}
 	}
 
 	/**
@@ -175,11 +190,16 @@ public class QueryClassTest {
 	 */
 	@Test
 	public void testFoodEqualsFalse() {
-		Food f = new Food(new byte[] { 0 }, "pizza", 1005, 1002, 1003, 1004,
-				1005, 1006, 1007, 1008);
-		Food g = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004,
-				1005, 1006, 1007, 1008);
-		assertTrue(!f.equals(g));
+		Food f, g;
+		try {
+			f = new Food(new byte[] { 0 }, "pizza", 1005, 1002, 1003, 1004, 1005, 1006,
+					1007, 1008);
+			g = new Food(new byte[] { 0 }, "pizza", 1001, 1002, 1003, 1004, 1005, 1006,
+					1007, 1008);
+			assertTrue(!f.equals(g));
+		} catch (IOException exception) {
+			fail();
+		}
 	}
 
 	/**
@@ -189,24 +209,34 @@ public class QueryClassTest {
 	@Test
 	public void testAddAndDeleteFoodItem() {
 		QueryClass qc = new QueryClass();
-		Food f = new Food(new byte[] { 0 }, "dummy", 1001, 1002, 1003, 1004,
-				1005, 1006, 1007, 1008);
-		qc.addFoodItem(f);
-		f = qc.getFoodItem("dummy");
-		assertNotNull(f);
-		qc.deleteFoodItem("dummy");
-		f = qc.getFoodItem("dummy");
-		assertNull(f);	
+		Food f;
+		try {
+			f = new Food(new byte[] { 0 }, "dummy", 1001, 1002, 1003, 1004, 1005, 1006,
+					1007, 1008);
+			qc.addFoodItem(f);
+			f = qc.getFoodItem("dummy");
+			assertNotNull(f);
+			qc.deleteFoodItem("dummy");
+			f = qc.getFoodItem("dummy");
+			assertNull(f);
+		} catch (IOException exception) {
+			fail();
+		}
 	}
-	
+
 	/**
-	 * Checks to see that we get all the correct information for grabbing a single item.
+	 * Checks to see that we get all the correct information for grabbing a
+	 * single item.
 	 */
 	@Test
 	public void testGetFoodItem() {
 		QueryClass qc = new QueryClass();
 		Food f = null;
-		f = qc.getFoodItem("Banana");
+		try {
+			f = qc.getFoodItem("Banana");
+		} catch (IOException exception) {
+			fail();
+		}
 		assertEquals(f.name, "Banana");
 		assertTrue(f.calories == 89);
 		assertTrue(f.totalFat == (float) 0.33);

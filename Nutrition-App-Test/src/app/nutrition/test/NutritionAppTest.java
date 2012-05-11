@@ -1,8 +1,9 @@
 package app.nutrition.test;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.Button;
+import android.widget.ImageButton;
 import app.nutrition.NutritionAppActivity;
+import app.nutrition.R;
 
 /**
  * Test the NutritionAppActivity class
@@ -15,7 +16,7 @@ public class NutritionAppTest extends
 
 	private NutritionAppActivity naa;
 	private String appName;
-	private Button camera_button;
+	private ImageButton camera, set, info, search, exit;
 	
 	/**
 	 * Constructor.
@@ -32,7 +33,11 @@ public class NutritionAppTest extends
 
 		setActivityInitialTouchMode(false);
 		naa = getActivity();
-		camera_button = (Button) naa.findViewById(app.nutrition.R.id.camera_button);
+		camera = (ImageButton) naa.findViewById(app.nutrition.R.id.camera_button);
+		set = (ImageButton) naa.findViewById(R.id.settings_button);
+		info = (ImageButton) naa.findViewById(R.id.info_button);
+		search = (ImageButton) naa.findViewById(R.id.search_button);
+		exit = (ImageButton) naa.findViewById(R.id.exit_button);
 		appName = naa.getString(app.nutrition.R.string.app_name);
 	}
 
@@ -47,30 +52,44 @@ public class NutritionAppTest extends
 	 * Test app has a name
 	 */
 	public void testAppName() {
-		assertEquals("Nutrition-App", appName);
+		assertEquals("Nutrition App", appName);
+	}
+	
+	/**
+	 * Test that camera button created
+	 */
+	public void testCameraCreation() {
+		assertNotNull(camera);
+	}
+	
+	/**
+	 * Test that settings button created
+	 */
+	public void testSettingsCreation() {
+		assertNotNull(set);
+	}
+	
+	/**
+	 * Test that info button created
+	 */
+	public void testInfoCreation() {
+		assertNotNull(info);
+	}
+	
+	/**
+	 * Test that search button created
+	 */
+	public void testSearchCreation() {
+		assertNotNull(search);
+	}
+	
+	/**
+	 * Test that exit button created
+	 */
+	public void testExitCreation() {
+		assertNotNull(exit);
 	}
 	
 
-//	/**
-//	 * Test that Camera Intent is opened.
-//	 */
-//	//@UiThreadTest
-//	public void testCameraIntentCalled() {
-////		Instrumentation instr = getInstrumentation();
-//		camera_button.setPressed(true);
-////		int req_code = getStartedActivityRequest();
-////		Intent intent = getStartedActivityIntent();
-////		assertEquals(NutritionAppActivity.TAKE_PICTURE, req_code);
-////		assertEquals("android.media.action.IMAGE_CAPTURE", intent.getAction());
-//		fail();
-//	}
-//	
-//	/**
-//	 * Test camera calls
-//	 */
-//	//@UiThreadTest
-//	public void testCameraButton() {
-////		Instrumentation instr = getInstrumentation();
-//		fail("test not implemented");
-//	}
+	
 }

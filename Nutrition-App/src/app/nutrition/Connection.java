@@ -1,4 +1,4 @@
-package network;
+package app.nutrition;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
