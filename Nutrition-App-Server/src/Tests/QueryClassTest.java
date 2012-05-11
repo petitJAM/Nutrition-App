@@ -1,10 +1,14 @@
-package Database;
+package Tests;
 
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
 import org.junit.Test;
+
+import Database.Device;
+import Database.Food;
+import Database.QueryClass;
 
 /**
  * tests the functionality of the Database.QueryClass
