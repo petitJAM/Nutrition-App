@@ -50,7 +50,7 @@ public class ResultsViewActivityTest extends
 		seq[0] = 0; seq[1] = 0; seq[2] = 0;
 		NutritionAppActivity.colorSequence = seq;
 		try {
-			rva.getNGM();
+			rva.getSequence();
 		} catch (Exception e) {
 			fail("Exception");
 		}
@@ -64,7 +64,7 @@ public class ResultsViewActivityTest extends
 	public void testGetNGMFromNutritionAppActivityWithNullNGM() {
 		NutritionAppActivity.colorSequence = null;
 		try {
-			rva.getNGM();
+			rva.getSequence();
 			fail();
 		} catch (Exception e) {
 			assertTrue(e instanceof NullPointerException);

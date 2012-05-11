@@ -22,6 +22,7 @@ public class Server {
 	private Thread serverThread;
 	private boolean stop;
 	private ServerSocket sSock;
+	/** List of Connections */
 	ArrayList<Connection> clientConnections;
 
 	/**
@@ -73,6 +74,7 @@ public class Server {
 	}
 
 	private class ServerThread implements Runnable {
+		@Override
 		public void run() {
 			while (!stop) {
 				while (running) {
@@ -88,6 +90,7 @@ public class Server {
 						Socket sock = sSock.accept();
 						Connection con = new Connection(sock);
 						clientConnections.add(con);
+						System.out.println("Added connection: " + con.toString());
 						(new Thread(new ClientConnection(con))).start();
 					} catch (SocketException e) {
 						if (!running) {
@@ -106,15 +109,16 @@ public class Server {
 
 		private class ClientConnection implements Runnable {
 			private Connection con;
-			private boolean stoping;
+			private boolean stopping;
 
 			public ClientConnection(Connection con) {
 				this.con = con;
-				this.stoping = false;
+				this.stopping = false;
 			}
 
+			@Override
 			public void run() {
-				while (!stoping) {
+				while (!stopping) {
 					int type = -1;
 					try {
 						type = con.recieveInt();
