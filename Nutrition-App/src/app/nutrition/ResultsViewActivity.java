@@ -64,7 +64,7 @@ public class ResultsViewActivity extends Activity {
 
 		Connection con = getConnection();
 		con.sendInt(0); // 0 means this connection is asking for a list of results
-//		con.sendByteArray(); TODO send byte array
+		con.sendByteArray(colorSequence);
 
 		ProgressDialog progdog = ProgressDialog.show(this, "",
 				getString(R.string.wait_dialog), true);
@@ -100,6 +100,18 @@ public class ResultsViewActivity extends Activity {
 		// get the returned list of foods and somehow store so display results
 		// knows about them (or pass them along, i guess)
 		// call display results
+		try {
+			con.recieveInt(); // should be 3 indicating the 3 results
+			Connection.deSerialize(con.recieveByteArray());
+			Connection.deSerialize(con.recieveByteArray());
+			Connection.deSerialize(con.recieveByteArray());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
