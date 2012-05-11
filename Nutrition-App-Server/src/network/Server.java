@@ -54,8 +54,7 @@ public class Server {
 	 * @return the Connection connected to the given client
 	 */
 	public Connection getClientConnection(int i) {
-		if (clientConnections.size() > i)
-			return clientConnections.get(i);
+		if (clientConnections.size() > i) return clientConnections.get(i);
 		return null;
 	}
 
@@ -123,43 +122,34 @@ public class Server {
 					try {
 						type = con.recieveInt();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					if (type == 0) { // this is a request for a list of matches
-						NGramModel ngm = null;
+						byte[] seq = null;
 						try {
-							ngm = (NGramModel) Connection.deSerialize(con
-									.recieveByteArray());
+							seq = (byte[]) Connection.deSerialize(con.recieveByteArray());
 						} catch (ClassNotFoundException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						// get the top 3 food items to send
-						ArrayList<Food> possiblitites = getTop3(
-								Serv.qc.getFood(), ngm);
-
-						con.sendInt(3);
+						ArrayList<Food> possiblitites;
 						try {
-							con.sendByteArray(Connection
-									.serialize(possiblitites.get(0)));
-							con.sendByteArray(Connection
-									.serialize(possiblitites.get(1)));
-							con.sendByteArray(Connection
-									.serialize(possiblitites.get(2)));
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							possiblitites = getTop3(Serv.qc.getFood(), seq);
+							con.sendInt(3);
+							con.sendByteArray(Connection.serialize(possiblitites.get(0)));
+							con.sendByteArray(Connection.serialize(possiblitites.get(1)));
+							con.sendByteArray(Connection.serialize(possiblitites.get(2)));
+						} catch (IOException exception) {
+							exception.printStackTrace();
 						}
+
 					}
 				}
 			}
 
-			private ArrayList<Food> getTop3(ArrayList<Food> array,
-					NGramModel ngm) {
+			private ArrayList<Food> getTop3(ArrayList<Food> array, byte[] seq) {
 				Double a[] = { 0.0, 0.0, 0.0 };
 				ArrayList<Food> top3 = new ArrayList<Food>();
 				top3.add(null);
@@ -168,7 +158,7 @@ public class Server {
 				for (Food f : array) {
 					Food tempF = f;
 					Food tempF2 = f;
-					double tempD = logLikelihood(f.NGramModel, ngm);
+					double tempD = logLikelihood(f.ngm, seq);
 					double tempD2 = tempD;
 					if (top3.get(0) == null || tempD > a[0]) {
 						tempD2 = a[0];
@@ -181,7 +171,8 @@ public class Server {
 						a[1] = tempD2;
 						tempF2 = top3.get(0);
 						top3.set(1, tempF);
-					} else {
+					}
+					else {
 						tempD = tempD2;
 						tempF2 = tempF;
 					}
@@ -193,21 +184,16 @@ public class Server {
 				return null;
 			}
 
-			private Double logLikelihood(byte[] nGramModel, NGramModel ngm) {
-				NGramModel ngm2 = null;
-				try {
-					ngm2 = (NGramModel) Connection.deSerialize(nGramModel);
-				} catch (ClassNotFoundException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			private Double logLikelihood(NGramModel nGramModel, byte[] ngm) {
+				// NGramModel ngm2 = null;
+				// try {
+				// ngm2 = Connection.deSerialize(nGramModel);
+				// } catch (ClassNotFoundException | IOException e) {
+				// // TODO Auto-generated catch block
+				// e.printStackTrace();
+				// }
 				Double ret = 0.0;
-				try {
-					ret = ngm.logLikelihood(ngm2.getByteArray());
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				ret = nGramModel.logLikelihood(ngm);
 				return ret;
 			}
 		}

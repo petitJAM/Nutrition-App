@@ -95,4 +95,10 @@ public class NGramModel implements Serializable {
 	public String toString() {
 		return name;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		NGramModel n = (NGramModel) o;
+		return n.name == name;
+	}
 }

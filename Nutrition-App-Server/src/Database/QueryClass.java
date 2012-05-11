@@ -1,5 +1,6 @@
 package Database;
 
+import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -124,8 +125,9 @@ public class QueryClass {
 	 * 
 	 * @param f
 	 *            the food to add to the database
+	 * @throws IOException 
 	 */
-	public void addFoodItem(Food f) {
+	public void addFoodItem(Food f) throws IOException {
 		try {
 			Connection conn = null;
 			conn = getConnection(URL);
@@ -133,7 +135,7 @@ public class QueryClass {
 			CallableStatement proc;
 			proc = conn
 					.prepareCall("{ call addFoodItem(?,?,?,?,?,?,?,?,?,?) }");
-			proc.setBytes(1, f.NGramModel);
+			proc.setBytes(1, f.ngm.getByteArray());
 			proc.setString(2, f.name);
 			proc.setFloat(3, f.calories);
 			proc.setFloat(4, f.calFromFat);
@@ -182,8 +184,9 @@ public class QueryClass {
 	 * gets all of the Food objects in the database
 	 * 
 	 * @return an ArrayList<Food> of all the foods in the database
+	 * @throws IOException 
 	 */
-	public ArrayList<Food> getFood() {
+	public ArrayList<Food> getFood() throws IOException {
 		ArrayList<Food> food = new ArrayList<Food>();
 		try {
 			Connection conn = null;
@@ -216,7 +219,14 @@ public class QueryClass {
 		return food;
 	}
 
-	public Food getFoodItem(String name) {
+	/**
+	 * gets a Food object in the database.
+	 *
+	 * @param name
+	 * @return Food from the database
+	 * @throws IOException
+	 */
+	public Food getFoodItem(String name) throws IOException {
 		Food food = null;
 		try {
 			Connection conn = null;

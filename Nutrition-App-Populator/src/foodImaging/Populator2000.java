@@ -32,6 +32,7 @@ public class Populator2000 {
      * 		-- Creates NutritionFacts object that collects the information for the food
      * 		-- Send the information to the query class where it will be added to our database.
      * 
+     * @param args 
      * @throws IOException 
      */
     
@@ -50,6 +51,7 @@ public class Populator2000 {
     /**
      * Trains each image in in the image directory.
      * 
+     * @param imgDir 
      * @return array of NGramModels
      */
     public static NGramModel[] trainAll(String imgDir) {
