@@ -199,16 +199,14 @@ public class Server {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				ArrayList<Byte> bytes = new ArrayList<Byte>();
+				Double ret = 0.0;
 				try {
-					for (byte b : ngm2.getByteArray()) {
-						bytes.add(b);
-					}
+					ret = ngm.logLikelihood(ngm2.getByteArray());
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				return ngm.logLikelihood(bytes);
+				return ret;
 			}
 		}
 	}
