@@ -85,16 +85,14 @@ public class ResultsViewActivity extends Activity {
 		// call display results
 		try {
 			con.recieveInt(); // should be 3 indicating the 3 results
-			f1 = (Food) Connection.deSerialize(con.recieveByteArray());
-			f2 = (Food) Connection.deSerialize(con.recieveByteArray());
-			f3 = (Food) Connection.deSerialize(con.recieveByteArray());
+			f1 = con.recieveFood();
+			f2 = con.recieveFood();
+			f3 = con.recieveFood();
 			Log.d("Receive", f1.name);
 			Log.d("Receive", f2.name);
 			Log.d("Receive", f3.name);
 		} catch (IOException e) {
 			Log.d("sendSequence ioexception", e.getMessage());
-		} catch (ClassNotFoundException e) {
-			Log.d("sendSequence classnotfound", e.getMessage());
 		}
 		// wait for response with timeout
 		// waitloop
