@@ -16,7 +16,6 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 
-
 /**
  * Activity to send analyzed image data to a server and wait for the results.
  * 
@@ -38,23 +37,21 @@ public class ResultsViewActivity extends Activity {
 			getSequence();
 			sendSequence();
 		} catch (Exception e) {
-			if (e.getMessage() != null)
-				Log.d("getNGM()", e.getMessage());
-			else
-				Log.d("getNGM()", "No message");
+			Log.d("get seq()", e.toString());
 			finish();
 		}
 	}
 
 	/**
-	 * Set ResultsViewActivity.colorSequence to the colorSequence in NutritionAppActivity
+	 * Set ResultsViewActivity.colorSequence to the colorSequence in
+	 * NutritionAppActivity
 	 * 
 	 * @throws Exception
 	 */
 	public void getSequence() throws Exception {
 		colorSequence = NutritionAppActivity.colorSequence;
-		if (colorSequence == null) { 
-			Log.e("getNGM", "Sequence to retrieve is null!");
+		if (colorSequence == null) {
+			Log.e("get Sequence", "Sequence to retrieve is null!");
 			throw new NullPointerException("No Color Sequence available!");
 		}
 	}
@@ -76,7 +73,8 @@ public class ResultsViewActivity extends Activity {
 		Log.d("send Seq", "Progress dialog created");
 
 		Connection con = getConnection();
-		con.sendInt(0); // 0 means this connection is asking for a list of results
+		con.sendInt(0); // 0 means this connection is asking for a list of
+						// results
 		con.sendByteArray(colorSequence);
 
 		Food f1, f2, f3;
@@ -97,29 +95,29 @@ public class ResultsViewActivity extends Activity {
 		// wait for response with timeout
 		// waitloop
 		Log.d("send Seq", "Progress dialog dismissed");
-//		progdog.dismiss();
+		progdog.dismiss();
 
 		// show another dialog on fail
-//		{
-//			AlertDialog.Builder dogbuilder = new AlertDialog.Builder(this);
-//			dogbuilder.setMessage(getString(R.string.no_response_server))
-//					.setPositiveButton(getString(R.string.ok),
-//							new OnClickListener() {
-//
-//								public void onClick(DialogInterface dialog,
-//										int which) {
-//									Log.d("Failed to hear server dialog",
-//											"Server did not return");
-//									finish(); // probably change this to handle
-//												// failed server request
-//												// quit back to
-//												// NutritionAppActivity or try
-//												// again maybe?
-//								}
-//							});
-//			AlertDialog alertdog = dogbuilder.create();
-//			alertdog.show();
-//		}
+		// {
+		// AlertDialog.Builder dogbuilder = new AlertDialog.Builder(this);
+		// dogbuilder.setMessage(getString(R.string.no_response_server))
+		// .setPositiveButton(getString(R.string.ok),
+		// new OnClickListener() {
+		//
+		// public void onClick(DialogInterface dialog,
+		// int which) {
+		// Log.d("Failed to hear server dialog",
+		// "Server did not return");
+		// finish(); // probably change this to handle
+		// // failed server request
+		// // quit back to
+		// // NutritionAppActivity or try
+		// // again maybe?
+		// }
+		// });
+		// AlertDialog alertdog = dogbuilder.create();
+		// alertdog.show();
+		// }
 	}
 
 	private Connection getConnection() {
@@ -134,18 +132,18 @@ public class ResultsViewActivity extends Activity {
 		return new Connection(sock);
 	}
 
-//	/**
-//	 * This method is called after the ResultsViewActivity.ngm is sent to the
-//	 * server and the server returns the results.
-//	 * 
-//	 * @param foods
-//	 *            - list of all the foods in order of most likeliness
-//	 */
-//	public void displayResults(List<Food> foods) { // TODO change to
-//													// ArrayList<Food>
-//		ListPopupWindow foodDisplay = new ListPopupWindow(this);
-//		ListAdapter la = new ArrayAdapter<Food>(this, 0, foods);
-//		foodDisplay.setAdapter(la);
-//		foodDisplay.show();
-//	}
+	// /**
+	// * This method is called after the ResultsViewActivity.ngm is sent to the
+	// * server and the server returns the results.
+	// *
+	// * @param foods
+	// * - list of all the foods in order of most likeliness
+	// */
+	// public void displayResults(List<Food> foods) { // TODO change to
+	// // ArrayList<Food>
+	// ListPopupWindow foodDisplay = new ListPopupWindow(this);
+	// ListAdapter la = new ArrayAdapter<Food>(this, 0, foods);
+	// foodDisplay.setAdapter(la);
+	// foodDisplay.show();
+	// }
 }
