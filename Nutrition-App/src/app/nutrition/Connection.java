@@ -20,6 +20,7 @@ public class Connection {
 	public static int port = 12345;
 	private DataInputStream in;
 	private DataOutputStream out;
+	private Socket sock;
 
 	/**
 	 * Create a new Connection with the given Socket
@@ -27,6 +28,7 @@ public class Connection {
 	 * @param sock
 	 */
 	public Connection(Socket sock) {
+		this.sock = sock;
 		try {
 			this.in = new DataInputStream(sock.getInputStream());
 			this.out = new DataOutputStream(sock.getOutputStream());
@@ -35,6 +37,28 @@ public class Connection {
 		}
 	}
 
+	/**
+	 * closes the streams and socket associated with this connection, should be
+	 * called when we are done with this connection, and no more calls to
+	 * methods in this instance of connection should be made after calling close
+	 */
+	public void close() {
+		try {
+			in.close();
+			out.close();
+			sock.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Receives a food object from the server
+	 * 
+	 * @return the Food object received
+	 * @throws IOException
+	 */
 	public Food recieveFood() throws IOException {
 		String name = recieveString();
 		float calories = in.readFloat();

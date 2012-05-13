@@ -18,9 +18,13 @@ import Database.Food;
  */
 public class Connection {
 
+	/**
+	 * the port on which the server runs.
+	 */
 	public static int port = 12345;
 	private DataInputStream in;
 	private DataOutputStream out;
+	private Socket sock;
 
 	/**
 	 * Create a new Connection with the given Socket
@@ -28,11 +32,28 @@ public class Connection {
 	 * @param sock
 	 */
 	public Connection(Socket sock) {
+		this.sock = sock;
 		try {
 			this.in = new DataInputStream(sock.getInputStream());
 			this.out = new DataOutputStream(sock.getOutputStream());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+		}
+	}
+
+	/**
+	 * closes the streams and socket associated with this connection, should be
+	 * called when we are done with this connection, and no more calls to
+	 * methods in this instance of connection should be made after calling close
+	 */
+	public void close() {
+		try {
+			in.close();
+			out.close();
+			sock.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -47,6 +68,13 @@ public class Connection {
 		return sendByteArray(new byte[] { b });
 	}
 
+	/**
+	 * sends a food object over the network (not including it's NGramModel
+	 * 
+	 * @param f
+	 *            the food to be sent over the network
+	 * @return true on success, false on failure
+	 */
 	public boolean sendFood(Food f) {
 		sendString(f.name);
 		try {

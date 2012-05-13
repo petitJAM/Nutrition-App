@@ -101,6 +101,8 @@ public class ResultsViewActivity extends Activity {
 		} catch (IOException e) {
 			Log.d("sendSequence ioexception", e.getMessage());
 		}
+		con.sendInt(1); // 1 means we are closing the socket and the server
+						// should do the same
 	}
 
 	/**
@@ -118,7 +120,8 @@ public class ResultsViewActivity extends Activity {
 		} catch (IOException e) {
 			Log.d("getConnection", e.getMessage());
 		}
-		if (sock == null) throw new NoRouteToHostException();
+		if (sock == null)
+			throw new NoRouteToHostException();
 		return new Connection(sock);
 	}
 
@@ -129,14 +132,17 @@ public class ResultsViewActivity extends Activity {
 		case DIALOG_SERVER_CONNECTION_FAILED:
 			AlertDialog.Builder dogbuilder = new AlertDialog.Builder(this);
 			dogbuilder.setMessage(getString(R.string.no_response_server))
-					.setPositiveButton(getString(R.string.ok), new OnClickListener() {
+					.setPositiveButton(getString(R.string.ok),
+							new OnClickListener() {
 
-						public void onClick(DialogInterface dialog, int which) {
-							Log.d("Failed to hear server dialog", "Server did not return");
-							dismissDialog(DIALOG_SERVER_CONNECTION_FAILED);
-							finish();
-						}
-					});
+								public void onClick(DialogInterface dialog,
+										int which) {
+									Log.d("Failed to hear server dialog",
+											"Server did not return");
+									dismissDialog(DIALOG_SERVER_CONNECTION_FAILED);
+									finish();
+								}
+							});
 
 			dog = dogbuilder.create();
 			break;

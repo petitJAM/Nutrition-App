@@ -141,16 +141,16 @@ public class Server {
 						try {
 							possiblitites = getTop3(Serv.qc.getFood(), seq);
 							con.sendInt(3);
-							con.sendByteArray(Connection
-									.serialize(possiblitites.get(0)));
-							con.sendByteArray(Connection
-									.serialize(possiblitites.get(1)));
-							con.sendByteArray(Connection
-									.serialize(possiblitites.get(2)));
+							con.sendFood(possiblitites.get(0));
+							con.sendFood(possiblitites.get(1));
+							con.sendFood(possiblitites.get(2));
 						} catch (IOException exception) {
 							exception.printStackTrace();
 						}
-
+					} else if(type == 1){ // close the socket and end this thread
+						con.close();
+						stopping = true;
+						break;
 					}
 				}
 			}
