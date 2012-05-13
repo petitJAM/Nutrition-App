@@ -24,6 +24,7 @@ public class Server {
 	private ServerSocket sSock;
 	/** List of Connections */
 	ArrayList<Connection> clientConnections;
+	private int port;
 
 	/**
 	 * creates a serversocket and listens for connections from clients
@@ -32,9 +33,19 @@ public class Server {
 	 *            the port to listen on
 	 */
 	public Server(int port) {
+		this.port = port;
+		running = false;
+		stop = true;
+		clientConnections = new ArrayList<Connection>();
+	}
+
+	/**
+	 * starts a server listening on the port this server was created on
+	 * subsequent calls to start should not be made, unless stop is called
+	 */
+	public void start() {
 		running = true;
 		stop = false;
-		clientConnections = new ArrayList<Connection>();
 		try {
 			sSock = new ServerSocket(port);
 		} catch (IOException e) {
@@ -147,7 +158,8 @@ public class Server {
 						} catch (IOException exception) {
 							exception.printStackTrace();
 						}
-					} else if(type == 1){ // close the socket and end this thread
+					} else if (type == 1) { // close the socket and end this
+											// thread
 						con.close();
 						stopping = true;
 						break;
@@ -158,7 +170,7 @@ public class Server {
 			private ArrayList<Food> getTop3(ArrayList<Food> array, byte[] seq) {
 				System.out.println("Get Top 3");
 				Double a[] = { 0.0, 0.0, 0.0 };
-				Food top3[] = {null,null,null};
+				Food top3[] = { null, null, null };
 				for (Food f : array) {
 					Food tempF = f;
 					Food tempF2 = f;
@@ -168,24 +180,24 @@ public class Server {
 						tempD2 = a[0];
 						a[0] = tempD;
 						tempF = top3[0];
-						top3[0]= f;
+						top3[0] = f;
 					}
 					if (top3[1] == null || tempD2 > a[1]) {
 						tempD = a[1];
 						a[1] = tempD2;
 						tempF2 = top3[0];
-						top3[1]= tempF;
+						top3[1] = tempF;
 					} else {
 						tempD = tempD2;
 						tempF2 = tempF;
 					}
 					if (top3[2] == null || tempD > a[2]) {
 						a[2] = tempD;
-						top3[2]= tempF2;
+						top3[2] = tempF2;
 					}
 				}
 				ArrayList<Food> top3ArrayList = new ArrayList<Food>();
-				for(Food f : top3){
+				for (Food f : top3) {
 					top3ArrayList.add(f);
 				}
 				return top3ArrayList;
