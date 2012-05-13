@@ -13,6 +13,10 @@ import java.io.Serializable;
 public class Food implements Serializable {
 
 	/**
+	 * necessary for implementing Serializable
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * the name of this food item
 	 */
 	public String name;
@@ -100,8 +104,7 @@ public class Food implements Serializable {
 	 * @return true if they are the same, false otherwise
 	 */
 	public boolean equals(Food f) {
-		return f.name.equals(this.name)
-				&& f.calories == this.calories
+		return f.name.equals(this.name) && f.calories == this.calories
 				&& f.calFromFat == this.calFromFat
 				&& this.totalFat == f.totalFat && f.sodium == this.sodium
 				&& f.carbs == this.carbs && f.fiber == this.fiber
