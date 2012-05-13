@@ -64,7 +64,7 @@ public class L10NTest extends ActivityInstrumentationTestCase2<NutritionAppActiv
 		assertEquals("Settings", settings_button_text);
 		assertEquals("About Us", info_button_text);
 		assertEquals("Exit", exit_button_text);
-		assertEquals("Waiting for server …", wait_dialog);
+		assertEquals("Waiting for server…", wait_dialog);
 		assertEquals("Failed to receive information from server!", no_response_server);
 		assertEquals("OK", OK);
 //		assertEquals("Welcome to Nutrition App!\nThis application is your very smart, very adorable companion.\nIf you\'re ever curious about what is hiding in your food, just take a quick snapshot using the camera button, and watch as computer magic sends its nutrition info to your phone!\nThis application was designed by three poor, starving college students, so give us money!    ", about_us);

@@ -8,8 +8,8 @@
     <string name="settings_button_text">Settings</string>
     <string name="info_button_text">About Us</string>
     <string name="exit_button_text">Exit</string>
-    <!-- &#8230 is Unicode for the ellipsis character '...' -->
-    <string name="wait_dialog">Waiting for server …</string>
+    <string name="processing_image_dialog_text">Processing Image…</string>
+    <string name="wait_dialog">Waiting for server…</string>
     <string name="no_response_server">Failed to receive information from server!</string>
     <string name="ok">OK</string>
     <string name="about_us">

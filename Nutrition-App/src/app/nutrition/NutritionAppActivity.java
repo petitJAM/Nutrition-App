@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,6 +31,8 @@ public class NutritionAppActivity extends Activity {
 	public final static int TAKE_PICTURE = 0;
 	/** Code for opening ResultsViewActivity */
 	public final static int RESULTS = 1;
+
+	private static final int ANALYZE_IMAGE_PROGRESS_DIALOG = 0;
 	private static Uri imageUri;
 	private static int SCALED_HEIGHT = 368;
 	private static int SCALED_WIDTH = 640;
@@ -60,6 +64,7 @@ public class NutritionAppActivity extends Activity {
 		case TAKE_PICTURE:
 			if (resultCode == RESULT_OK) {
 				Log.i("Picture taken", imageUri.toString());
+				// make progress dialog
 				analyzeImage();
 			}
 			else if (resultCode == RESULT_CANCELED) {
@@ -79,13 +84,31 @@ public class NutritionAppActivity extends Activity {
 		Bitmap img = null;
 		try {
 			Log.d("Analyze", imageUri.getPath());
+			onCreateDialog(ANALYZE_IMAGE_PROGRESS_DIALOG);
+			showDialog(ANALYZE_IMAGE_PROGRESS_DIALOG);
 			img = BitmapFactory.decodeFile(imageUri.getPath());
 			img = scaleImage(img);
 			colorSequence = ProcessImage.generateSequence(img);
-			sendNGramModel();
+			dismissDialog(ANALYZE_IMAGE_PROGRESS_DIALOG);
+			
+			Log.d("send color sequence", "");
+			Intent resultsIntent = new Intent(this, ResultsViewActivity.class);
+			startActivityForResult(resultsIntent, RESULTS);
 		} catch (Exception e) {
 			Log.e("Analyze", e.toString());
 		}
+	}
+	
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		Dialog dog = null;
+		switch(id) {
+		case ANALYZE_IMAGE_PROGRESS_DIALOG:
+			dog = new ProgressDialog(this);
+			dog.setTitle(getString(R.string.processing_image_dialog_text));
+			break;
+		}
+		return dog;
 	}
 
 	private Bitmap scaleImage(Bitmap b) {
@@ -97,13 +120,6 @@ public class NutritionAppActivity extends Activity {
 			newb = b;
 		}
 		return newb;
-	}
-
-	private void sendNGramModel() {
-		Log.d("send color sequence", "");
-
-		Intent resultsIntent = new Intent(this, ResultsViewActivity.class);
-		startActivityForResult(resultsIntent, RESULTS);
 	}
 
 	private class CameraOnClickListener implements View.OnClickListener {
