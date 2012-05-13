@@ -1,21 +1,18 @@
 package app.nutrition;
 
 import java.io.IOException;
+import java.net.NoRouteToHostException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-
 
 /**
  * Activity to send analyzed image data to a server and wait for the results.
@@ -26,8 +23,13 @@ public class ResultsViewActivity extends Activity {
 
 	private static final int PORT = 12345;
 	private static final String IP_ADDRESS = "137.112.115.102";
+	private static final int DIALOG_SERVER_CONNECTION_FAILED = 0;
+	private static final int DIALOG_RESULTS_VIEW = 1;
+	private static final int NUMBER_SERVER_CONNECTION_ATTEMPTS = 2;
+	private static final int DIALOG_CONTACTING_SERVER = 3;
 	/** Color Sequence to work with */
 	public byte[] colorSequence = null;
+	private Connection con = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -38,30 +40,25 @@ public class ResultsViewActivity extends Activity {
 			getSequence();
 			sendSequence();
 		} catch (Exception e) {
-			if (e.getMessage() != null)
-				Log.d("getNGM()", e.getMessage());
-			else
-				Log.d("getNGM()", "No message");
-			finish();
+			Log.d("get seq()", e.toString());
+			// finish();
 		}
 	}
 
 	/**
-	 * Set ResultsViewActivity.colorSequence to the colorSequence in NutritionAppActivity
+	 * Set ResultsViewActivity.colorSequence to the colorSequence in
+	 * NutritionAppActivity
 	 * 
 	 * @throws Exception
 	 */
 	public void getSequence() throws Exception {
 		colorSequence = NutritionAppActivity.colorSequence;
-		if (colorSequence == null) { 
-			Log.e("getNGM", "Sequence to retrieve is null!");
+		if (colorSequence == null) {
+			Log.e("get Sequence", "Sequence to retrieve is null!");
 			throw new NullPointerException("No Color Sequence available!");
 		}
 	}
 
-	// you don't really want to run the code in the state it's in
-	// it needs some work with connecting
-	// and i honestly have no idea why all the dialogs are named with '*dog'
 	/**
 	 * This method sends ResultsViewActivity.ngm to the server and waits for
 	 * results.
@@ -69,62 +66,50 @@ public class ResultsViewActivity extends Activity {
 	 */
 	public void sendSequence() {
 		Log.d("send Seq", "Sending NGM");
-		// convert the ngm to a transmitable format
-		// send to server
-		ProgressDialog progdog = ProgressDialog.show(this, "",
-			getString(R.string.wait_dialog), true);
-		Log.d("send Seq", "Progress dialog created");
 
-		Connection con = getConnection();
-		con.sendInt(0); // 0 means this connection is asking for a list of results
+		onCreateDialog(DIALOG_CONTACTING_SERVER);
+		showDialog(DIALOG_CONTACTING_SERVER);
+
+		Thread connectionThread = new Thread(new ServerConnectThread());
+		connectionThread.start();
+		try {
+			connectionThread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		dismissDialog(DIALOG_CONTACTING_SERVER);
+		if (con == null) {
+			onCreateDialog(DIALOG_SERVER_CONNECTION_FAILED);
+			showDialog(DIALOG_SERVER_CONNECTION_FAILED);
+		}
+
+		con.sendInt(0); // 0 means this connection is asking for a list of
+						// results
 		con.sendByteArray(colorSequence);
 
 		Food f1, f2, f3;
-		// get the returned list of foods and somehow store so display results
-		// knows about them (or pass them along, i guess)
-		// call display results
 		try {
-			con.recieveInt(); // should be 3 indicating the 3 results
-			f1 = (Food) Connection.deSerialize(con.recieveByteArray());
-			f2 = (Food) Connection.deSerialize(con.recieveByteArray());
-			f3 = (Food) Connection.deSerialize(con.recieveByteArray());
-			Log.d("Receive", f1.name);
-			Log.d("Receive", f2.name);
-			Log.d("Receive", f3.name);
+			if (con.recieveInt() == 3) { // should be 3 indicating the 3 results
+				f1 = con.recieveFood();
+				f2 = con.recieveFood();
+				f3 = con.recieveFood();
+				Log.d("Receive", f1.name);
+				Log.d("Receive", f2.name);
+				Log.d("Receive", f3.name);
+			}
 		} catch (IOException e) {
 			Log.d("sendSequence ioexception", e.getMessage());
-		} catch (ClassNotFoundException e) {
-			Log.d("sendSequence classnotfound", e.getMessage());
 		}
-		// wait for response with timeout
-		// waitloop
-		Log.d("send Seq", "Progress dialog dismissed");
-//		progdog.dismiss();
-
-		// show another dialog on fail
-//		{
-//			AlertDialog.Builder dogbuilder = new AlertDialog.Builder(this);
-//			dogbuilder.setMessage(getString(R.string.no_response_server))
-//					.setPositiveButton(getString(R.string.ok),
-//							new OnClickListener() {
-//
-//								public void onClick(DialogInterface dialog,
-//										int which) {
-//									Log.d("Failed to hear server dialog",
-//											"Server did not return");
-//									finish(); // probably change this to handle
-//												// failed server request
-//												// quit back to
-//												// NutritionAppActivity or try
-//												// again maybe?
-//								}
-//							});
-//			AlertDialog alertdog = dogbuilder.create();
-//			alertdog.show();
-//		}
 	}
 
-	private Connection getConnection() {
+	/**
+	 * Get a connection to the server.
+	 * 
+	 * @return connection to the server
+	 * @throws NoRouteToHostException
+	 */
+	public Connection getConnection() throws NoRouteToHostException {
 		Socket sock = null;
 		try {
 			sock = new Socket(IP_ADDRESS, PORT);
@@ -133,21 +118,55 @@ public class ResultsViewActivity extends Activity {
 		} catch (IOException e) {
 			Log.d("getConnection", e.getMessage());
 		}
+		if (sock == null) throw new NoRouteToHostException();
 		return new Connection(sock);
 	}
 
-//	/**
-//	 * This method is called after the ResultsViewActivity.ngm is sent to the
-//	 * server and the server returns the results.
-//	 * 
-//	 * @param foods
-//	 *            - list of all the foods in order of most likeliness
-//	 */
-//	public void displayResults(List<Food> foods) { // TODO change to
-//													// ArrayList<Food>
-//		ListPopupWindow foodDisplay = new ListPopupWindow(this);
-//		ListAdapter la = new ArrayAdapter<Food>(this, 0, foods);
-//		foodDisplay.setAdapter(la);
-//		foodDisplay.show();
-//	}
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		Dialog dog = null;
+		switch (id) {
+		case DIALOG_SERVER_CONNECTION_FAILED:
+			AlertDialog.Builder dogbuilder = new AlertDialog.Builder(this);
+			dogbuilder.setMessage(getString(R.string.no_response_server))
+					.setPositiveButton(getString(R.string.ok), new OnClickListener() {
+
+						public void onClick(DialogInterface dialog, int which) {
+							Log.d("Failed to hear server dialog", "Server did not return");
+							dismissDialog(DIALOG_SERVER_CONNECTION_FAILED);
+							finish();
+						}
+					});
+
+			dog = dogbuilder.create();
+			break;
+		case DIALOG_CONTACTING_SERVER:
+			dog = new ProgressDialog(this);
+			dog.setTitle(getString(R.string.wait_dialog));
+			break;
+		case DIALOG_RESULTS_VIEW:
+			// create it again
+			break;
+		default:
+			dog = null;
+		}
+		return dog;
+	}
+
+	private class ServerConnectThread implements Runnable {
+
+		public void run() {
+			int count = 0;
+			while (con == null && count < NUMBER_SERVER_CONNECTION_ATTEMPTS) {
+				Log.d("trying connection...", (count + 1) + "");
+				try {
+					con = getConnection();
+				} catch (NoRouteToHostException e) {
+					Log.d("NoRouteToHost", "No connection made");
+				}
+				count++;
+			}
+		}
+
+	}
 }

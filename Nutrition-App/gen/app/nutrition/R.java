@@ -26,7 +26,6 @@ public final class R {
         public static final int exit_button=0x7f050006;
         public static final int info_button=0x7f050005;
         public static final int logo_view=0x7f050001;
-        public static final int results_list=0x7f050007;
         public static final int search_button=0x7f050003;
         public static final int settings_button=0x7f050004;
         public static final int textView1=0x7f050000;
@@ -37,21 +36,21 @@ public final class R {
         public static final int results=0x7f030002;
     }
     public static final class string {
-        public static final int about_us=0x7f04000a;
+        public static final int about_us=0x7f04000b;
         public static final int app_name=0x7f040000;
         public static final int camera_button_text=0x7f040002;
         public static final int exit_button_text=0x7f040006;
         public static final int info_button_text=0x7f040005;
         public static final int logo_content_description=0x7f040001;
-        public static final int no_response_server=0x7f040008;
-        public static final int ok=0x7f040009;
+        public static final int no_response_server=0x7f040009;
+        public static final int ok=0x7f04000a;
+        public static final int processing_image_dialog_text=0x7f040007;
         public static final int search_button_text=0x7f040003;
         public static final int settings_button_text=0x7f040004;
         /**  &#8230 is Unicode for the ellipsis character '...' 
  &#8230 is Unicode for the ellipsis character '...' 
  &#8230 is Unicode for the ellipsis character '...' 
- &#8230 is Unicode for the ellipsis character '...' 
          */
-        public static final int wait_dialog=0x7f040007;
+        public static final int wait_dialog=0x7f040008;
     }
 }
