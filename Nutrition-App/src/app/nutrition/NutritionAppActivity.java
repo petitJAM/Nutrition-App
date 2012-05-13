@@ -161,6 +161,7 @@ public class NutritionAppActivity extends Activity {
 	
 	private class InfoOnClickListener implements View.OnClickListener {
 		public void onClick(View v) {
+			// TODO make this better!
 			setContentView(R.layout.info);
 		}
 	}

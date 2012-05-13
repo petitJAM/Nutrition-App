@@ -35,6 +35,12 @@ public class Connection {
 		}
 	}
 
+	/**
+	 * Receive a food
+	 *
+	 * @return food received
+	 * @throws IOException
+	 */
 	public Food recieveFood() throws IOException {
 		String name = recieveString();
 		float calories = in.readFloat();

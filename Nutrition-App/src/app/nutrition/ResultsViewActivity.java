@@ -62,7 +62,6 @@ public class ResultsViewActivity extends Activity {
 	/**
 	 * This method sends ResultsViewActivity.ngm to the server and waits for
 	 * results.
-	 * 
 	 */
 	public void sendSequence() {
 		Log.d("send Seq", "Sending NGM");
@@ -73,33 +72,39 @@ public class ResultsViewActivity extends Activity {
 		Thread connectionThread = new Thread(new ServerConnectThread());
 		connectionThread.start();
 		try {
+			wait(1);
 			connectionThread.join();
+			dismissDialog(DIALOG_CONTACTING_SERVER);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		Log.d("After join", "");
 		dismissDialog(DIALOG_CONTACTING_SERVER);
+		
 		if (con == null) {
 			onCreateDialog(DIALOG_SERVER_CONNECTION_FAILED);
 			showDialog(DIALOG_SERVER_CONNECTION_FAILED);
 		}
+		else {
 
-		con.sendInt(0); // 0 means this connection is asking for a list of
-						// results
-		con.sendByteArray(colorSequence);
+			con.sendInt(0); // 0 means this connection is asking for a list of
+							// results
+			con.sendByteArray(colorSequence);
 
-		Food f1, f2, f3;
-		try {
-			if (con.recieveInt() == 3) { // should be 3 indicating the 3 results
-				f1 = con.recieveFood();
-				f2 = con.recieveFood();
-				f3 = con.recieveFood();
-				Log.d("Receive", f1.name);
-				Log.d("Receive", f2.name);
-				Log.d("Receive", f3.name);
+			Food f1, f2, f3;
+			try {
+				if (con.recieveInt() == 3) { // should be 3 indicating the 3
+												// results
+					f1 = con.recieveFood();
+					f2 = con.recieveFood();
+					f3 = con.recieveFood();
+					Log.d("Receive", f1.name);
+					Log.d("Receive", f2.name);
+					Log.d("Receive", f3.name);
+				}
+			} catch (IOException e) {
+				Log.d("sendSequence ioexception", e.getMessage());
 			}
-		} catch (IOException e) {
-			Log.d("sendSequence ioexception", e.getMessage());
 		}
 	}
 
@@ -132,12 +137,10 @@ public class ResultsViewActivity extends Activity {
 					.setPositiveButton(getString(R.string.ok), new OnClickListener() {
 
 						public void onClick(DialogInterface dialog, int which) {
-							Log.d("Failed to hear server dialog", "Server did not return");
 							dismissDialog(DIALOG_SERVER_CONNECTION_FAILED);
 							finish();
 						}
 					});
-
 			dog = dogbuilder.create();
 			break;
 		case DIALOG_CONTACTING_SERVER:
@@ -154,19 +157,15 @@ public class ResultsViewActivity extends Activity {
 	}
 
 	private class ServerConnectThread implements Runnable {
-
 		public void run() {
 			int count = 0;
 			while (con == null && count < NUMBER_SERVER_CONNECTION_ATTEMPTS) {
 				Log.d("trying connection...", (count + 1) + "");
 				try {
 					con = getConnection();
-				} catch (NoRouteToHostException e) {
-					Log.d("NoRouteToHost", "No connection made");
-				}
+				} catch (NoRouteToHostException e) {}
 				count++;
 			}
 		}
-
 	}
 }
