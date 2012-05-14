@@ -14,7 +14,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +32,6 @@ import android.widget.ListAdapter;
 public class ResultsViewActivity extends Activity {
 
 	private static final int PORT = 12345;
-	private static final String IP_ADDRESS = "137.112.136.208";
 
 	private static final int NUMBER_SERVER_CONNECTION_ATTEMPTS = 2;
 
@@ -51,11 +53,17 @@ public class ResultsViewActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.results);
+		
+//		PreferenceManager.setDefaultValues(this, )
+//		SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+//		Editor e = prefs.edit();
+//		e.putString("IP_ADDRESS", "137.112.136.208");
+//		e.commit();
 		try {
 			getSequence();
 			sendSequence();
-		} catch (Exception e) {
-			Log.d("get seq()", e.toString());
+		} catch (Exception ex) {
+			Log.d("get seq()", ex.toString());
 			// finish();
 		}
 	}
@@ -141,8 +149,11 @@ public class ResultsViewActivity extends Activity {
 	 */
 	public Connection getConnection() throws NoRouteToHostException {
 		Socket sock = null;
+		// The default value is whatever the IP was at the time of this change.
+		// Not necessarily an appropriate value. (Though it probably doesn't matter)
+		String ip = getPreferences(MODE_PRIVATE).getString("IP_ADDRESS", "137.112.136.208");
 		try {
-			sock = new Socket(IP_ADDRESS, PORT);
+			sock = new Socket(ip, PORT);
 		} catch (UnknownHostException e) {
 			Log.d("getConnection", e.getMessage());
 		} catch (IOException e) {
