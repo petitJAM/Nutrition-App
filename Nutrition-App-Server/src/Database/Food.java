@@ -28,6 +28,18 @@ public class Food implements Serializable {
 	 */
 	public String name;
 	/**
+	 * the name of this food item in Spanish
+	 */
+	public String nameSpanish;
+	/**
+	 * the name of this food item in French
+	 */
+	public String nameFrench;
+	/**
+	 * the name of this food item in German
+	 */
+	public String nameGerman;
+	/**
 	 * the total number of calories contained in one serving of this food item
 	 */
 	public float calories;
@@ -69,8 +81,14 @@ public class Food implements Serializable {
 	 * 
 	 * @param bs
 	 *            NGramModel for this food object
-	 * @param string
+	 * @param name
 	 *            the name of this food object
+	 * @param nameSpanish
+	 *            the name of this food object in Spanish
+	 * @param nameFrench
+	 *            the name of this food object in French
+	 * @param nameGerman
+	 *            the name of this food object in German
 	 * @param calories
 	 *            the number of calories in one serving of this food
 	 * @param calFromFat
@@ -90,7 +108,8 @@ public class Food implements Serializable {
 	 *            the amount of protein in one serving of this food
 	 * @throws IOException
 	 */
-	public Food(byte[] bs, String string, float calories, float calFromFat,
+	public Food(byte[] bs, String name, String nameSpanish, String nameFrench,
+			String nameGerman, float calories, float calFromFat,
 			float totalFat, float sodium, float carbs, float fiber,
 			float sugar, float protein) {
 		try {
@@ -98,7 +117,10 @@ public class Food implements Serializable {
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
-		this.name = string;
+		this.name = name;
+		this.nameSpanish = nameSpanish;
+		this.nameFrench = nameFrench;
+		this.nameGerman = nameGerman;
 		this.calories = calories;
 		this.calFromFat = calFromFat;
 		this.totalFat = totalFat;

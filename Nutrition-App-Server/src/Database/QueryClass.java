@@ -38,94 +38,11 @@ public class QueryClass {
 	}
 
 	/**
-	 * gets the device with the specified id from the database
-	 * 
-	 * @param i
-	 *            the id of the Device to retrieve from the Database
-	 * @return object describing the Device gotten from the database, null if
-	 *         there was an error
-	 */
-	public Device getDevice(int i) {
-		Device result = null;
-		try {
-			Connection conn = null;
-			conn = getConnection(URL);
-
-			CallableStatement proc;
-			proc = conn.prepareCall("{ call getDevice(?) }");
-			proc.setInt(1, i);
-			proc.execute();
-
-			ResultSet rs = null;
-			// rows were returned
-			rs = proc.getResultSet();
-			if (rs != null && rs.next()) {
-				int ID = rs.getInt(1);
-				int times_used = rs.getInt(2);
-				int times_correct = rs.getInt(3);
-				result = new Device(ID, times_used, times_correct);
-			}
-
-			proc.close();
-			proc = null;
-			conn.close();
-			conn = null;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return result;
-	}
-
-	/**
-	 * updates a Device in the database and returns it
-	 * 
-	 * @param i
-	 *            the id of the device to update
-	 * @param j
-	 *            the number of times this device has used our service
-	 * @param k
-	 *            the number of times we correctly identified a food for this
-	 *            device
-	 * @return a new Device object representing the modified device we created,
-	 *         null if error
-	 */
-	public Device updateDevice(int i, int j, int k) {
-		if (j < 0 || k < 0 || k > j) {
-			return null;
-		}
-		try {
-			Connection conn = null;
-			conn = getConnection(URL);
-
-			CallableStatement proc;
-			proc = conn.prepareCall("{ call updateDevice(?,?,?) }");
-			proc.setInt(1, i);
-			proc.setInt(2, j);
-			proc.setInt(3, k);
-			int affected = proc.executeUpdate();
-			if (affected <= 0) {
-				return null;
-			}
-
-			proc.close();
-			proc = null;
-			conn.close();
-			conn = null;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-		return new Device(i, j, k);
-	}
-
-	/**
 	 * s a new food item to the database
 	 * 
 	 * @param f
 	 *            the food to add to the database
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public void addFoodItem(Food f) throws IOException {
 		try {
@@ -134,17 +51,20 @@ public class QueryClass {
 
 			CallableStatement proc;
 			proc = conn
-					.prepareCall("{ call addFoodItem(?,?,?,?,?,?,?,?,?,?) }");
+					.prepareCall("{ call addFoodItem(?,?,?,?,?,?,?,?,?,?,?,?,?) }");
 			proc.setBytes(1, f.ngm.getByteArray());
 			proc.setString(2, f.name);
-			proc.setFloat(3, f.calories);
-			proc.setFloat(4, f.calFromFat);
-			proc.setFloat(5, f.totalFat);
-			proc.setFloat(6, f.sodium);
-			proc.setFloat(7, f.carbs);
-			proc.setFloat(8, f.fiber);
-			proc.setFloat(9, f.sugar);
-			proc.setFloat(10, f.protein);
+			proc.setString(3, f.nameSpanish);
+			proc.setString(4, f.nameFrench);
+			proc.setString(5, f.nameGerman);
+			proc.setFloat(6, f.calories);
+			proc.setFloat(7, f.calFromFat);
+			proc.setFloat(8, f.totalFat);
+			proc.setFloat(9, f.sodium);
+			proc.setFloat(10, f.carbs);
+			proc.setFloat(11, f.fiber);
+			proc.setFloat(12, f.sugar);
+			proc.setFloat(13, f.protein);
 			proc.execute();
 
 			proc.close();
@@ -184,7 +104,7 @@ public class QueryClass {
 	 * gets all of the Food objects in the database
 	 * 
 	 * @return an ArrayList<Food> of all the foods in the database
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public ArrayList<Food> getFood() throws IOException {
 		ArrayList<Food> food = new ArrayList<Food>();
@@ -202,9 +122,10 @@ public class QueryClass {
 			if (rs != null) {
 				while (rs.next()) {
 					food.add(new Food(rs.getBytes(1), rs.getString(2), rs
-							.getFloat(3), rs.getFloat(4), rs.getFloat(5), rs
+							.getString(3), rs.getString(4), rs.getString(5), rs
 							.getFloat(6), rs.getFloat(7), rs.getFloat(8), rs
-							.getFloat(9), rs.getFloat(10)));
+							.getFloat(9), rs.getFloat(10), rs.getFloat(11), rs
+							.getFloat(12), rs.getFloat(13)));
 				}
 			}
 
@@ -221,7 +142,7 @@ public class QueryClass {
 
 	/**
 	 * gets a Food object in the database.
-	 *
+	 * 
 	 * @param name
 	 * @return Food from the database
 	 * @throws IOException
@@ -244,9 +165,10 @@ public class QueryClass {
 			if (rs != null) {
 				while (rs.next()) {
 					food = new Food(rs.getBytes(1), rs.getString(2),
-							rs.getFloat(3), rs.getFloat(4), rs.getFloat(5),
+							rs.getString(3), rs.getString(4), rs.getString(5),
 							rs.getFloat(6), rs.getFloat(7), rs.getFloat(8),
-							rs.getFloat(9), rs.getFloat(10));
+							rs.getFloat(9), rs.getFloat(10), rs.getFloat(11),
+							rs.getFloat(12), rs.getFloat(13));
 				}
 			}
 			proc.close();
@@ -257,41 +179,6 @@ public class QueryClass {
 			e.printStackTrace();
 		}
 		return food;
-	}
-
-	/**
-	 * creates a new device in the database, and returns the new id for it
-	 * 
-	 * @return the unique identifier for this device
-	 */
-	public Device newDevice() {
-		Device result = null;
-		try {
-			Connection conn = null;
-			conn = getConnection(URL);
-
-			CallableStatement proc;
-			proc = conn.prepareCall("{ call addDevice() }");
-			proc.execute();
-
-			ResultSet rs = null;
-
-			rs = proc.getResultSet();
-
-			if (rs != null && rs.next()) {
-				int ID = rs.getInt(1);
-				result = new Device(ID, 0, 0);
-			}
-
-			proc.close();
-			proc = null;
-			conn.close();
-			conn = null;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return result;
 	}
 
 	private boolean registerSQLServerDriver() throws SQLException {

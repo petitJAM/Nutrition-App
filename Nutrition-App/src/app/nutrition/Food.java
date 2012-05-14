@@ -21,6 +21,18 @@ public class Food implements Serializable {
 	 */
 	public String name;
 	/**
+	 * the name of this food item in Spanish
+	 */
+	public String nameSpanish;
+	/**
+	 * the name of this food item in French
+	 */
+	public String nameFrench;
+	/**
+	 * the name of this food item in German
+	 */
+	public String nameGerman;
+	/**
 	 * the total number of calories contained in one serving of this food item
 	 */
 	public float calories;

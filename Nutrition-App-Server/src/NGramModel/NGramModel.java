@@ -6,23 +6,34 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.List;
 
-
 /**
  * Contains a matrix of color transitions and a name to identify it.
  * 
- * @author Alex Petitjean, Rob Wagner
- *         Created Apr 13, 2012.
- *         Last Updated Apr 26, 2012
+ * @author Alex Petitjean, Rob Wagner Created Apr 13, 2012. Last Updated Apr 26,
+ *         2012
  */
 
 @SuppressWarnings("serial")
 public class NGramModel implements Serializable {
-	
+
 	/**
 	 * Name of this NGramModel
 	 */
 	public String name;
-	
+	/**
+	 * Name of this NGramModel in Spanish
+	 */
+	public String nameSpanish;
+
+	/**
+	 * Name of this NGramModel in French
+	 */
+	public String nameFrench;
+
+	/**
+	 * Name of this NGramModel in German
+	 */
+	public String nameGerman;
 	/**
 	 * TransitionMatrix this NGramModel encases
 	 */
@@ -31,28 +42,40 @@ public class NGramModel implements Serializable {
 	/**
 	 * Create a model with the given name and TransitionMatrix
 	 * 
-	 * @param name - name of this NGramModel
-	 * @param t - TransitionMatrix associated with this NGramModel
+	 * @param name
+	 *            name of this NGramModel
+	 * @param nameSpanish
+	 *            name of this NGramModel in Spanish
+	 * @param nameFrench
+	 *            name of this NGramModel in French
+	 * @param nameGerman
+	 *            name of this NGramModel in German
+	 * @param t
+	 *            TransitionMatrix associated with this NGramModel
 	 */
-	public NGramModel(String name, TransitionMatrix t) {
+	public NGramModel(String name, String nameSpanish, String nameFrench,
+			String nameGerman, TransitionMatrix t) {
 		this.name = name;
+		this.nameSpanish = nameSpanish;
+		this.nameFrench = nameFrench;
+		this.nameGerman = nameGerman;
 		tmat = t;
 	}
-
 
 	/**
 	 * Returns the log likelihood of the given sequence matching this model
 	 * 
-	 * @param seq - color transition sequence
+	 * @param seq
+	 *            - color transition sequence
 	 * @return loglikelihood of the sequence matching this NGramModel
 	 */
 	public double logLikelihood(byte[] seq) {
 		double ll = 0.0;
 		for (int i = 1; i < seq.length; i++) {
-			int x = seq[i-1];
+			int x = seq[i - 1];
 			int y = seq[i];
 			if (tmat.mat[x][y] != 0)
-				ll += Math.log10(tmat.mat[seq[i-1]][seq[i]]);
+				ll += Math.log10(tmat.mat[seq[i - 1]][seq[i]]);
 		}
 		return ll;
 	}
@@ -61,8 +84,10 @@ public class NGramModel implements Serializable {
 	 * Trains a NGramModel based on the sequence. Counts the transitions between
 	 * colors in the sequence.
 	 * 
-	 * @param seq - color transition sequence
-	 * @param name - name of the model
+	 * @param seq
+	 *            - color transition sequence
+	 * @param name
+	 *            - name of the model
 	 */
 	public void train(List<Byte> seq) {
 		int s = seq.size();
@@ -95,7 +120,7 @@ public class NGramModel implements Serializable {
 	public String toString() {
 		return name;
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 		NGramModel n = (NGramModel) o;
