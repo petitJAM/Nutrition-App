@@ -80,7 +80,7 @@ public class ResultsViewActivity extends Activity {
 		}
 		Log.d("After join", "");
 		dismissDialog(DIALOG_CONTACTING_SERVER);
-		
+
 		if (con == null) {
 			onCreateDialog(DIALOG_SERVER_CONNECTION_FAILED);
 			showDialog(DIALOG_SERVER_CONNECTION_FAILED);
@@ -106,6 +106,8 @@ public class ResultsViewActivity extends Activity {
 				Log.d("sendSequence ioexception", e.getMessage());
 			}
 		}
+		con.sendInt(1); // 1 means we are closing the socket and the server
+						// should do the same
 	}
 
 	/**
@@ -141,6 +143,7 @@ public class ResultsViewActivity extends Activity {
 							finish();
 						}
 					});
+
 			dog = dogbuilder.create();
 			break;
 		case DIALOG_CONTACTING_SERVER:
@@ -168,7 +171,7 @@ public class ResultsViewActivity extends Activity {
 			}
 		}
 	}
-	
+
 	synchronized private void doWait() {
 		try {
 			wait(100);

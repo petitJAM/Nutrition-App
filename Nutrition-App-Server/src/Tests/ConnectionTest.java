@@ -40,6 +40,7 @@ public class ConnectionTest {
 	@Test
 	public void testCreateServerConnectionSucceeds() {
 		Server server = new Server(port);
+		server.start();
 		assertNotNull(server);
 		server.stop();
 	}
@@ -50,6 +51,7 @@ public class ConnectionTest {
 	@Test
 	public void testOpenConnectionFromClientToServer() {
 		Server server = new Server(port);
+		server.start();
 		@SuppressWarnings("unused")
 		Connection client = new Connection(connection(ip, port));
 		// if there is no exception we pass this test
@@ -63,6 +65,7 @@ public class ConnectionTest {
 	@Test
 	public void testServerCreatesNewThreadToHandleClient() {
 		Server server = new Server(port);
+		server.start();
 		@SuppressWarnings("unused")
 		Connection client = new Connection(connection(ip, port));
 		doWait(100);
@@ -76,6 +79,7 @@ public class ConnectionTest {
 	@Test
 	public void testClientSendsServerByteProperly() {
 		Server server = new Server(port);
+		server.start();
 		Connection client = new Connection(connection(ip, port));
 		doWait(100);
 		assertTrue(client.sendByte((byte) 1));
@@ -94,6 +98,7 @@ public class ConnectionTest {
 	@Test
 	public void testServerSendsClientByteProperly() {
 		Server server = new Server(port);
+		server.start();
 		Connection client = new Connection(connection(ip, port));
 		doWait(100);
 		assertTrue(server.getClientConnection(0).sendByte((byte) 1));
@@ -112,6 +117,7 @@ public class ConnectionTest {
 	@Test
 	public void testClientSendsServerIntProperly() {
 		Server server = new Server(port);
+		server.start();
 		Connection client = new Connection(connection(ip, port));
 		doWait(100);
 		assertTrue(client.sendInt(1234567));
@@ -130,6 +136,7 @@ public class ConnectionTest {
 	@Test
 	public void testServerSendsClientIntProperly() {
 		Server server = new Server(port);
+		server.start();
 		Connection client = new Connection(connection(ip, port));
 		doWait(100);
 		assertTrue(server.getClientConnection(0).sendInt(1234567));
@@ -148,6 +155,7 @@ public class ConnectionTest {
 	@Test
 	public void testClientSendsServerCharProperly() {
 		Server server = new Server(port);
+		server.start();
 		Connection client = new Connection(connection(ip, port));
 		doWait(100);
 		assertTrue(client.sendChar('a'));
@@ -166,6 +174,7 @@ public class ConnectionTest {
 	@Test
 	public void testServerSendsClientCharProperly() {
 		Server server = new Server(port);
+		server.start();
 		Connection client = new Connection(connection(ip, port));
 		doWait(100);
 		assertTrue(server.getClientConnection(0).sendChar('a'));
@@ -184,6 +193,7 @@ public class ConnectionTest {
 	@Test
 	public void testClientSendsServerStringProperly() {
 		Server server = new Server(port);
+		server.start();
 		Connection client = new Connection(connection(ip, port));
 		doWait(100);
 		assertTrue(client.sendString("hello man, what's going on yo?"));
@@ -203,6 +213,7 @@ public class ConnectionTest {
 	@Test
 	public void testServerSendsClientStringProperly() {
 		Server server = new Server(port);
+		server.start();
 		Connection client = new Connection(connection(ip, port));
 		doWait(100);
 		assertTrue(server.getClientConnection(0).sendString(
@@ -223,6 +234,7 @@ public class ConnectionTest {
 	@Test
 	public void testClientSendsServerByteArrayProperly() {
 		Server server = new Server(port);
+		server.start();
 		Connection client = new Connection(connection(ip, port));
 		doWait(100);
 		assertTrue(client.sendByteArray(new byte[] { (byte) 0, (byte) 1 }));
@@ -242,6 +254,7 @@ public class ConnectionTest {
 	@Test
 	public void testServerSendsClientByteArrayProperly() {
 		Server server = new Server(port);
+		server.start();
 		Connection client = new Connection(connection(ip, port));
 		doWait(100);
 		assertTrue(server.getClientConnection(0).sendByteArray(
@@ -262,6 +275,7 @@ public class ConnectionTest {
 	@Test
 	public void testServerAllowsTwoClients() {
 		Server server = new Server(port);
+		server.start();
 		@SuppressWarnings("unused")
 		Connection client1 = new Connection(connection(ip, port));
 		@SuppressWarnings("unused")
@@ -279,6 +293,7 @@ public class ConnectionTest {
 	@Test
 	public void testServerHandlesTwoClients() {
 		Server server = new Server(port);
+		server.start();
 		Connection client1 = new Connection(connection(ip, port));
 		doWait(100); // to ensure client ordering is correct
 		Connection client2 = new Connection(connection(ip, port));

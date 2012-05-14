@@ -7,6 +7,7 @@ times_used int,
 times_correct int
 );
 
+
 create table Food(
 Transition_Matrix varbinary(max),
 Name varchar(256),

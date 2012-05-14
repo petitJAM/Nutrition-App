@@ -16,6 +16,10 @@ import NGramModel.NGramModel;
 public class Food implements Serializable {
 
 	/**
+	 * needed for implementing Serializable
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * the matrix describing the image of this food item
 	 */
 	public NGramModel ngm;
@@ -87,8 +91,8 @@ public class Food implements Serializable {
 	 * @throws IOException
 	 */
 	public Food(byte[] bs, String string, float calories, float calFromFat,
-			float totalFat, float sodium, float carbs, float fiber, float sugar,
-			float protein) {
+			float totalFat, float sodium, float carbs, float fiber,
+			float sugar, float protein) {
 		try {
 			this.ngm = (NGramModel) Connection.deSerialize(bs);
 		} catch (ClassNotFoundException | IOException e) {
@@ -115,7 +119,8 @@ public class Food implements Serializable {
 	 */
 	public boolean equals(Food f) {
 		return f.ngm.equals(this.ngm) && f.name.equals(this.name)
-				&& f.calories == this.calories && f.calFromFat == this.calFromFat
+				&& f.calories == this.calories
+				&& f.calFromFat == this.calFromFat
 				&& this.totalFat == f.totalFat && f.sodium == this.sodium
 				&& f.carbs == this.carbs && f.fiber == this.fiber
 				&& f.sugar == this.sugar && f.protein == this.protein;
