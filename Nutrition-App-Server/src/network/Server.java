@@ -191,7 +191,7 @@ public class Server {
 
 				@Override
 				public int compareTo(FoodItem o) {
-					return (int) ((this.val - o.val) * 1000);
+					return (int) ((o.val - this.val) * 1000);
 				}
 			}
 		}
