@@ -30,6 +30,7 @@ public class ResultsViewActivity extends Activity {
 
 	private static final int PORT = 12345;
 	private static final String IP_ADDRESS = "137.112.136.208";
+
 	private static final int NUMBER_SERVER_CONNECTION_ATTEMPTS = 2;
 
 	/* Dialog constants */
@@ -180,7 +181,8 @@ public class ResultsViewActivity extends Activity {
 			AlertDialog.Builder resultsBuilder = new AlertDialog.Builder(this);
 			ListAdapter resultsAdapter = null;
 			if (foods != null)
-				resultsAdapter = new ArrayAdapter<Food>(this, R.layout.results_list, foods);
+				resultsAdapter = new ArrayAdapter<Food>(this, R.layout.results_list,
+						foods);
 			else
 				Log.d("Null list", "");
 
@@ -226,19 +228,19 @@ public class ResultsViewActivity extends Activity {
 
 	private class FoodListAdapter extends ArrayAdapter<Food> {
 		private List<Food> noms;
-		
+
 		public FoodListAdapter(Context context, int textViewResourceId, List<Food> noms) {
 			super(context, textViewResourceId, noms);
 			this.noms = noms;
 		}
-		
+
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			
+
 			return null;
 		}
 	}
-	
+
 	synchronized private void doWait() {
 		try {
 			wait(100);
