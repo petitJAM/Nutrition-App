@@ -171,6 +171,8 @@ public class Server {
 				PriorityQueue<FoodItem> foods = new PriorityQueue<FoodItem>(3);
 				for (Food f : array) {
 					foods.add(new FoodItem(f, f.ngm.logLikelihood(seq)));
+					System.out.println("added " + f.name + " with score "
+							+ f.ngm.logLikelihood(seq));
 				}
 
 				ArrayList<Food> ret = new ArrayList<Food>();
