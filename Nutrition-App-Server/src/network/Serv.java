@@ -1,5 +1,7 @@
 package network;
 
+import java.net.ServerSocket;
+
 import Database.QueryClass;
 
 /**
@@ -10,13 +12,8 @@ import Database.QueryClass;
  */
 public class Serv {
 
-	/**
-	 * the global connection to the SQLServer through which all DB queries are made
-	 */
+	private static boolean stopping;
 	public static QueryClass qc;
-	/**
-	 * used to keep threads from starting when we are testing to ensure we can directly access the connection associated with a client
-	 */
 	public static boolean startClientThreads = false;
 
 	/**
@@ -24,8 +21,10 @@ public class Serv {
 	 */
 	public static void main(String[] args) {
 		startClientThreads = true;
-		qc = new QueryClass();
+		stopping = false;
 
+		ServerSocket sock = null;
+		qc = new QueryClass();
 		Server server = new Server(Connection.port);
 		server.start();
 	}
