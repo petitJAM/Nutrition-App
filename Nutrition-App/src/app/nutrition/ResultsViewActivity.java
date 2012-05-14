@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.NoRouteToHostException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,19 +24,26 @@ public class ResultsViewActivity extends Activity {
 
 	private static final int PORT = 12345;
 	private static final String IP_ADDRESS = "137.112.115.102";
+	private static final int NUMBER_SERVER_CONNECTION_ATTEMPTS = 2;
+
+	/* Dialog constants */
 	private static final int DIALOG_SERVER_CONNECTION_FAILED = 0;
 	private static final int DIALOG_RESULTS_VIEW = 1;
-	private static final int NUMBER_SERVER_CONNECTION_ATTEMPTS = 2;
-	private static final int DIALOG_CONTACTING_SERVER = 3;
+	private static final int DIALOG_CONTACTING_SERVER = 2;
+	private static final int DIALOG_WAITING_FOR_SERVER_RESPONSE = 3;
+
 	/** Color Sequence to work with */
 	public byte[] colorSequence = null;
+
+	/** Connection to server */
 	private Connection con = null;
+	/** Foods to display */
+	private ArrayList<Food> foods;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.results);
-		Log.d("ResultsViewActivity", "opened");
 		try {
 			getSequence();
 			sendSequence();
@@ -49,9 +57,9 @@ public class ResultsViewActivity extends Activity {
 	 * Set ResultsViewActivity.colorSequence to the colorSequence in
 	 * NutritionAppActivity
 	 * 
-	 * @throws Exception
+	 * @throws NullPointerException
 	 */
-	public void getSequence() throws Exception {
+	public void getSequence() throws NullPointerException {
 		colorSequence = NutritionAppActivity.colorSequence;
 		if (colorSequence == null) {
 			Log.e("get Sequence", "Sequence to retrieve is null!");
@@ -64,44 +72,50 @@ public class ResultsViewActivity extends Activity {
 	 * results.
 	 */
 	public void sendSequence() {
-		Log.d("send Seq", "Sending NGM");
-
 		onCreateDialog(DIALOG_CONTACTING_SERVER);
 		showDialog(DIALOG_CONTACTING_SERVER);
 
 		Thread connectionThread = new Thread(new ServerConnectThread());
 		connectionThread.start();
 		try {
+			Log.d("doWait", "");
 			doWait();
 			connectionThread.join();
 			dismissDialog(DIALOG_CONTACTING_SERVER);
 		} catch (InterruptedException e) {
 			Log.d("ConnectionThread", e.getMessage());
 		}
-		Log.d("After join", "");
-		dismissDialog(DIALOG_CONTACTING_SERVER);
+		// Log.d("After join", "");
+		// dismissDialog(DIALOG_CONTACTING_SERVER);
 
 		if (con == null) {
 			onCreateDialog(DIALOG_SERVER_CONNECTION_FAILED);
 			showDialog(DIALOG_SERVER_CONNECTION_FAILED);
 		}
 		else {
+			Log.d("Sending", "Sending " + colorSequence.toString());
+			onCreateDialog(DIALOG_WAITING_FOR_SERVER_RESPONSE);
+			showDialog(DIALOG_WAITING_FOR_SERVER_RESPONSE);
 
 			con.sendInt(0); // 0 means this connection is asking for a list of
 							// results
 			con.sendByteArray(colorSequence);
 
-			Food f1, f2, f3;
 			try {
 				if (con.recieveInt() == 3) { // should be 3 indicating the 3
 												// results
-					f1 = con.recieveFood();
-					f2 = con.recieveFood();
-					f3 = con.recieveFood();
-					Log.d("Receive", f1.name);
-					Log.d("Receive", f2.name);
-					Log.d("Receive", f3.name);
+					foods = new ArrayList<Food>();
+					foods.add(con.recieveFood());
+					foods.add(con.recieveFood());
+					foods.add(con.recieveFood());
+					Log.d("Receive", foods.get(0).name);
+					Log.d("Receive", foods.get(1).name);
+					Log.d("Receive", foods.get(2).name);
 				}
+				else {
+					Log.d("Receive", "Error in receiving results");
+				}
+				dismissDialog(DIALOG_WAITING_FOR_SERVER_RESPONSE);
 			} catch (IOException e) {
 				Log.d("sendSequence ioexception", e.getMessage());
 			}
@@ -150,8 +164,13 @@ public class ResultsViewActivity extends Activity {
 			dog = new ProgressDialog(this);
 			dog.setTitle(getString(R.string.wait_dialog));
 			break;
+		case DIALOG_WAITING_FOR_SERVER_RESPONSE:
+			dog = new ProgressDialog(this);
+			dog.setTitle(getString(R.string.wait_dialog));
 		case DIALOG_RESULTS_VIEW:
 			// create it again
+			dog = new Dialog(this);
+			dog.setTitle("Implement me!");
 			break;
 		default:
 			dog = null;
@@ -166,6 +185,7 @@ public class ResultsViewActivity extends Activity {
 				Log.d("trying connection...", (count + 1) + "");
 				try {
 					con = getConnection();
+					Log.d("connection success", con.toString());
 				} catch (NoRouteToHostException e) {}
 				count++;
 			}

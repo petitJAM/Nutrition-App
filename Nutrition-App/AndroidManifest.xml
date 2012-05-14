@@ -27,7 +27,8 @@
         </activity>
         <activity
             android:name=".ResultsViewActivity"
-            android:label="" >
+            android:label=""
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <category android:name="android.intent.category.ALTERNATIVE" />
             </intent-filter>
