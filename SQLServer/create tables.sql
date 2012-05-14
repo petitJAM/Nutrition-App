@@ -11,6 +11,9 @@ times_correct int
 create table Food(
 Transition_Matrix varbinary(max),
 Name varchar(256),
+NameSpanish varchar(256),
+NameFrench varchar(256),
+NameGerman varchar(256),
 Calories float,
 Calories_from_Fat float,
 Total_Fat float,

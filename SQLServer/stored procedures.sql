@@ -1,21 +1,12 @@
 use [Nutrition-App]
 go
 
-CREATE PROCEDURE [dbo].getDevice
-(@DeviceID int)
-AS
-select * from Device where ID = @DeviceID
-go
-
-CREATE PROCEDURE [dbo].updateDevice
-(@DeviceID int, @times_used int, @times_correct int)
-AS
-update Device set times_used =@times_used, times_correct = @times_correct where ID = @DeviceID
-go
-
 CREATE PROCEDURE [dbo].addFoodItem
 (@Transition_Matrix varbinary(max),
 @Name varchar(256),
+@NameSpanish varchar(256),
+@NameFrench varchar(256),
+@NameGerman varchar(256),
 @Calories float,
 @Calories_from_Fat float,
 @Total_Fat float,
@@ -26,18 +17,10 @@ CREATE PROCEDURE [dbo].addFoodItem
 @Protein float)
 
 AS
-insert into Food values (@Transition_Matrix,@Name,@Calories,@Calories_from_Fat,@Total_Fat,@Sodium,@Carbohydrates,@Fiber,@Sugar,@Protein)
+insert into Food values (@Transition_Matrix,@Name,@NameSpanish,@NameFrench,@NameGerman,@Calories,@Calories_from_Fat,@Total_Fat,@Sodium,@Carbohydrates,@Fiber,@Sugar,@Protein)
 go
 
 CREATE PROCEDURE [dbo].getFood
 as
 select * from Food
-go
-
-CREATE PROCEDURE [dbo].addDevice
-as
-begin
-select max(ID)+1 from Device
-insert into Device values (0,0)
-end
 go
