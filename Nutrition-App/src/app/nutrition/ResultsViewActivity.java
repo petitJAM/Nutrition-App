@@ -72,11 +72,11 @@ public class ResultsViewActivity extends Activity {
 		Thread connectionThread = new Thread(new ServerConnectThread());
 		connectionThread.start();
 		try {
-			wait(1);
+			doWait();
 			connectionThread.join();
 			dismissDialog(DIALOG_CONTACTING_SERVER);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			Log.d("ConnectionThread", e.getMessage());
 		}
 		Log.d("After join", "");
 		dismissDialog(DIALOG_CONTACTING_SERVER);
@@ -167,5 +167,11 @@ public class ResultsViewActivity extends Activity {
 				count++;
 			}
 		}
+	}
+	
+	synchronized private void doWait() {
+		try {
+			wait(100);
+		} catch (InterruptedException e) {}
 	}
 }
