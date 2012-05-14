@@ -5,15 +5,21 @@ import java.net.NoRouteToHostException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 
 /**
  * Activity to send analyzed image data to a server and wait for the results.
@@ -111,6 +117,8 @@ public class ResultsViewActivity extends Activity {
 					Log.d("Receive", foods.get(0).name);
 					Log.d("Receive", foods.get(1).name);
 					Log.d("Receive", foods.get(2).name);
+					onCreateDialog(DIALOG_RESULTS_VIEW);
+					showDialog(DIALOG_RESULTS_VIEW);
 				}
 				else {
 					Log.d("Receive", "Error in receiving results");
@@ -148,8 +156,8 @@ public class ResultsViewActivity extends Activity {
 		Dialog dog = null;
 		switch (id) {
 		case DIALOG_SERVER_CONNECTION_FAILED:
-			AlertDialog.Builder dogbuilder = new AlertDialog.Builder(this);
-			dogbuilder.setMessage(getString(R.string.no_response_server))
+			AlertDialog.Builder failedBuilder = new AlertDialog.Builder(this);
+			failedBuilder.setMessage(getString(R.string.no_response_server))
 					.setPositiveButton(getString(R.string.ok), new OnClickListener() {
 
 						public void onClick(DialogInterface dialog, int which) {
@@ -158,7 +166,7 @@ public class ResultsViewActivity extends Activity {
 						}
 					});
 
-			dog = dogbuilder.create();
+			dog = failedBuilder.create();
 			break;
 		case DIALOG_CONTACTING_SERVER:
 			dog = new ProgressDialog(this);
@@ -169,8 +177,32 @@ public class ResultsViewActivity extends Activity {
 			dog.setTitle(getString(R.string.wait_dialog));
 		case DIALOG_RESULTS_VIEW:
 			// create it again
-			dog = new Dialog(this);
-			dog.setTitle("Implement me!");
+			AlertDialog.Builder resultsBuilder = new AlertDialog.Builder(this);
+			ListAdapter resultsAdapter = null;
+			if (foods != null)
+				resultsAdapter = new ArrayAdapter<Food>(this, R.layout.results_list, foods);
+			else
+				Log.d("Null list", "");
+
+			resultsBuilder.setAdapter(resultsAdapter, new OnClickListener() {
+
+				public void onClick(DialogInterface dialog, int which) {
+					switch (which) {
+					case DialogInterface.BUTTON1:
+						// TODO
+						break;
+					case DialogInterface.BUTTON2:
+						// TODO
+						break;
+					case DialogInterface.BUTTON3:
+						// TODO
+						break;
+					default:
+						break;
+					}
+				}
+			});
+			dog = resultsBuilder.create();
 			break;
 		default:
 			dog = null;
@@ -192,6 +224,21 @@ public class ResultsViewActivity extends Activity {
 		}
 	}
 
+	private class FoodListAdapter extends ArrayAdapter<Food> {
+		private List<Food> noms;
+		
+		public FoodListAdapter(Context context, int textViewResourceId, List<Food> noms) {
+			super(context, textViewResourceId, noms);
+			this.noms = noms;
+		}
+		
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			
+			return null;
+		}
+	}
+	
 	synchronized private void doWait() {
 		try {
 			wait(100);

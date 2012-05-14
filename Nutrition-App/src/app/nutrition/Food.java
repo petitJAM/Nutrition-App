@@ -123,12 +123,8 @@ public class Food implements Serializable {
 				&& f.sugar == this.sugar && f.protein == this.protein;
 	}
 
-	// private boolean compareMatrix(byte[] a, byte[] b) {
-	// if (a.length == b.length) {
-	// for (int i = 0; i < a.length; i++)
-	// if (a[i] != b[i]) return false;
-	// return true;
-	// }
-	// return false;
-	// }
+	@Override
+	public String toString() {
+		return name;
+	}
 }
