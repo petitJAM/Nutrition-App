@@ -1,19 +1,23 @@
 package network;
 
-import java.net.ServerSocket;
-
 import Database.QueryClass;
 
 /**
  * Run the server
- *
- * @author Ryne Bell.
- *         Created May 10, 2012.
+ * 
+ * @author Ryne Bell. Created May 10, 2012.
  */
 public class Serv {
 
-	private static boolean stopping;
+	/**
+	 * the global query connection to the Database, which all queries are made
+	 * through
+	 */
 	public static QueryClass qc;
+	/**
+	 * used to ensure that threads are not started to handle clients when we are
+	 * running tests and need direct access to the Server's Connections
+	 */
 	public static boolean startClientThreads = false;
 
 	/**
@@ -21,9 +25,6 @@ public class Serv {
 	 */
 	public static void main(String[] args) {
 		startClientThreads = true;
-		stopping = false;
-
-		ServerSocket sock = null;
 		qc = new QueryClass();
 		Server server = new Server(Connection.port);
 		server.start();

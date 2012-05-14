@@ -23,7 +23,7 @@ import NGramModel.TransitionMatrix;
  * 
  */
 public class QueryClassTest {
-	
+
 	/**
 	 * Checks to make sure that all of the foods have a non-null transition
 	 * matrix
