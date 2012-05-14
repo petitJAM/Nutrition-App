@@ -115,6 +115,7 @@ public class ResultsViewActivity extends Activity {
 				else {
 					Log.d("Receive", "Error in receiving results");
 				}
+				dismissDialog(DIALOG_WAITING_FOR_SERVER_RESPONSE);
 			} catch (IOException e) {
 				Log.d("sendSequence ioexception", e.getMessage());
 			}
