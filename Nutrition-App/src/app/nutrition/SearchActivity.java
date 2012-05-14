@@ -4,16 +4,16 @@ import android.app.Activity;
 import android.os.Bundle;
 
 /**
- * Displays the "about us" page.
+ * This class handles directly search for a food by text input rather than image
+ * analysis.
  * 
  * @author Alex Petitjean.
  *         Created May 14, 2012.
  */
-public class InfoActivity extends Activity {
+public class SearchActivity extends Activity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceBundle) {
 		super.onCreate(savedInstanceBundle);
-		setContentView(R.layout.info);
 	}
 }

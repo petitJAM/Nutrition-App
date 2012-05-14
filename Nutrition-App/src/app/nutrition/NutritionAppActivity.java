@@ -113,13 +113,16 @@ public class NutritionAppActivity extends Activity {
 
 	private Bitmap scaleImage(Bitmap b) {
 		Bitmap newb; // lol
-		if (b.getWidth() > SCALED_WIDTH && b.getHeight() > SCALED_HEIGHT) {
+		if (b.getWidth() > SCALED_WIDTH && b.getHeight() > SCALED_HEIGHT)
 			newb = Bitmap.createScaledBitmap(b, SCALED_WIDTH, SCALED_HEIGHT, false);
-		}
-		else {
+		else
 			newb = b;
-		}
 		return newb;
+	}
+	
+	private void startSearchActivity() {
+		Intent searchIntent = new Intent(this, SearchActivity.class);
+		startActivity(searchIntent);
 	}
 	
 	private void startInfoActivity() {
@@ -172,7 +175,7 @@ public class NutritionAppActivity extends Activity {
 
 	private class SearchOnClickListener implements View.OnClickListener {
 		public void onClick(View v) {
-			// TODO implement onClick
+			startSearchActivity();
 		}
 	}
 
