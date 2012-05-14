@@ -41,6 +41,7 @@ public class Populator2000 {
 			ClassNotFoundException {
 		NGramModel[] ngms = trainAll(newImgDir);
 		QueryClass q = new QueryClass();
+		q.deleteFoodItem("Egg (raw)");
 		for (int i = 0; i < ngms.length; i++) {
 			byte[] b = ngms[i].getByteArray();
 			NutritionFacts n = new NutritionFacts(ngms[i].name);
