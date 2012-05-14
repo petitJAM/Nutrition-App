@@ -5,9 +5,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 import Database.Food;
-import NGramModel.NGramModel;
 
 /**
  * the class which handles connections from clients to the server spinning off
@@ -168,52 +168,31 @@ public class Server {
 			}
 
 			private ArrayList<Food> getTop3(ArrayList<Food> array, byte[] seq) {
-				System.out.println("Get Top 3");
-				Double a[] = { 0.0, 0.0, 0.0 };
-				Food top3[] = { null, null, null };
+				PriorityQueue<FoodItem> foods = new PriorityQueue<FoodItem>(3);
 				for (Food f : array) {
-					Food tempF = f;
-					Food tempF2 = f;
-					double tempD = logLikelihood(f.ngm, seq);
-					double tempD2 = tempD;
-					if (top3[0] == null || tempD > a[0]) {
-						tempD2 = a[0];
-						a[0] = tempD;
-						tempF = top3[0];
-						top3[0] = f;
-					}
-					if (top3[1] == null || tempD2 > a[1]) {
-						tempD = a[1];
-						a[1] = tempD2;
-						tempF2 = top3[0];
-						top3[1] = tempF;
-					} else {
-						tempD = tempD2;
-						tempF2 = tempF;
-					}
-					if (top3[2] == null || tempD > a[2]) {
-						a[2] = tempD;
-						top3[2] = tempF2;
-					}
+					foods.add(new FoodItem(f, f.ngm.logLikelihood(seq)));
 				}
-				ArrayList<Food> top3ArrayList = new ArrayList<Food>();
-				for (Food f : top3) {
-					top3ArrayList.add(f);
-				}
-				return top3ArrayList;
+
+				ArrayList<Food> ret = new ArrayList<Food>();
+				ret.add(foods.poll().f);
+				ret.add(foods.poll().f);
+				ret.add(foods.poll().f);
+				return ret;
 			}
 
-			private Double logLikelihood(NGramModel nGramModel, byte[] ngm) {
-				// NGramModel ngm2 = null;
-				// try {
-				// ngm2 = Connection.deSerialize(nGramModel);
-				// } catch (ClassNotFoundException | IOException e) {
-				// // TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
-				Double ret = 0.0;
-				ret = nGramModel.logLikelihood(ngm);
-				return ret;
+			private class FoodItem implements Comparable<FoodItem> {
+				public Food f;
+				public double val;
+
+				public FoodItem(Food f, double val) {
+					this.f = f;
+					this.val = val;
+				}
+
+				@Override
+				public int compareTo(FoodItem o) {
+					return (int) ((this.val - o.val) * 1000);
+				}
 			}
 		}
 	}
