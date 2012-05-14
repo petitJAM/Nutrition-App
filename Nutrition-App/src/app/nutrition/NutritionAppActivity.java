@@ -90,7 +90,7 @@ public class NutritionAppActivity extends Activity {
 			img = scaleImage(img);
 			colorSequence = ProcessImage.generateSequence(img);
 			dismissDialog(ANALYZE_IMAGE_PROGRESS_DIALOG);
-			
+
 			Log.d("send color sequence", "");
 			Intent resultsIntent = new Intent(this, ResultsViewActivity.class);
 			startActivityForResult(resultsIntent, RESULTS);
@@ -98,11 +98,11 @@ public class NutritionAppActivity extends Activity {
 			Log.e("Analyze", e.toString());
 		}
 	}
-	
+
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		Dialog dog = null;
-		switch(id) {
+		switch (id) {
 		case ANALYZE_IMAGE_PROGRESS_DIALOG:
 			dog = new ProgressDialog(this);
 			dog.setTitle(getString(R.string.processing_image_dialog_text));
@@ -120,6 +120,11 @@ public class NutritionAppActivity extends Activity {
 			newb = b;
 		}
 		return newb;
+	}
+	
+	private void startInfoActivity() {
+		Intent infoIntent = new Intent(this, InfoActivity.class);
+		startActivity(infoIntent);
 	}
 
 	private class CameraOnClickListener implements View.OnClickListener {
@@ -152,23 +157,22 @@ public class NutritionAppActivity extends Activity {
 			startActivityForResult(camera_intent, TAKE_PICTURE);
 		}
 	}
-	
+
 	private class SettingsOnClickListener implements View.OnClickListener {
 		public void onClick(View v) {
-			//TODO implement onClick
+			// TODO implement onClick
 		}
 	}
-	
+
 	private class InfoOnClickListener implements View.OnClickListener {
 		public void onClick(View v) {
-			// TODO make this better!
-			setContentView(R.layout.info);
+			startInfoActivity();
 		}
 	}
-	
+
 	private class SearchOnClickListener implements View.OnClickListener {
 		public void onClick(View v) {
-			//TODO implement onClick
+			// TODO implement onClick
 		}
 	}
 

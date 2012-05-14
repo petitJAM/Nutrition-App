@@ -29,7 +29,7 @@ import android.widget.ListAdapter;
 public class ResultsViewActivity extends Activity {
 
 	private static final int PORT = 12345;
-	private static final String IP_ADDRESS = "137.112.115.102";
+	private static final String IP_ADDRESS = "137.112.136.208";
 	private static final int NUMBER_SERVER_CONNECTION_ATTEMPTS = 2;
 
 	/* Dialog constants */
