@@ -122,7 +122,7 @@ public class ResultsViewActivity extends Activity {
 				Log.d("sendSequence ioexception", e.getMessage());
 			}
 		}
-		con.sendInt(1); // 1 means we are closing the socket and the server
+		con.sendInt(2); // 1 means we are closing the socket and the server
 						// should do the same
 	}
 

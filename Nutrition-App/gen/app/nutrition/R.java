@@ -18,8 +18,9 @@ public final class R {
         public static final int exitbutton=0x7f020004;
         public static final int ic_launcher=0x7f020005;
         public static final int infobutton=0x7f020006;
-        public static final int searchbutton=0x7f020007;
-        public static final int settingsbutton=0x7f020008;
+        public static final int search_background=0x7f020007;
+        public static final int searchbutton=0x7f020008;
+        public static final int settingsbutton=0x7f020009;
     }
     public static final class id {
         public static final int camera_button=0x7f060002;
@@ -27,6 +28,8 @@ public final class R {
         public static final int info_button=0x7f060005;
         public static final int logo_view=0x7f060001;
         public static final int search_button=0x7f060003;
+        public static final int search_go=0x7f060008;
+        public static final int searchbar=0x7f060007;
         public static final int settings_button=0x7f060004;
         public static final int textView1=0x7f060000;
     }
@@ -36,6 +39,7 @@ public final class R {
         public static final int nutrition_display=0x7f030002;
         public static final int results=0x7f030003;
         public static final int results_list=0x7f030004;
+        public static final int search=0x7f030005;
     }
     public static final class string {
         public static final int about_us=0x7f05000b;

@@ -47,6 +47,14 @@
                 <category android:name="android.intent.category.ALTERNATIVE" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SearchActivity"
+            android:label=""
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <category android:name="android.intent.category.ALTERNATIVE" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

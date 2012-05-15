@@ -10,10 +10,12 @@ import android.os.Bundle;
  *         Created May 14, 2012.
  */
 public class NutritionDisplayActivity extends Activity {
+	private Food displayFood;
 
 	@Override
 	public void onCreate(Bundle savedInstanceBundle) {
 		super.onCreate(savedInstanceBundle);
+		displayFood = ResultsViewActivity.displayFood;
 		setContentView(R.layout.nutrition_display);
 	}
 }
