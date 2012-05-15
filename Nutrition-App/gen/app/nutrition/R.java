@@ -27,8 +27,9 @@ public final class R {
         public static final int exit_button=0x7f050006;
         public static final int info_button=0x7f050005;
         public static final int logo_view=0x7f050001;
-        public static final int search=0x7f050007;
         public static final int search_button=0x7f050003;
+        public static final int search_go=0x7f050008;
+        public static final int searchbar=0x7f050007;
         public static final int settings_button=0x7f050004;
         public static final int textView1=0x7f050000;
     }
