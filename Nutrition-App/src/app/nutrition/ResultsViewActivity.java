@@ -36,6 +36,8 @@ public class ResultsViewActivity extends Activity {
 
 	/** Color Sequence to work with */
 	public byte[] colorSequence = null;
+	/** Food to display */
+	public static Food displayFood;
 
 	/** Connection to server */
 	private Connection con = null;
@@ -185,13 +187,13 @@ public class ResultsViewActivity extends Activity {
 				public void onClick(DialogInterface dialog, int which) {
 					switch (which) {
 					case DialogInterface.BUTTON1:
-						foods.get(0);
+						displayFood = foods.get(0);
 						break;
 					case DialogInterface.BUTTON2:
-						// TODO
+						displayFood = foods.get(1);
 						break;
 					case DialogInterface.BUTTON3:
-						// TODO
+						displayFood = foods.get(2);
 						break;
 					default:
 						break;
