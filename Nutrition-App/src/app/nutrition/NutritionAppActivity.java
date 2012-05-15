@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +42,8 @@ public class NutritionAppActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
 		ImageButton cam, set, info, search, exit;
 		cam = (ImageButton) findViewById(R.id.camera_button);

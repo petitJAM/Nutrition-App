@@ -5,22 +5,17 @@ import java.net.NoRouteToHostException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 
@@ -30,9 +25,7 @@ import android.widget.ListAdapter;
  * @author Alex Petitjean. Created May 2, 2012.
  */
 public class ResultsViewActivity extends Activity {
-
-	private static final int PORT = 12345;
-
+	
 	private static final int NUMBER_SERVER_CONNECTION_ATTEMPTS = 2;
 
 	/* Dialog constants */
@@ -54,11 +47,6 @@ public class ResultsViewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.results);
 		
-//		PreferenceManager.setDefaultValues(this, )
-//		SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-//		Editor e = prefs.edit();
-//		e.putString("IP_ADDRESS", "137.112.136.208");
-//		e.commit();
 		try {
 			getSequence();
 			sendSequence();
@@ -100,8 +88,6 @@ public class ResultsViewActivity extends Activity {
 		} catch (InterruptedException e) {
 			Log.d("ConnectionThread", e.getMessage());
 		}
-		// Log.d("After join", "");
-		// dismissDialog(DIALOG_CONTACTING_SERVER);
 
 		if (con == null) {
 			onCreateDialog(DIALOG_SERVER_CONNECTION_FAILED);
@@ -112,20 +98,17 @@ public class ResultsViewActivity extends Activity {
 			onCreateDialog(DIALOG_WAITING_FOR_SERVER_RESPONSE);
 			showDialog(DIALOG_WAITING_FOR_SERVER_RESPONSE);
 
-			con.sendInt(0); // 0 means this connection is asking for a list of
-							// results
+			// 0 means this connection is asking for a list of results
+			con.sendInt(0); 
 			con.sendByteArray(colorSequence);
 
 			try {
-				if (con.recieveInt() == 3) { // should be 3 indicating the 3
-												// results
+				// should be 3 indicating the 3 results
+				if (con.recieveInt() == 3) { 
 					foods = new ArrayList<Food>();
 					foods.add(con.recieveFood());
 					foods.add(con.recieveFood());
 					foods.add(con.recieveFood());
-					Log.d("Receive", foods.get(0).name);
-					Log.d("Receive", foods.get(1).name);
-					Log.d("Receive", foods.get(2).name);
 					onCreateDialog(DIALOG_RESULTS_VIEW);
 					showDialog(DIALOG_RESULTS_VIEW);
 				}
@@ -149,11 +132,11 @@ public class ResultsViewActivity extends Activity {
 	 */
 	public Connection getConnection() throws NoRouteToHostException {
 		Socket sock = null;
-		// The default value is whatever the IP was at the time of this change.
-		// Not necessarily an appropriate value. (Though it probably doesn't matter)
-		String ip = getPreferences(MODE_PRIVATE).getString("IP_ADDRESS", "137.112.136.208");
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		String ip = prefs.getString("IP_ADDRESS", "137.112.136.208");
+		int port = Integer.parseInt(prefs.getString("PORT", "12345"));
 		try {
-			sock = new Socket(ip, PORT);
+			sock = new Socket(ip, port);
 		} catch (UnknownHostException e) {
 			Log.d("getConnection", e.getMessage());
 		} catch (IOException e) {
@@ -202,7 +185,7 @@ public class ResultsViewActivity extends Activity {
 				public void onClick(DialogInterface dialog, int which) {
 					switch (which) {
 					case DialogInterface.BUTTON1:
-						// TODO
+						foods.get(0);
 						break;
 					case DialogInterface.BUTTON2:
 						// TODO
@@ -237,24 +220,24 @@ public class ResultsViewActivity extends Activity {
 		}
 	}
 
-	private class FoodListAdapter extends ArrayAdapter<Food> {
-		private List<Food> noms;
-
-		public FoodListAdapter(Context context, int textViewResourceId, List<Food> noms) {
-			super(context, textViewResourceId, noms);
-			this.noms = noms;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-
-			return null;
-		}
-	}
+//	private class FoodListAdapter extends ArrayAdapter<Food> {
+//		private List<Food> noms;
+//
+//		public FoodListAdapter(Context context, int textViewResourceId, List<Food> noms) {
+//			super(context, textViewResourceId, noms);
+//			this.noms = noms;
+//		}
+//
+//		@Override
+//		public View getView(int position, View convertView, ViewGroup parent) {
+//
+//			return null;
+//		}
+//	}
 
 	synchronized private void doWait() {
 		try {
-			wait(100);
+			wait(1000);
 		} catch (InterruptedException e) {}
 	}
 }

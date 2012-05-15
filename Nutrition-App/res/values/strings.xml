@@ -21,4 +21,5 @@
         This application was designed by three poor, starving college students,
         so give us money!    
     </string>
+    <string name="ip_address">137.112.115.32</string>
 </resources>

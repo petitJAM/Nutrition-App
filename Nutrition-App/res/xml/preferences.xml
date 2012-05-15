@@ -3,7 +3,16 @@
     android:key="applicationPreference" >
 
     <ListPreference
-        android:defaultValue="137.112.136.208"
-        android:key="IP_ADDRESS" />
+        android:defaultValue="@string/ip_address"
+        android:key="IP_ADDRESS"
+        android:persistent="true"
+        android:summary="IP address of the server"
+        android:title="IP Address" />
+    <ListPreference
+        android:defaultValue="12345"
+        android:key="PORT"
+        android:persistent="true"
+        android:summary="Port to connect to the server on"
+        android:title="Port" />
 
 </PreferenceScreen>

@@ -158,8 +158,8 @@ public class Server {
 						} catch (IOException exception) {
 							exception.printStackTrace();
 						}
-					} else if (type == 1) { // close the socket and end this
-											// thread
+					} else if (type == 1) { 
+						// close the socket and end this thread
 						con.close();
 						stopping = true;
 						break;
