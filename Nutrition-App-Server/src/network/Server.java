@@ -142,23 +142,30 @@ public class Server {
 					}
 					if (type == 0) { // this is a request for a list of matches
 						byte[] seq = null;
-						try {
-							seq = con.recieveByteArray();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						// get the top 3 food items to send
 						ArrayList<Food> possiblitites;
 						try {
+							seq = con.recieveByteArray();
 							possiblitites = getTop3(Serv.qc.getFood(), seq);
 							con.sendInt(3);
 							con.sendFood(possiblitites.get(0));
 							con.sendFood(possiblitites.get(1));
 							con.sendFood(possiblitites.get(2));
-						} catch (IOException exception) {
-							exception.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
 						}
-					} else if (type == 1) { 
+					}
+					if (type == 1) {
+						String string = "";
+						Food f;
+						try {
+							string = con.recieveString();
+							con.sendInt(4);
+							f = Serv.qc.getFoodItem(string);
+							con.sendFood(f);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					} else if (type == 2) { 
 						// close the socket and end this thread
 						con.close();
 						stopping = true;
