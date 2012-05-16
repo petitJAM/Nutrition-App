@@ -147,8 +147,10 @@ public class ResultsViewActivity extends Activity {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		String ip = prefs.getString("IP_ADDRESS", "137.112.136.208");
 		int port = Integer.parseInt(prefs.getString("PORT", "12345"));
+		Log.d("getConnection", "Socket-- IP: " + ip + " port: " + port);
 		try {
 			sock = new Socket(ip, port);
+			Log.d("made a socket", sock.toString());
 		} catch (UnknownHostException e) {
 			Log.d("getConnection", e.getMessage());
 		} catch (IOException e) {

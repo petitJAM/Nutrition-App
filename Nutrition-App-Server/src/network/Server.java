@@ -99,6 +99,7 @@ public class Server {
 					}
 					try {
 						Socket sock = sSock.accept();
+						System.out.println("Socket accepted" + sock.toString());
 						Connection con = new Connection(sock);
 						clientConnections.add(con);
 
