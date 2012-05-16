@@ -159,9 +159,13 @@ public class Server {
 						Food f;
 						try {
 							string = con.recieveString();
-							con.sendInt(4);
 							f = Serv.qc.getFoodItem(string);
-							con.sendFood(f);
+							if (f == null) {
+								con.sendInt(5);
+							} else {
+								con.sendInt(4);
+								con.sendFood(f);
+							}
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
