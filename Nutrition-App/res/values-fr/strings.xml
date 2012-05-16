@@ -21,4 +21,13 @@
          Cette application a été conçu par trois étudiants de niveau collégial, les pauvres meurent de faim,
          afin de nous donner de l\'argent!
 	</string>
+   <string name="ip_address">137.112.115.32</string>
+	<string name= "calories">Calorías</string>
+	<string name="calFromFat">Calorías de las Grasas</string>
+	<string name="fat">Grasa Total</string>
+	<string name="sodium">Sodio</string>
+	<string name="carbs">Los hidratos de carbono</string>
+	<string name="fiber">fibra</string>
+	<string name="sugar">azúcar</string>
+	<string name="protein">proteína</string>
 </resources>

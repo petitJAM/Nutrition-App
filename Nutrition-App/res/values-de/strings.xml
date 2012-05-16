@@ -21,4 +21,13 @@
          Diese Anwendung wurde von drei armen, hungernden Studenten konzipiert,
          so geben uns Geld!
 	</string>
+    <string name="ip_address">137.112.115.32</string>
+	<string name="calories">Kalorien</string>
+	<string name="calFromFat">Kalorien von Fett</string>
+	<string name="fat">Total Fat</string>
+	<string name="sodium">Natrium</string>
+	<string name="carbs">Kohlenhydrate</string>
+	<string name="fiber">Faser</string>
+	<string name="sugar">Zucker</string>
+	<string name="protein">Protein</string>
 </resources>

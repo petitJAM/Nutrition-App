@@ -22,4 +22,12 @@
         so give us money!    
     </string>
     <string name="ip_address">137.112.115.32</string>
+    <string name="calories">Calories</string>
+	<string name="calFromFat">Calories from Fat</string>
+	<string name="fat">Total Fat</string>
+	<string name="sodium">Sodium</string>
+	<string name="carbs">Carbohydrates</string>
+	<string name="fiber">Fiber</string>
+	<string name="sugar">Sugar</string>
+	<string name="protein">Protein</string>
 </resources>
