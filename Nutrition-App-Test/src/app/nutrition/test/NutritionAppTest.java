@@ -14,7 +14,6 @@ public class NutritionAppTest extends
 		ActivityInstrumentationTestCase2<NutritionAppActivity> {
 
 	private NutritionAppActivity naa;
-	private String appName;
 	private ImageButton camera, set, info, search, exit;
 	
 	/**
@@ -37,7 +36,6 @@ public class NutritionAppTest extends
 		info = (ImageButton) naa.findViewById(app.nutrition.R.id.info_button);
 		search = (ImageButton) naa.findViewById(app.nutrition.R.id.search_button);
 		exit = (ImageButton) naa.findViewById(app.nutrition.R.id.exit_button);
-		appName = naa.getString(app.nutrition.R.string.app_name);
 	}
 
 	/**
@@ -49,10 +47,11 @@ public class NutritionAppTest extends
 
 	/**
 	 * Test app has a name
+	 * Moved to L10NTest
 	 */
-	public void testAppName() {
-		assertEquals("Nutrition App", appName);
-	}
+//	public void testAppName() {
+//		assertEquals("Nutrition App", appName);
+//	}
 	
 	/**
 	 * Test that camera button created

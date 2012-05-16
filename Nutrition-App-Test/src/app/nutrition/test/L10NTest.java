@@ -54,8 +54,6 @@ public class L10NTest extends ActivityInstrumentationTestCase2<NutritionAppActiv
 		conf.locale = new Locale(en.toLowerCase());
 		res.updateConfiguration(conf, dm);
 		
-		logAllStrings();
-
 		getStrings();
 		assertEquals("Nutrition App", app_name);
 		assertEquals("Logo", logo_content_description);
@@ -77,8 +75,6 @@ public class L10NTest extends ActivityInstrumentationTestCase2<NutritionAppActiv
 		android.content.res.Configuration conf = res.getConfiguration();
 		conf.locale = new Locale(fr.toLowerCase());
 		res.updateConfiguration(conf, dm);
-		
-		logAllStrings();
 
 		getStrings();
 		assertEquals("Nutrition App", app_name);
@@ -102,8 +98,6 @@ public class L10NTest extends ActivityInstrumentationTestCase2<NutritionAppActiv
 		conf.locale = new Locale(de.toLowerCase());
 		res.updateConfiguration(conf, dm);
 		
-		logAllStrings();
-
 		getStrings();
 		assertEquals("Ernährung App", app_name);
 		assertEquals("Logo", logo_content_description);
@@ -126,8 +120,6 @@ public class L10NTest extends ActivityInstrumentationTestCase2<NutritionAppActiv
 		conf.locale = new Locale(es.toLowerCase());
 		res.updateConfiguration(conf, dm);
 		
-		logAllStrings();
-
 		getStrings();
 		assertEquals("Nutrición App", app_name);
 		assertEquals("Logotipo", logo_content_description);
@@ -155,19 +147,5 @@ public class L10NTest extends ActivityInstrumentationTestCase2<NutritionAppActiv
 		no_response_server = naa.getString(app.nutrition.R.string.no_response_server);
 		OK = naa.getString(app.nutrition.R.string.ok);
 		about_us = naa.getString(app.nutrition.R.string.about_us);
-	}
-	
-	private void logAllStrings() {
-		Log.d("Strings", "" + app_name);
-		Log.d("Strings", "" + logo_content_description);
-		Log.d("Strings", "" + camera_button_text);
-		Log.d("Strings", "" + search_button_text);
-		Log.d("Strings", "" + settings_button_text);
-		Log.d("Strings", "" + info_button_text);
-		Log.d("Strings", "" + exit_button_text);
-		Log.d("Strings", "" + wait_dialog);
-		Log.d("Strings", "" + no_response_server);
-		Log.d("Strings", "" + OK);
-		Log.d("Strings", "" + about_us);
 	}
 }
