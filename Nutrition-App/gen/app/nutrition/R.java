@@ -23,16 +23,24 @@ public final class R {
         public static final int settingsbutton=0x7f020009;
     }
     public static final class id {
+        public static final int cal_text=0x7f060008;
+        public static final int calfromfat_text=0x7f060009;
         public static final int camera_button=0x7f060002;
+        public static final int carbs_text=0x7f06000c;
         public static final int exit_button=0x7f060006;
+        public static final int fiber_text=0x7f06000d;
         public static final int food_name=0x7f060007;
         public static final int info_button=0x7f060005;
         public static final int logo_view=0x7f060001;
+        public static final int protein_text=0x7f06000f;
         public static final int search_button=0x7f060003;
-        public static final int search_go=0x7f060009;
-        public static final int searchbar=0x7f060008;
+        public static final int search_go=0x7f060011;
+        public static final int searchbar=0x7f060010;
         public static final int settings_button=0x7f060004;
+        public static final int sodium_text=0x7f06000b;
+        public static final int sugar_text=0x7f06000e;
         public static final int textView1=0x7f060000;
+        public static final int totalfat_text=0x7f06000a;
     }
     public static final class layout {
         public static final int info=0x7f030000;
