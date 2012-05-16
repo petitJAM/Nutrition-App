@@ -43,7 +43,7 @@ public class NutritionAppActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+		PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
 
 		ImageButton cam, set, info, search, exit;
 		cam = (ImageButton) findViewById(R.id.camera_button);

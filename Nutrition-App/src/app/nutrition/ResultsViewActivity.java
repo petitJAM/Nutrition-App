@@ -78,8 +78,6 @@ public class ResultsViewActivity extends Activity {
 	 * results.
 	 */
 	public void sendSequence() {
-		onCreateDialog(DIALOG_CONTACTING_SERVER);
-		showDialog(DIALOG_CONTACTING_SERVER);
 
 		int count = 0;
 		while (con == null && count < NUMBER_SERVER_CONNECTION_ATTEMPTS) {
@@ -90,16 +88,6 @@ public class ResultsViewActivity extends Activity {
 			} catch (NoRouteToHostException e) {}
 			count++;
 		}
-		// Thread connectionThread = new Thread(new ServerConnectThread());
-		// connectionThread.start();
-		// try {
-		// Log.d("doWait", "");
-		// doWait();
-		// connectionThread.join();
-		// dismissDialog(DIALOG_CONTACTING_SERVER);
-		// } catch (InterruptedException e) {
-		// Log.d("ConnectionThread", e.getMessage());
-		// }
 
 		if (con == null) {
 			onCreateDialog(DIALOG_SERVER_CONNECTION_FAILED);
@@ -146,11 +134,10 @@ public class ResultsViewActivity extends Activity {
 		Socket sock = null;
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		String ip = prefs.getString("IP_ADDRESS", "137.112.136.208");
+		Log.d("IP", ip);
 		int port = Integer.parseInt(prefs.getString("PORT", "12345"));
-		Log.d("getConnection", "Socket-- IP: " + ip + " port: " + port);
 		try {
 			sock = new Socket(ip, port);
-			Log.d("made a socket", sock.toString());
 		} catch (UnknownHostException e) {
 			Log.d("getConnection", e.getMessage());
 		} catch (IOException e) {
@@ -197,14 +184,15 @@ public class ResultsViewActivity extends Activity {
 			resultsBuilder.setAdapter(resultsAdapter, new OnClickListener() {
 
 				public void onClick(DialogInterface dialog, int which) {
+					Log.d("click!", which + "");
 					switch (which) {
-					case DialogInterface.BUTTON1:
+					case 0:
 						displayFood = foods.get(0);
 						break;
-					case DialogInterface.BUTTON2:
+					case 1:
 						displayFood = foods.get(1);
 						break;
-					case DialogInterface.BUTTON3:
+					case 2:
 						displayFood = foods.get(2);
 						break;
 					default:
@@ -222,40 +210,4 @@ public class ResultsViewActivity extends Activity {
 		}
 		return dog;
 	}
-
-	// private class ServerConnectThread implements Runnable {
-	// public void run() {
-	// int count = 0;
-	// while (con == null && count < NUMBER_SERVER_CONNECTION_ATTEMPTS) {
-	// Log.d("trying connection...", (count + 1) + "");
-	// try {
-	// con = getConnection();
-	// Log.d("connection success", con.toString());
-	// } catch (NoRouteToHostException e) {}
-	// count++;
-	// }
-	// }
-	// }
-
-	// private class FoodListAdapter extends ArrayAdapter<Food> {
-	// private List<Food> noms;
-	//
-	// public FoodListAdapter(Context context, int textViewResourceId,
-	// List<Food> noms) {
-	// super(context, textViewResourceId, noms);
-	// this.noms = noms;
-	// }
-	//
-	// @Override
-	// public View getView(int position, View convertView, ViewGroup parent) {
-	//
-	// return null;
-	// }
-	// }
-
-	// synchronized private void doWait() {
-	// try {
-	// wait(1000);
-	// } catch (InterruptedException e) {}
-	// }
 }

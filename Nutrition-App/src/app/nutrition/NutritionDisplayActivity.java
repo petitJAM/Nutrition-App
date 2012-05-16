@@ -2,6 +2,7 @@ package app.nutrition;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 /**
@@ -18,7 +19,10 @@ public class NutritionDisplayActivity extends Activity {
 		super.onCreate(savedInstanceBundle);
 		setContentView(R.layout.nutrition_display);
 		displayFood = ResultsViewActivity.displayFood;
-		setTexts();
+		if (displayFood != null)
+			setTexts();
+		else
+			Log.d("display", "displayFood is null");
 	}
 	
 	/**

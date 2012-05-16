@@ -9,8 +9,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import android.util.Log;
-
 /**
  * A Connection with the server.
  * 
@@ -34,7 +32,6 @@ public class Connection {
 		try {
 			this.in = new DataInputStream(sock.getInputStream());
 			this.out = new DataOutputStream(sock.getOutputStream());
-			Log.d("Connection", "Streams established");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -49,7 +50,10 @@ public class SearchActivity extends Activity {
 				int receivedint = con.recieveInt();
 				if (receivedint == 4) {
 					Food f = con.recieveFood();
-					Log.d("Name of recieved food", "" + f.name);	
+					ResultsViewActivity.displayFood = f;
+					Intent displayIntent = new Intent(SearchActivity.this, NutritionDisplayActivity.class);
+					SearchActivity.this.startActivity(displayIntent);
+					Log.d("Name of recieved food", "" + f.name);
 				} else if (receivedint == 5) {
 					// close
 					con.sendInt(2);

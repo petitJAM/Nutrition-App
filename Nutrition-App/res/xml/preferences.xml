@@ -3,7 +3,7 @@
     android:key="applicationPreference" >
 
     <ListPreference
-        android:defaultValue="@string/ip_address"
+        android:defaultValue="137.112.115.138"
         android:key="IP_ADDRESS"
         android:persistent="true"
         android:summary="IP address of the server"
