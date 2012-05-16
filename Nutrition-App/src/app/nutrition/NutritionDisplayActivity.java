@@ -2,6 +2,7 @@ package app.nutrition;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 /**
@@ -15,11 +16,16 @@ public class NutritionDisplayActivity extends Activity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceBundle) {
+		Log.d("hello!", "");
 		super.onCreate(savedInstanceBundle);
-		displayFood = ResultsViewActivity.displayFood;
+		
+		Log.d("super called", "");
 		setContentView(R.layout.nutrition_display);
 		
-		displayFood = ResultsViewActivity.displayFood;
+//		displayFood = ResultsViewActivity.displayFood;
+		Log.d("set view", "");
+		displayFood = new Food("Nom", 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f);
+		Log.d("created food", "");
 		
 		TextView foodname = (TextView) findViewById(R.id.food_name);
 		foodname.setText(displayFood.name);
