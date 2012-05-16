@@ -38,7 +38,9 @@ public class SearchActivity extends Activity {
 	
 	private class SearchOnClickListener implements View.OnClickListener {
 		public void onClick(View v) {
+			Log.d("SearchGo", "clicked!");
 			String foodName = SearchActivity.this.searchBar.getText().toString();
+			Log.d("about to try connection", "");
 			try {
 				Connection con = getConnection();
 				con.sendInt(1);
@@ -69,10 +71,12 @@ public class SearchActivity extends Activity {
 	 * @throws NoRouteToHostException
 	 */
 	public Connection getConnection() throws NoRouteToHostException {
+		Log.d("getting connection...", "");
 		Socket sock = null;
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 		String ip = prefs.getString("IP_ADDRESS", "137.112.136.208");
 		int port = Integer.parseInt(prefs.getString("PORT", "12345"));
+		Log.d("trying connection...", "");
 		try {
 			sock = new Socket(ip, port);
 		} catch (UnknownHostException e) {
