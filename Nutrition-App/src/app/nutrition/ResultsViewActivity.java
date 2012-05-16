@@ -81,16 +81,25 @@ public class ResultsViewActivity extends Activity {
 		onCreateDialog(DIALOG_CONTACTING_SERVER);
 		showDialog(DIALOG_CONTACTING_SERVER);
 
-		Thread connectionThread = new Thread(new ServerConnectThread());
-		connectionThread.start();
-		try {
-			Log.d("doWait", "");
-			doWait();
-			connectionThread.join();
-			dismissDialog(DIALOG_CONTACTING_SERVER);
-		} catch (InterruptedException e) {
-			Log.d("ConnectionThread", e.getMessage());
+		int count = 0;
+		while (con == null && count < NUMBER_SERVER_CONNECTION_ATTEMPTS) {
+			Log.d("trying connection...", (count + 1) + "");
+			try {
+				con = getConnection();
+				Log.d("connection success", con.toString());
+			} catch (NoRouteToHostException e) {}
+			count++;
 		}
+		// Thread connectionThread = new Thread(new ServerConnectThread());
+		// connectionThread.start();
+		// try {
+		// Log.d("doWait", "");
+		// doWait();
+		// connectionThread.join();
+		// dismissDialog(DIALOG_CONTACTING_SERVER);
+		// } catch (InterruptedException e) {
+		// Log.d("ConnectionThread", e.getMessage());
+		// }
 
 		if (con == null) {
 			onCreateDialog(DIALOG_SERVER_CONNECTION_FAILED);
@@ -122,9 +131,9 @@ public class ResultsViewActivity extends Activity {
 			} catch (IOException e) {
 				Log.d("sendSequence ioexception", e.getMessage());
 			}
+			con.sendInt(2); // 1 means we are closing the socket and the server
+							// should do the same
 		}
-		con.sendInt(2); // 1 means we are closing the socket and the server
-						// should do the same
 	}
 
 	/**
@@ -212,19 +221,19 @@ public class ResultsViewActivity extends Activity {
 		return dog;
 	}
 
-	private class ServerConnectThread implements Runnable {
-		public void run() {
-			int count = 0;
-			while (con == null && count < NUMBER_SERVER_CONNECTION_ATTEMPTS) {
-				Log.d("trying connection...", (count + 1) + "");
-				try {
-					con = getConnection();
-					Log.d("connection success", con.toString());
-				} catch (NoRouteToHostException e) {}
-				count++;
-			}
-		}
-	}
+	// private class ServerConnectThread implements Runnable {
+	// public void run() {
+	// int count = 0;
+	// while (con == null && count < NUMBER_SERVER_CONNECTION_ATTEMPTS) {
+	// Log.d("trying connection...", (count + 1) + "");
+	// try {
+	// con = getConnection();
+	// Log.d("connection success", con.toString());
+	// } catch (NoRouteToHostException e) {}
+	// count++;
+	// }
+	// }
+	// }
 
 	// private class FoodListAdapter extends ArrayAdapter<Food> {
 	// private List<Food> noms;
@@ -242,9 +251,9 @@ public class ResultsViewActivity extends Activity {
 	// }
 	// }
 
-	synchronized private void doWait() {
-		try {
-			wait(1000);
-		} catch (InterruptedException e) {}
-	}
+	// synchronized private void doWait() {
+	// try {
+	// wait(1000);
+	// } catch (InterruptedException e) {}
+	// }
 }
