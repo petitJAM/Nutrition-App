@@ -42,7 +42,7 @@ public class NutritionAppActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
+
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
 		ImageButton cam, set, info, search, exit;
@@ -122,16 +122,6 @@ public class NutritionAppActivity extends Activity {
 			newb = b;
 		return newb;
 	}
-	
-	private void startSearchActivity() {
-		Intent searchIntent = new Intent(this, SearchActivity.class);
-		startActivity(searchIntent);
-	}
-	
-	private void startInfoActivity() {
-		Intent infoIntent = new Intent(this, InfoActivity.class);
-		startActivity(infoIntent);
-	}
 
 	private class CameraOnClickListener implements View.OnClickListener {
 		public void onClick(View v) {
@@ -172,13 +162,16 @@ public class NutritionAppActivity extends Activity {
 
 	private class InfoOnClickListener implements View.OnClickListener {
 		public void onClick(View v) {
-			startInfoActivity();
+			Intent infoIntent = new Intent(NutritionAppActivity.this, InfoActivity.class);
+			startActivity(infoIntent);
 		}
 	}
 
 	private class SearchOnClickListener implements View.OnClickListener {
 		public void onClick(View v) {
-			startSearchActivity();
+			Intent searchIntent = new Intent(NutritionAppActivity.this,
+					SearchActivity.class);
+			startActivity(searchIntent);
 		}
 	}
 

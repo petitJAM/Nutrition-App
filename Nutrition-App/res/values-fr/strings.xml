@@ -21,4 +21,12 @@
          Cette application a été conçu par trois étudiants de niveau collégial, les pauvres meurent de faim,
          afin de nous donner de l\'argent!
 	</string>
+	<string name="calories">Calories</string>
+    <string name="calfromfat">Calories provenant des Lipides</string>
+    <string name="totalfat">Total des Matières Grasses</string>
+    <string name="sodium">Sodium</string>
+    <string name="carbs">Glucides</string>
+    <string name="fiber">Fibre</string>
+    <string name="sugar">Sucre</string>
+    <string name="protein">Protéine</string>
 </resources>

@@ -12,6 +12,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -25,7 +26,7 @@ import android.widget.ListAdapter;
  * @author Alex Petitjean. Created May 2, 2012.
  */
 public class ResultsViewActivity extends Activity {
-	
+
 	private static final int NUMBER_SERVER_CONNECTION_ATTEMPTS = 2;
 
 	/* Dialog constants */
@@ -48,7 +49,7 @@ public class ResultsViewActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.results);
-		
+
 		try {
 			getSequence();
 			sendSequence();
@@ -101,12 +102,12 @@ public class ResultsViewActivity extends Activity {
 			showDialog(DIALOG_WAITING_FOR_SERVER_RESPONSE);
 
 			// 0 means this connection is asking for a list of results
-			con.sendInt(0); 
+			con.sendInt(0);
 			con.sendByteArray(colorSequence);
 
 			try {
 				// should be 3 indicating the 3 results
-				if (con.recieveInt() == 3) { 
+				if (con.recieveInt() == 3) {
 					foods = new ArrayList<Food>();
 					foods.add(con.recieveFood());
 					foods.add(con.recieveFood());
@@ -198,6 +199,9 @@ public class ResultsViewActivity extends Activity {
 					default:
 						break;
 					}
+					Intent displayIntent = new Intent(ResultsViewActivity.this,
+							NutritionDisplayActivity.class);
+					startActivity(displayIntent);
 				}
 			});
 			dog = resultsBuilder.create();
@@ -222,20 +226,21 @@ public class ResultsViewActivity extends Activity {
 		}
 	}
 
-//	private class FoodListAdapter extends ArrayAdapter<Food> {
-//		private List<Food> noms;
-//
-//		public FoodListAdapter(Context context, int textViewResourceId, List<Food> noms) {
-//			super(context, textViewResourceId, noms);
-//			this.noms = noms;
-//		}
-//
-//		@Override
-//		public View getView(int position, View convertView, ViewGroup parent) {
-//
-//			return null;
-//		}
-//	}
+	// private class FoodListAdapter extends ArrayAdapter<Food> {
+	// private List<Food> noms;
+	//
+	// public FoodListAdapter(Context context, int textViewResourceId,
+	// List<Food> noms) {
+	// super(context, textViewResourceId, noms);
+	// this.noms = noms;
+	// }
+	//
+	// @Override
+	// public View getView(int position, View convertView, ViewGroup parent) {
+	//
+	// return null;
+	// }
+	// }
 
 	synchronized private void doWait() {
 		try {

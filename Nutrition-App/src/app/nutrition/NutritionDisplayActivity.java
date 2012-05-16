@@ -2,6 +2,7 @@ package app.nutrition;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 /**
  * Display the results from ResultsViewActivity
@@ -17,5 +18,10 @@ public class NutritionDisplayActivity extends Activity {
 		super.onCreate(savedInstanceBundle);
 		displayFood = ResultsViewActivity.displayFood;
 		setContentView(R.layout.nutrition_display);
+		
+		displayFood = ResultsViewActivity.displayFood;
+		
+		TextView foodname = (TextView) findViewById(R.id.food_name);
+		foodname.setText(displayFood.name);
 	}
 }

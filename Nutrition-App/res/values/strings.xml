@@ -21,5 +21,13 @@
         This application was designed by three poor, starving college students,
         so give us money!    
     </string>
-    <string name="ip_address">137.112.115.32</string>
+    <string name="calories">Calories</string>
+    <string name="calfromfat">Calories from fat</string>
+    <string name="totalfat">Total Fat</string>
+    <string name="sodium">Sodium</string>
+    <string name="carbs">Carbohydrates</string>
+    <string name="fiber">Fiber</string>
+    <string name="sugar">Sugar</string>
+    <string name="protein">Protein</string>
+    <string name="ip_address">137.112.136.208</string>
 </resources>
