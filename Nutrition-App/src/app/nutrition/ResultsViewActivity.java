@@ -78,12 +78,15 @@ public class ResultsViewActivity extends Activity {
 	 * results.
 	 */
 	public void sendSequence() {
-
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		String ip = prefs.getString("IP_ADDRESS", "137.112.136.208");
+		int port = Integer.parseInt(prefs.getString("PORT", "12345"));
+		
 		int count = 0;
 		while (con == null && count < NUMBER_SERVER_CONNECTION_ATTEMPTS) {
 			Log.d("trying connection...", (count + 1) + "");
 			try {
-				con = getConnection();
+				con = getConnection(ip, port);
 				Log.d("connection success", con.toString());
 			} catch (NoRouteToHostException e) {}
 			count++;
@@ -127,15 +130,14 @@ public class ResultsViewActivity extends Activity {
 	/**
 	 * Get a connection to the server.
 	 * 
+	 * @param ip
+	 * @param port
 	 * @return connection to the server
 	 * @throws NoRouteToHostException
 	 */
-	public Connection getConnection() throws NoRouteToHostException {
+	public Connection getConnection(String ip, int port) throws NoRouteToHostException {
 		Socket sock = null;
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		String ip = prefs.getString("IP_ADDRESS", "137.112.136.208");
-		Log.d("IP", ip);
-		int port = Integer.parseInt(prefs.getString("PORT", "12345"));
+
 		try {
 			sock = new Socket(ip, port);
 		} catch (UnknownHostException e) {

@@ -5,11 +5,10 @@ import java.util.Locale;
 import android.content.res.Resources;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import app.nutrition.NutritionAppActivity;
 
 /**
- * TODO Put here a description of what this class does.
+ * Test localization of strings.
  * 
  * @author Alex Petitjean.
  *         Created May 11, 2012.
@@ -26,7 +25,7 @@ public class L10NTest extends ActivityInstrumentationTestCase2<NutritionAppActiv
 
 	private String app_name, logo_content_description, camera_button_text,
 			search_button_text, settings_button_text, info_button_text, exit_button_text,
-			wait_dialog, no_response_server, OK, about_us;
+			wait_dialog, no_response_server, OK;
 
 	/**
 	 * Test Localization of the app.
@@ -65,7 +64,6 @@ public class L10NTest extends ActivityInstrumentationTestCase2<NutritionAppActiv
 		assertEquals("Waiting for server…", wait_dialog);
 		assertEquals("Failed to receive information from server!", no_response_server);
 		assertEquals("OK", OK);
-//		assertEquals("Welcome to Nutrition App!\nThis application is your very smart, very adorable companion.\nIf you\'re ever curious about what is hiding in your food, just take a quick snapshot using the camera button, and watch as computer magic sends its nutrition info to your phone!\nThis application was designed by three poor, starving college students, so give us money!    ", about_us);
 	}
 
 	/**
@@ -87,7 +85,6 @@ public class L10NTest extends ActivityInstrumentationTestCase2<NutritionAppActiv
 		assertEquals("Attente pour le serveur…", wait_dialog);
 		assertEquals("Impossible de recevoir des informations depuis le serveur!", no_response_server);
 		assertEquals("OK", OK);
-//		assertEquals("Bienvenue sur App nutrition!\nCette application est votre très intelligent, très adorable compagnon.\nSi jamais vous êtes curieux de savoir ce qui se cache dans votre alimentation, il suffit de prendre un instantané rapide en utilisant le bouton de la caméra, et regardez la magie ordinateur envoie son info nutrition à votre téléphone!\nCette application a été conçu par trois étudiants de niveau collégial, les pauvres meurent de faim, afin de nous donner de l\'argent!", about_us);
 	}
 
 	/**
@@ -109,7 +106,6 @@ public class L10NTest extends ActivityInstrumentationTestCase2<NutritionAppActiv
 		assertEquals("Warten auf den Server…", wait_dialog);
 		assertEquals("Konnte Informationen vom Server zu empfangen!", no_response_server);
 		assertEquals("OK", OK);
-//		assertEquals("Willkommen bei Nutrition App!\nDiese Anwendung ist Ihr sehr klug, sehr liebenswert Begleiter.\nWenn Sie schon einmal neugierig, was in Ihrem Essen versteckt sind, Werfen Sie einen schnellen Überblick über die Kamera-Taste, und zusehen, wie Computer Magie sendet seine Ernährung Info auf Ihr Handy!\nDiese Anwendung wurde von drei armen, hungernden Studenten konzipiert, so geben uns Geld!", about_us);
 	}
 
 	/**
@@ -131,7 +127,6 @@ public class L10NTest extends ActivityInstrumentationTestCase2<NutritionAppActiv
 		assertEquals("Esperando que el servidor…", wait_dialog);
 		assertEquals("¡No se pudo recibir la información desde el servidor!", no_response_server);
 		assertEquals("OK", OK);
-//		assertEquals("Bienvenido a la aplicación de Nutrición!\nEsta aplicación es su muy inteligente, muy adorable compañera.\nSi alguna vez curiosidad por saber qué se esconde en los alimentos, acaba de tomar una instantánea rápida mediante el botón de la cámara, y ver como la magia computadora envía la información de nutrición para tu teléfono!\nEsta aplicación fue diseñada por tres estudiantes universitarios pobres, hambrientos, así que nos dan dinero!", about_us);
 	}
 
 	private void getStrings() {
@@ -146,6 +141,5 @@ public class L10NTest extends ActivityInstrumentationTestCase2<NutritionAppActiv
 		wait_dialog = naa.getString(app.nutrition.R.string.wait_dialog);
 		no_response_server = naa.getString(app.nutrition.R.string.no_response_server);
 		OK = naa.getString(app.nutrition.R.string.ok);
-		about_us = naa.getString(app.nutrition.R.string.about_us);
 	}
 }

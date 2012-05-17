@@ -1,6 +1,9 @@
 package app.nutrition.test;
 
+import java.net.NoRouteToHostException;
+
 import android.test.ActivityInstrumentationTestCase2;
+import app.nutrition.Connection;
 import app.nutrition.ResultsViewActivity;
 
 /**
@@ -37,6 +40,18 @@ public class ResultsViewActivityTest extends ActivityInstrumentationTestCase2<Re
 	 * Test that a Connection is made correctly.
 	 */
 	public void testGetConnection() {
+		Connection c = null;
+		String ip = "137.112.115.138";
+		int port = 12345;
 		
+		try {
+			c = rva.getConnection(ip, port);
+		} catch (NoRouteToHostException e) {
+			fail();
+		}
+		
+		assertNotNull(c);
+		c.sendInt(2);
+		c.close();
 	}
 }

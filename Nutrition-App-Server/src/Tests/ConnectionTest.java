@@ -22,8 +22,8 @@ import org.junit.Test;
  */
 public class ConnectionTest {
 
-	String ip = "127.0.0.1";
-	int port = 12345;
+	private String ip = "127.0.0.1";
+	private int port = 12345;
 
 	/**
 	 * the client can create a connection which is not null

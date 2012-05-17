@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /**
- * a class to hold both the transition matrix, and nutrition facts for a given
+ * A class to hold both the transition matrix, and nutrition facts for a given
  * food item
  * 
  * @author bellrj
- * 
  */
 public class Food implements Serializable {
 
@@ -42,7 +41,7 @@ public class Food implements Serializable {
 	 */
 	public float calFromFat;
 	/**
-	 * the total amount of fat (//TODO in grams?) contained in one serving of
+	 * the total amount of fat contained in one serving of
 	 * this food item
 	 */
 	public float totalFat;
@@ -55,7 +54,7 @@ public class Food implements Serializable {
 	 */
 	public float carbs;
 	/**
-	 * the amount of fiber (//TODO in grams?) contained in one serving of this
+	 * the amount of fiber contained in one serving of this
 	 * food item
 	 */
 	public float fiber;
@@ -64,7 +63,7 @@ public class Food implements Serializable {
 	 */
 	public float sugar;
 	/**
-	 * the amount of protein (//TODO in grams?) contained in one serving of this
+	 * the amount of protein contained in one serving of this
 	 * food item
 	 */
 	public float protein;
