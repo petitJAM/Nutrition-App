@@ -7,7 +7,7 @@ import java.io.Serializable;
  * a class to hold both the transition matrix, and nutrition facts for a given
  * food item
  * 
- * @author bellrj
+ * @author Ryne Bell
  * 
  */
 public class Food implements Serializable {

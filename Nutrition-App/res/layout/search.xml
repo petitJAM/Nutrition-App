@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/search_background"
     android:orientation="vertical" >
-
+
     <TableRow>
 
         <EditText

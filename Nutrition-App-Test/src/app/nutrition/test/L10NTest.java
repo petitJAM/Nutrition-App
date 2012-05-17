@@ -5,7 +5,6 @@ import java.util.Locale;
 import android.content.res.Resources;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import app.nutrition.NutritionAppActivity;
 
 /**
@@ -26,7 +25,7 @@ public class L10NTest extends ActivityInstrumentationTestCase2<NutritionAppActiv
 
 	private String app_name, logo_content_description, camera_button_text,
 			search_button_text, settings_button_text, info_button_text, exit_button_text,
-			wait_dialog, no_response_server, OK, about_us;
+			wait_dialog, no_response_server, OK;
 
 	/**
 	 * Test Localization of the app.
@@ -146,6 +145,6 @@ public class L10NTest extends ActivityInstrumentationTestCase2<NutritionAppActiv
 		wait_dialog = naa.getString(app.nutrition.R.string.wait_dialog);
 		no_response_server = naa.getString(app.nutrition.R.string.no_response_server);
 		OK = naa.getString(app.nutrition.R.string.ok);
-		about_us = naa.getString(app.nutrition.R.string.about_us);
+		naa.getString(app.nutrition.R.string.about_us);
 	}
 }

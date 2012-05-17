@@ -5,8 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import network.Connection;
-
 import Database.Food;
 import Database.QueryClass;
 import NGramModel.NGramModel;

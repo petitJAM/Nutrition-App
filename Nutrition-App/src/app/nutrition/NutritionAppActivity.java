@@ -21,7 +21,7 @@ import android.widget.ImageButton;
 /**
  * Starting point and main screen of the app
  * 
- * @author Alex Petitjean.
+ * @author Alex Petitjean, Rob Wagner
  *         Created Apr 19, 2012.
  */
 public class NutritionAppActivity extends Activity {

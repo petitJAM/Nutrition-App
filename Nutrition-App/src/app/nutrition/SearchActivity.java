@@ -19,7 +19,7 @@ import android.widget.EditText;
  * This class handles directly search for a food by text input rather than image
  * analysis.
  * 
- * @author Alex Petitjean.
+ * @author Rob Wagner (Lord of Searching)
  *         Created May 14, 2012.
  */
 public class SearchActivity extends Activity {
