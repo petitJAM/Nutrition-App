@@ -147,6 +147,9 @@ public class Server {
 						try {
 							seq = con.recieveByteArray();
 							possiblitites = getTop3(Serv.qc.getFood(), seq);
+							if(possiblitites.isEmpty()){
+								con.sendInt(0);
+							}
 							con.sendInt(3);
 							con.sendFood(possiblitites.get(0));
 							con.sendFood(possiblitites.get(1));
